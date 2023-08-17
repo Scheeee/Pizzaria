@@ -14,8 +14,24 @@ public class Endereco {
     @Column(name = "id", nullable = false, unique = true)
     private long id;
 
+    @Getter
     @Setter
-    @ManyToOne
+    @Column(name = "ruas",nullable = false)
+    private String rua;
+
+    @Getter
+    @Setter
+    @Column(name = "numero",nullable = false)
+    private String numero;
+
+    @Getter
+    @Setter
+    @Column(name = "complemento")
+    private String complemento;
+
+
+    @Setter
+    @OneToOne
     @JoinColumn(name = "cliente_id")
     private Cliente cliente;
 

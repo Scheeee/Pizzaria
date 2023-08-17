@@ -23,12 +23,12 @@ public class Cliente {
 
     @Getter
     @Setter
-    @Column(name = "telefone")
+    @Column(name = "telefone",nullable = false)
     private String telefone;
 
     @Getter @Setter
-    @OneToMany(mappedBy = "cliente", fetch = FetchType.EAGER)
-    private List<Endereco> enderecos;
+    @OneToOne(mappedBy = "cliente", fetch = FetchType.EAGER)
+    private Endereco endereco;
 
     @Getter @Setter
     @OneToMany(mappedBy = "cliente", fetch = FetchType.EAGER)
