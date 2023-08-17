@@ -5,6 +5,7 @@ import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @Entity
@@ -34,9 +35,18 @@ public class Pizza {
             inverseJoinColumns = @JoinColumn(name = "sabor_id")
     )
     private List<Sabor> sabores;
-    @ManyToMany(mappedBy = "pizzas")
-    private List<Pedido> pedidos;
+   /* @ManyToMany(mappedBy = "pizzas")
+    private Pedido pedido;*/
+
+    @Setter
+    @ManyToOne
+    @JoinColumn(name = "pedido_id")
+    private Pedido pedido;
 
 
-
+    @Getter
+    @Setter
+    @NotNull(message = "Campo não informado")
+    @JoinColumn(name = "valorUnidade")
+    private BigDecimal valorUnit;
 }
