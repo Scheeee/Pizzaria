@@ -19,4 +19,8 @@ public class Endereco {
     @JoinColumn(name = "cliente_id")
     private Cliente cliente;
 
+
+
+
+
 }

@@ -18,7 +18,7 @@ public class Cliente {
 
     @Getter
     @Setter
-    @Column(name="nome")
+    @Column(name="nome", nullable = false)
     private String nome;
 
     @Getter
@@ -29,6 +29,10 @@ public class Cliente {
     @Getter @Setter
     @OneToMany(mappedBy = "cliente", fetch = FetchType.EAGER)
     private List<Endereco> enderecos;
+
+    @Getter @Setter
+    @OneToMany(mappedBy = "cliente", fetch = FetchType.EAGER)
+    private List<Pedido> pedidos;
 
 
 }
