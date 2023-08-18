@@ -45,12 +45,12 @@ public class Pizza {
     @Getter
     @Setter
     @JoinColumn(name = "ingredientes")
-    private String ingredientes;
+    private List<String> ingredientes;
 
     @Getter
     @Setter
     @JoinColumn(name = "adicionais")
-    private String adicionais;
+    private List<String> adicionais;
 
     @Getter
     @Setter

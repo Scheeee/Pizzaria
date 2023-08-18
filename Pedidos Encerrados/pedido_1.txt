@@ -1,5 +1,0 @@
-Cliente: 
-Endereço: 
-Itens do pedido:
- - com.uniamerica.pizzaria.entity.Pizza@24ae944c
-Total do pedido: R$ 20.00

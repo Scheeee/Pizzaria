@@ -20,8 +20,8 @@ public class Atendente {
     @Column(name="nome", nullable = false)
     private String nome;
 
-    @Getter @Setter
+    /*@Getter @Setter
     @OneToMany(mappedBy = "atendente", fetch = FetchType.EAGER)
     private List<Pedido> pedidos;
-
+    */
 }

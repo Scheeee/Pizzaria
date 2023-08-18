@@ -27,10 +27,10 @@ public class Pedido {
     @Getter @Setter
     @Column( name = "finalizado")
     private LocalDate finalizado;
-    @Setter @ManyToOne
+    @Getter @Setter @ManyToOne
     @JoinColumn(name = "atendente_id")
     private Atendente atendente;
-    @Setter @ManyToOne
+    @Getter @Setter @ManyToOne
     @JoinColumn(name = "cliente_id")
     private Cliente cliente;
 

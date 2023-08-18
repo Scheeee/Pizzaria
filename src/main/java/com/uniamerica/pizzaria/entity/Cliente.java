@@ -30,10 +30,10 @@ public class Cliente {
     @OneToOne(mappedBy = "cliente", fetch = FetchType.EAGER)
     private Endereco endereco;
 
-    @Getter @Setter
+   /* @Getter @Setter
     @OneToMany(mappedBy = "cliente", fetch = FetchType.EAGER)
     private List<Pedido> pedidos;
-
+    */
 
 
 

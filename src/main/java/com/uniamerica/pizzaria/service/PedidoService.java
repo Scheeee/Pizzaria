@@ -80,24 +80,128 @@ public class PedidoService {
         String pasta = "C:\\Users\\Lenovo\\Documents\\desenvolvimento\\pizzaria\\Pedidos Encerrados\\";
         String arquivo = pasta + "pedido_" + pedido.getId() + ".txt";
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(arquivo))) {
-            writer.write("Cliente: " );
+            writer.write("Cliente: " + pedido.getCliente().getNome());
             writer.newLine();
-            writer.write("Endereço: " );
+            writer.write("Telefone: " + pedido.getCliente().getTelefone() );
+            writer.newLine();
+            writer.write("Endereço: " + pedido.getCliente().getEndereco().getRua() + " N°:" + pedido.getCliente().getEndereco().getNumero());
+            writer.newLine();
+            writer.write("Complemento: " + pedido.getCliente().getEndereco().getComplemento() );
             writer.newLine();
             writer.write("Itens do pedido:");
             writer.newLine();
-            for (Pizza item : pedido.getPizzas()) {
-                writer.write(" - " + item );
+            int nPizza = 1;
+            for (Pizza pizza : pedido.getPizzas()) {
+                writer.write("- pizza n°: "+ nPizza +" Tamanho:"+ pizza.getTamanho() );
+                writer.newLine();
+                writer.write("Sabor(es):");
+                writer.newLine();
+                for(Sabor sabor : pizza.getSabores()){
+                    writer.write("-"+ sabor.getNome() );
+                    writer.newLine();
+                }
+                if(pizza.getIngredientes() != null) {
+                    writer.write(" Ingrediente(s) retirado(s):");
+
+                    writer.newLine();
+                    for (String ingrediente : pizza.getIngredientes()) {
+                        writer.write(" - " + ingrediente);
+                        writer.newLine();
+                    }
+                }
+                if(pizza.getAdicionais() != null) {
+                    writer.write(" Adicionais: ");
+                    writer.newLine();
+                    for (String adicionais : pizza.getAdicionais()) {
+                        writer.write(" - " + adicionais);
+                        writer.newLine();
+                    }
+                }
+                writer.write(" Valor unitário: R$" + pizza.getValorUnit());
+                writer.newLine();
+                nPizza++;
+            }
+            writer.write("Total: R$ " + pedido.getValorTotal());
+            writer.newLine();
+            if(pedido.isDinheiro()){
+                writer.write("Pagamento no Dinheiro");
                 writer.newLine();
             }
-            writer.write("Total do pedido: R$ " + pedido.getValorTotal());
-            writer.newLine();
+            else {
+                writer.write("Pagamento no Cartão");
+
+            }
             System.out.println("Arquivo gerado com sucesso: " + arquivo);
         } catch (IOException e) {
             System.out.println("Erro ao salvar o arquivo: " + e.getMessage());
         }
 
     }
+
+    @Transactional(rollbackOn = Exception.class)
+    public void gerarComanda(Pedido pedido) {
+        String pasta = "C:\\Users\\Lenovo\\Documents\\desenvolvimento\\pizzaria\\Comanda\\";
+        String arquivo = pasta + "pedido_" + pedido.getId() + ".txt";
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(arquivo))) {
+            writer.write("Cliente: " + pedido.getCliente().getNome());
+            writer.newLine();
+            writer.write("Telefone: " + pedido.getCliente().getTelefone() );
+            writer.newLine();
+            writer.write("Endereço: " + pedido.getCliente().getEndereco().getRua() + " N°:" + pedido.getCliente().getEndereco().getNumero());
+            writer.newLine();
+            writer.write("Complemento: " + pedido.getCliente().getEndereco().getComplemento() );
+            writer.newLine();
+            writer.write("Itens do pedido:");
+            writer.newLine();
+            int nPizza = 1;
+            for (Pizza pizza : pedido.getPizzas()) {
+                writer.write("- pizza n°: "+ nPizza +" Tamanho:"+ pizza.getTamanho() );
+                writer.newLine();
+                writer.write("Sabor(es):");
+                writer.newLine();
+                for(Sabor sabor : pizza.getSabores()){
+                    writer.write("-"+ sabor.getNome() );
+                    writer.newLine();
+                }
+                if(pizza.getIngredientes() != null) {
+                    writer.write(" Ingrediente(s) retirado(s):");
+
+                    writer.newLine();
+                    for (String ingrediente : pizza.getIngredientes()) {
+                        writer.write(" - " + ingrediente);
+                        writer.newLine();
+                    }
+                }
+                if(pizza.getAdicionais() != null) {
+                    writer.write(" Adicionais: ");
+                    writer.newLine();
+                    for (String adicionais : pizza.getAdicionais()) {
+                        writer.write(" - " + adicionais);
+                        writer.newLine();
+                    }
+                }
+                writer.write(" Valor unitário: R$" + pizza.getValorUnit());
+                writer.newLine();
+                nPizza++;
+            }
+            writer.write("Total: R$ " + pedido.getValorTotal());
+            writer.newLine();
+            if(pedido.isDinheiro()){
+                writer.write("Pagamento no Dinheiro");
+                writer.newLine();
+            }
+            else {
+                writer.write("Pagamento no Cartão");
+
+            }
+            System.out.println("Arquivo gerado com sucesso: " + arquivo);
+        } catch (IOException e) {
+            System.out.println("Erro ao salvar o arquivo: " + e.getMessage());
+        }
+
+    }
+
+
 
 
 }
