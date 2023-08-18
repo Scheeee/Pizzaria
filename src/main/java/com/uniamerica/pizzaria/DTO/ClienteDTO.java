@@ -2,9 +2,10 @@ package com.uniamerica.pizzaria.DTO;
 
 import com.uniamerica.pizzaria.entity.Endereco;
 import jakarta.persistence.*;
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
-
+@Data
 public class ClienteDTO {
 
     @Id

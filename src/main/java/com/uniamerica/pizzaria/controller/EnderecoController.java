@@ -1,8 +1,12 @@
 package com.uniamerica.pizzaria.controller;
 
+import com.uniamerica.pizzaria.DTO.ClienteDTO;
+import com.uniamerica.pizzaria.DTO.EnderecoDTO;
 import com.uniamerica.pizzaria.entity.Cliente;
 import com.uniamerica.pizzaria.entity.Endereco;
 import com.uniamerica.pizzaria.repository.EnderecoRep;
+import jakarta.validation.Valid;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.ResponseEntity;
@@ -20,10 +24,11 @@ public class EnderecoController {
         return ResponseEntity.ok(enderecoRep.findAll());
     }
     @PostMapping
-    public ResponseEntity<?> inserir(@RequestBody final Endereco endereco){
+    public ResponseEntity<?> inserir(@RequestBody final EnderecoDTO endereco){
         try {
-
-            enderecoRep.save(endereco);
+            Endereco endereco1 = new Endereco();
+            BeanUtils.copyProperties(endereco,endereco1);
+            enderecoRep.save(endereco1);
             return ResponseEntity.ok("Endereço cadastrado com sucesso!");
 
         }
@@ -32,24 +37,25 @@ public class EnderecoController {
         }
     }
 
-    @PutMapping
-    public ResponseEntity<?> editar(@RequestParam("id") final Long id, @RequestBody final Endereco endereco){
-        try {
-            final Endereco endereco1 = this.enderecoRep.findById(id).orElse(null);
+    @PutMapping("/{id}")
+    public ResponseEntity<?> updateEndereco(@PathVariable(value = "id")Long id,@RequestBody @Valid EnderecoDTO endereco){
 
-            if (endereco1 == null || endereco1.equals(endereco.getId())){
-                throw new RuntimeException("Não foi possivel indentificar o endereço informada");
-            }
-            this.enderecoRep.save(endereco);
-            return ResponseEntity.ok
-                    ("Endereço cadastrado(a) com sucesso");
-        }
-        catch (DataIntegrityViolationException e){
-            return ResponseEntity.internalServerError()
-                    .body("Error: " + e.getCause().getCause().getMessage());
-        }
-        catch (RuntimeException e){
-            return ResponseEntity.internalServerError().body("Error: " + e.getMessage());
-        }
+        Endereco enderecoNovo = enderecoRep.getById(id);
+
+        BeanUtils.copyProperties(endereco, enderecoNovo, "id");
+        enderecoRep.save(enderecoNovo);
+        return ResponseEntity.ok("endereço atualizado com sucesso!");
+
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> delete(@PathVariable(value = "id")Long id){
+
+        Endereco endereco = enderecoRep.getById(id);
+
+
+        enderecoRep.delete(endereco);
+        return ResponseEntity.ok("Endereço deletado com sucesso!");
+
     }
 }

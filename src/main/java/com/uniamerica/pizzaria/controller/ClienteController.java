@@ -1,8 +1,11 @@
 package com.uniamerica.pizzaria.controller;
 
+import com.uniamerica.pizzaria.DTO.ClienteDTO;
 import com.uniamerica.pizzaria.entity.Atendente;
 import com.uniamerica.pizzaria.entity.Cliente;
 import com.uniamerica.pizzaria.repository.ClienteRep;
+import jakarta.validation.Valid;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.ResponseEntity;
@@ -20,10 +23,11 @@ public class ClienteController {
         return ResponseEntity.ok(clienteRep.findAll());
     }
     @PostMapping
-    public ResponseEntity<?> inserir(@RequestBody final Cliente cliente){
+    public ResponseEntity<?> inserir(@RequestBody final ClienteDTO cliente){
         try {
-
-            clienteRep.save(cliente);
+            Cliente cliente1 = new Cliente();
+            BeanUtils.copyProperties(cliente,cliente1);
+            clienteRep.save(cliente1);
             return ResponseEntity.ok("Cliente cadastrado(a) com sucesso!");
 
         }
@@ -31,25 +35,26 @@ public class ClienteController {
             return ResponseEntity.internalServerError().body("Error: " + e.getMessage());
         }
     }
+    @PutMapping("/{id}")
+    public ResponseEntity<?> updateCliente(@PathVariable(value = "id")Long id,@RequestBody @Valid ClienteDTO cliente){
 
-    @PutMapping
-    public ResponseEntity<?> editar(@RequestParam("id") final Long id, @RequestBody final Cliente cliente){
-        try {
-            final Cliente cliente1 = this.clienteRep.findById(id).orElse(null);
+        Cliente clienteNovo = clienteRep.getById(id);
 
-            if (cliente1 == null || cliente1.equals(cliente.getId())){
-                throw new RuntimeException("Não foi possivel indentificar o cliente informada");
-            }
-            this.clienteRep.save(cliente);
-            return ResponseEntity.ok
-                    ("Atendente Cadastrado(a) com Sucesso");
-        }
-        catch (DataIntegrityViolationException e){
-            return ResponseEntity.internalServerError()
-                    .body("Error: " + e.getCause().getCause().getMessage());
-        }
-        catch (RuntimeException e){
-            return ResponseEntity.internalServerError().body("Error: " + e.getMessage());
-        }
+        BeanUtils.copyProperties(cliente, clienteNovo, "id");
+        clienteRep.save(clienteNovo);
+        return ResponseEntity.ok("Cliente atualizado com sucesso!");
+
     }
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> delete(@PathVariable(value = "id")Long id){
+
+        Cliente cliente = clienteRep.getById(id);
+
+
+        clienteRep.delete(cliente);
+        return ResponseEntity.ok("Cliente deletado com sucesso!");
+
+    }
+
+
 }

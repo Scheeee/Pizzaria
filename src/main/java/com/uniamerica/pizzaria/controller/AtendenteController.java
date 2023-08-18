@@ -1,7 +1,10 @@
 package com.uniamerica.pizzaria.controller;
 
+import com.uniamerica.pizzaria.DTO.AtendenteDTO;
 import com.uniamerica.pizzaria.entity.Atendente;
 import com.uniamerica.pizzaria.repository.AtendenteRep;
+import jakarta.validation.Valid;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
@@ -23,10 +26,12 @@ public class AtendenteController {
         return ResponseEntity.ok(atendenteRep.findAll());
     }
     @PostMapping
-    public ResponseEntity<?> inserir(@RequestBody final Atendente atendente){
+    public ResponseEntity<?> inserir(@RequestBody final AtendenteDTO atendente){
         try {
+            Atendente atendente1 = new Atendente();
+            BeanUtils.copyProperties(atendente,atendente1);
 
-            atendenteRep.save(atendente);
+            atendenteRep.save(atendente1);
             return ResponseEntity.ok("Atendente cadastrado(a) com sucesso!");
 
         }
@@ -35,26 +40,28 @@ public class AtendenteController {
         }
     }
 
-    @PutMapping
-    public ResponseEntity<?> editar(@RequestParam("id") final Long id, @RequestBody final Atendente atendente){
-        try {
-            final Atendente atendente1 = this.atendenteRep.findById(id).orElse(null);
+    @PutMapping("/{id}")
+    public ResponseEntity<?> updateAtendente(@PathVariable(value = "id")Long id,@RequestBody @Valid AtendenteDTO atendente){
 
-            if (atendente1 == null || atendente1.equals(atendente.getId())){
-                throw new RuntimeException("Não foi possivel indentificar o atendente informada");
-            }
-            this.atendenteRep.save(atendente);
-            return ResponseEntity.ok
-                    ("Atendente Cadastrado(a) com Sucesso");
-        }
-        catch (DataIntegrityViolationException e){
-            return ResponseEntity.internalServerError()
-                    .body("Error: " + e.getCause().getCause().getMessage());
-        }
-        catch (RuntimeException e){
-            return ResponseEntity.internalServerError().body("Error: " + e.getMessage());
-        }
+        Atendente atendenteNovo = atendenteRep.getById(id);
+
+        BeanUtils.copyProperties(atendente, atendenteNovo, "id");
+        atendenteRep.save(atendenteNovo);
+        return ResponseEntity.ok("Atendente atualizado com sucesso!");
+
     }
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> delete(@PathVariable(value = "id")Long id){
+
+        Atendente atendente = atendenteRep.getById(id);
+
+
+        atendenteRep.delete(atendente);
+        return ResponseEntity.ok("Atendente deletado com sucesso!");
+
+    }
+
+
 
 
 }

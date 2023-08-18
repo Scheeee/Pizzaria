@@ -1,16 +1,16 @@
 package com.uniamerica.pizzaria.controller;
-
-import com.fasterxml.jackson.annotation.JsonFormat;
+import com.uniamerica.pizzaria.DTO.PedidoDTO;
+import com.uniamerica.pizzaria.entity.Cliente;
 import com.uniamerica.pizzaria.entity.Endereco;
 import com.uniamerica.pizzaria.entity.Pedido;
 import com.uniamerica.pizzaria.entity.Status;
+import com.uniamerica.pizzaria.repository.AtendenteRep;
+import com.uniamerica.pizzaria.repository.ClienteRep;
 import com.uniamerica.pizzaria.repository.PedidoRep;
 import com.uniamerica.pizzaria.service.PedidoService;
-import jakarta.persistence.Id;
 import jakarta.validation.Valid;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -27,16 +27,38 @@ public class PedidoController {
     PedidoRep pedidoRep;
     @Autowired
     PedidoService pedidoService;
+    @Autowired
+    private ClienteRep clienteRep;
+    @Autowired
+    private AtendenteRep atendenteRep;
 
     @GetMapping("/{data}")
     public ResponseEntity<?> findByData(@PathVariable("data") String dataString){
         try {
-
-            return new ResponseEntity<>(pedidoService.totais(dataString), HttpStatus.OK);
+            return ResponseEntity.ok(pedidoService.totais(dataString));
 
         } catch (Exception e) {
             return new ResponseEntity<>("Formato de data inválido.", HttpStatus.BAD_REQUEST);
         }
+    }
+    @GetMapping("/atendente/{id}")
+    public ResponseEntity<?> getatendente(@PathVariable("id") Long id){
+        try {
+            return ResponseEntity.ok(pedidoRep.findByAtendente(atendenteRep.getById(id)));
+        }
+        catch (Exception e){
+            return ResponseEntity.internalServerError().body("Error: " + e.getMessage());
+        }
+    }
+    @GetMapping("/cliente/{id}")
+    public ResponseEntity<?> getCliente(@PathVariable("id") Long id){
+       try{
+
+           return ResponseEntity.ok(pedidoRep.findByCliente(clienteRep.getById(id)));
+       }
+       catch (Exception e){
+           return ResponseEntity.internalServerError().body("Error: " + e.getMessage());
+       }
     }
     @GetMapping("/comanda/{id}")
     public ResponseEntity<?> findById(@PathVariable("id") Long id) {
@@ -57,15 +79,17 @@ public class PedidoController {
     public ResponseEntity<?> getativos(){
         return ResponseEntity.ok(pedidoRep.findByStatus(Status.Ativo));
     }
+
     @GetMapping("/lista")
     public ResponseEntity<?> getAll(){
         return ResponseEntity.ok(pedidoRep.findAll());
     }
     @PostMapping
-    public ResponseEntity<?> inserir(@RequestBody final Pedido pedido){
+    public ResponseEntity<?> inserir(@RequestBody final PedidoDTO pedido){
         try {
-
-           pedidoRep.save(pedido);
+            Pedido pedido1 = new Pedido();
+            BeanUtils.copyProperties(pedido,pedido1);
+           pedidoRep.save(pedido1);
             return ResponseEntity.ok("pedido cadastrado com sucesso!");
 
         }
@@ -75,24 +99,14 @@ public class PedidoController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<?> editar(@PathVariable("id") final Long id, @RequestBody final Pedido pedido){
-        try {
-            final Pedido pedido1 = this.pedidoRep.findById(id).orElse(null);
+    public ResponseEntity<?> updatePedido(@PathVariable(value = "id")Long id,@RequestBody @Valid PedidoDTO pedido){
 
-            if (pedido1 == null || pedido1.equals(pedido.getId())){
-                throw new RuntimeException("Não foi possivel indentificar o pedido informada");
-            }
-            this.pedidoRep.save(pedido);
-            return ResponseEntity.ok
-                    ("pedido cadastrado com sucesso");
-        }
-        catch (DataIntegrityViolationException e){
-            return ResponseEntity.internalServerError()
-                    .body("Error: " + e.getCause().getCause().getMessage());
-        }
-        catch (RuntimeException e){
-            return ResponseEntity.internalServerError().body("Error: " + e.getMessage());
-        }
+        Pedido pedidoNovo = pedidoRep.getById(id);
+
+        BeanUtils.copyProperties(pedido, pedidoNovo, "id");
+        pedidoRep.save(pedidoNovo);
+        return ResponseEntity.ok("pedido atualizado com sucesso!");
+
     }
 
     @PutMapping("/{id}/cancelar")
@@ -117,7 +131,16 @@ public class PedidoController {
 
 
     }
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> delete(@PathVariable(value = "id")Long id){
 
+        Pedido pedido = pedidoRep.getById(id);
+
+
+        pedidoRep.delete(pedido);
+        return ResponseEntity.ok("Pedido deletado com sucesso!");
+
+    }
 
 
 }

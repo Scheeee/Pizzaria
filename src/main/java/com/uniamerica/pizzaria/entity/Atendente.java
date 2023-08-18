@@ -1,6 +1,8 @@
 package com.uniamerica.pizzaria.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -17,6 +19,8 @@ public class Atendente {
 
     @Getter
     @Setter
+    @NotBlank(message = "Campo não informado")
+    @Size(max = 50, message = "A quantidade de caracteres é inválida")
     @Column(name="nome", nullable = false)
     private String nome;
 

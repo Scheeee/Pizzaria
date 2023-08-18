@@ -1,15 +1,12 @@
 package com.uniamerica.pizzaria.service;
 
 import com.uniamerica.pizzaria.entity.*;
-import com.uniamerica.pizzaria.repository.AtendenteRep;
-import com.uniamerica.pizzaria.repository.ClienteRep;
 import com.uniamerica.pizzaria.repository.PedidoRep;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.util.Assert;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;
@@ -29,9 +26,8 @@ public class PedidoService {
         this.pedidoRep = pedidoRep;
 
     }
-
     @Transactional(rollbackOn = Exception.class)
-    public ResponseEntity<?> totais(String data) {
+    public String totais(String data) {
 
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
         LocalDate date = LocalDate.parse(data, formatter);
@@ -53,9 +49,17 @@ public class PedidoService {
 
         BigDecimal totalValorPedidos = encerrado.stream().map(Pedido::getValorTotal).reduce(BigDecimal.ZERO, BigDecimal::add);
 
+        String resposta = "Total de pedidos: " + pedidosDoDia +
+        "\nTotal de pedidos encerrados: " + pedidosEncerrados +
+                "\nTotal de pedidos cancelados: " + pedidosCancelados +
+                "\nPedidos entregues: " + pedidosEntregues +
+                "\nPedidos retirados: " + pedidosRetirados +
+                "\nFaturamento total: " + totalValorPedidos +
+                "\nPedidos pagos em dinheiro: " + pedidosDinheiro +
+                "\nPedidos pagos no cartão: " + pedidosCartao;
+        return resposta;
 
-
-        return  ResponseEntity.ok("Total de pedidos:" + pedidosDoDia + "\n Total de pedidos encerrados: " + pedidosEncerrados +"Total de pedidos cancelados: "+ pedidosCancelados + "\n Pedidos entregues:" + pedidosEntregues + "\n Pedidos  retirados: "+ pedidosRetirados + "Faturamento total:"+ totalValorPedidos+"\n Pedidos pagos em dinheiro :" + pedidosDinheiro + "\n Pedidos pagos no cartão:" + pedidosCartao);
+      //  return  ResponseEntity.ok("Total de pedidos:" + pedidosDoDia + "\n Total de pedidos encerrados: " + pedidosEncerrados +"Total de pedidos cancelados: "+ pedidosCancelados + "\n Pedidos entregues:" + pedidosEntregues + "\n Pedidos  retirados: "+ pedidosRetirados + "Faturamento total:"+ totalValorPedidos+"\n Pedidos pagos em dinheiro :" + pedidosDinheiro + "\n Pedidos pagos no cartão:" + pedidosCartao);
 
     }
 

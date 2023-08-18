@@ -2,11 +2,12 @@ package com.uniamerica.pizzaria.DTO;
 
 import com.uniamerica.pizzaria.entity.Pizza;
 import jakarta.persistence.*;
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.util.List;
-
+@Data
 public class SaborDTO {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

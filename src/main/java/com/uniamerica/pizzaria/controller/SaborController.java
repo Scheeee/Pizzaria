@@ -1,8 +1,13 @@
 package com.uniamerica.pizzaria.controller;
 
+import com.uniamerica.pizzaria.DTO.PizzaDTO;
+import com.uniamerica.pizzaria.DTO.SaborDTO;
 import com.uniamerica.pizzaria.entity.Endereco;
+import com.uniamerica.pizzaria.entity.Pizza;
 import com.uniamerica.pizzaria.entity.Sabor;
 import com.uniamerica.pizzaria.repository.SaborRep;
+import jakarta.validation.Valid;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.ResponseEntity;
@@ -20,10 +25,11 @@ public class SaborController {
         return ResponseEntity.ok(saborRep.findAll());
     }
     @PostMapping
-    public ResponseEntity<?> inserir(@RequestBody final Sabor sabor){
+    public ResponseEntity<?> inserir(@RequestBody final SaborDTO sabor){
         try {
-
-            saborRep.save(sabor);
+            Sabor sabor1 = new Sabor();
+            BeanUtils.copyProperties(sabor,sabor1);
+            saborRep.save(sabor1);
             return ResponseEntity.ok("Sabor cadastrado com sucesso!");
 
         }
@@ -32,24 +38,24 @@ public class SaborController {
         }
     }
 
-    @PutMapping
-    public ResponseEntity<?> editar(@RequestParam("id") final Long id, @RequestBody final Sabor sabor){
-        try {
-            final Sabor sabor1 = this.saborRep.findById(id).orElse(null);
+    @PutMapping("/{id}")
+    public ResponseEntity<?> updateSabor(@PathVariable(value = "id")Long id,@RequestBody @Valid SaborDTO sabor){
 
-            if (sabor1 == null || sabor1.equals(sabor.getId())){
-                throw new RuntimeException("Não foi possivel indentificar o sabor informada");
-            }
-            this.saborRep.save(sabor);
-            return ResponseEntity.ok
-                    ("Sabor cadastrado com sucesso");
-        }
-        catch (DataIntegrityViolationException e){
-            return ResponseEntity.internalServerError()
-                    .body("Error: " + e.getCause().getCause().getMessage());
-        }
-        catch (RuntimeException e){
-            return ResponseEntity.internalServerError().body("Error: " + e.getMessage());
-        }
+        Sabor saborNovo = saborRep.getById(id);
+
+        BeanUtils.copyProperties(sabor, saborNovo, "id");
+        saborRep.save(saborNovo);
+        return ResponseEntity.ok("sabor atualizado com sucesso!");
+
+    }
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> delete(@PathVariable(value = "id")Long id){
+
+        Sabor sabor = saborRep.getById(id);
+
+
+       saborRep.delete(sabor);
+        return ResponseEntity.ok("Sabor deletado com sucesso!");
+
     }
 }

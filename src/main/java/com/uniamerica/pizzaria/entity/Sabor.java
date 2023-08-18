@@ -1,6 +1,9 @@
 package com.uniamerica.pizzaria.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -18,11 +21,14 @@ public class Sabor {
 
     @Getter
     @Setter
+    @NotBlank(message = "Campo não informado")
+    @Size(max = 50, message = "A quantidade de caracteres é inválida")
     @Column(name = "nome")
     private String nome;
 
     @Getter
     @Setter
+    @NotNull(message = "Campo não informado")
     @Column(name = "ingrediente")
     private List<String> ingredientes;
 

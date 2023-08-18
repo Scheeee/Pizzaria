@@ -1,10 +1,13 @@
 package com.uniamerica.pizzaria.controller;
 
-import com.uniamerica.pizzaria.entity.Endereco;
+import com.uniamerica.pizzaria.DTO.PedidoDTO;
+import com.uniamerica.pizzaria.DTO.PizzaDTO;
+import com.uniamerica.pizzaria.entity.Pedido;
 import com.uniamerica.pizzaria.entity.Pizza;
-import com.uniamerica.pizzaria.entity.Sabor;
 import com.uniamerica.pizzaria.repository.PizzaRep;
 import com.uniamerica.pizzaria.service.PizzaService;
+import jakarta.validation.Valid;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.ResponseEntity;
@@ -24,11 +27,12 @@ public class PizzaController {
         return ResponseEntity.ok(pizzaRep.findAll());
     }
     @PostMapping
-    public ResponseEntity<?> inserir(@RequestBody final Pizza pizza){
+    public ResponseEntity<?> inserir(@RequestBody final PizzaDTO pizza){
         try {
 
-
-            return pizzaService.save(pizza);
+            Pizza pizza1 = new Pizza();
+            BeanUtils.copyProperties(pizza,pizza1);
+            return pizzaService.save(pizza1);
 
         }
         catch (Exception e){
@@ -36,25 +40,25 @@ public class PizzaController {
         }
     }
 
-    @PutMapping
-    public ResponseEntity<?> editar(@RequestParam("id") final Long id, @RequestBody final Pizza pizza){
-        try {
-            final Pizza pizza1 = this.pizzaRep.findById(id).orElse(null);
+    @PutMapping("/{id}")
+    public ResponseEntity<?> updatePizza(@PathVariable(value = "id")Long id,@RequestBody @Valid PizzaDTO pizza){
 
-            if (pizza1 == null || pizza1.equals(pizza.getId())){
-                throw new RuntimeException("Não foi possivel indentificar a pizza informada");
-            }
-            this.pizzaRep.save(pizza);
-            return ResponseEntity.ok
-                    ("pizza cadastrada com sucesso");
-        }
-        catch (DataIntegrityViolationException e){
-            return ResponseEntity.internalServerError()
-                    .body("Error: " + e.getCause().getCause().getMessage());
-        }
-        catch (RuntimeException e){
-            return ResponseEntity.internalServerError().body("Error: " + e.getMessage());
-        }
+        Pizza pizzaNovo = pizzaRep.getById(id);
+
+        BeanUtils.copyProperties(pizza, pizzaNovo, "id");
+        pizzaRep.save(pizzaNovo);
+        return ResponseEntity.ok("pizza atualizada com sucesso!");
+
+    }
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> delete(@PathVariable(value = "id")Long id){
+
+        Pizza pizza = pizzaRep.getById(id);
+
+
+        pizzaRep.delete(pizza);
+        return ResponseEntity.ok("Pizza deletada com sucesso!");
+
     }
 
 }
