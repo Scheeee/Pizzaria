@@ -10,6 +10,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -66,7 +69,31 @@ public class PedidoService {
         pedidoAtual.setValorTotal(ValorPizzas);
 
         pedidoRep.save(pedidoAtual);
+        salvarPedidoEncerrado(pedidoAtual);
         return ResponseEntity.status(HttpStatus.OK).body(pedidoAtual);
+
+    }
+    @Transactional(rollbackOn = Exception.class)
+    public void salvarPedidoEncerrado(Pedido pedido) {
+        String pasta = "C:\\Users\\Lenovo\\Documents\\desenvolvimento\\pizzaria\\Pedidos Encerrados\\";
+        String arquivo = pasta + "pedido_" + pedido.getId() + ".txt";
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(arquivo))) {
+            writer.write("Cliente: " + pedido.getId());
+            writer.newLine();
+            writer.write("Endereço: " + pedido.getId());
+            writer.newLine();
+            writer.write("Itens do pedido:");
+            writer.newLine();
+            for (Pizza item : pedido.getPizzas()) {
+                writer.write(" - " + item );
+                writer.newLine();
+            }
+            writer.write("Total do pedido: R$ " + pedido.getValorTotal());
+            writer.newLine();
+            System.out.println("Arquivo gerado com sucesso: " + arquivo);
+        } catch (IOException e) {
+            System.out.println("Erro ao salvar o arquivo: " + e.getMessage());
+        }
 
     }
 
