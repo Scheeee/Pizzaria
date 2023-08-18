@@ -1,5 +1,5 @@
-Cliente: 1
-Endereço: 1
+Cliente: 
+Endereço: 
 Itens do pedido:
- - com.uniamerica.pizzaria.entity.Pizza@3ac9b0f5
+ - com.uniamerica.pizzaria.entity.Pizza@24ae944c
 Total do pedido: R$ 20.00
