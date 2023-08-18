@@ -52,12 +52,16 @@ public class PizzaController {
     }
     @DeleteMapping("/{id}")
     public ResponseEntity<?> delete(@PathVariable(value = "id")Long id){
+        try {
+            Pizza pizza = pizzaRep.getById(id);
 
-        Pizza pizza = pizzaRep.getById(id);
 
+            pizzaRep.delete(pizza);
+            return ResponseEntity.ok("Pizza deletada com sucesso!");
+        }catch (Exception e){
+            return ResponseEntity.internalServerError().body("Error: " + e.getMessage());
+        }
 
-        pizzaRep.delete(pizza);
-        return ResponseEntity.ok("Pizza deletada com sucesso!");
 
     }
 

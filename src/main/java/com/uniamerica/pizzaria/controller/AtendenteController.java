@@ -52,12 +52,15 @@ public class AtendenteController {
     }
     @DeleteMapping("/{id}")
     public ResponseEntity<?> delete(@PathVariable(value = "id")Long id){
+        try {
+            Atendente atendente = atendenteRep.getById(id);
 
-        Atendente atendente = atendenteRep.getById(id);
 
-
-        atendenteRep.delete(atendente);
-        return ResponseEntity.ok("Atendente deletado com sucesso!");
+            atendenteRep.delete(atendente);
+            return ResponseEntity.ok("Atendente deletado com sucesso!");
+        }catch (Exception e){
+        return ResponseEntity.internalServerError().body("Error: " + e.getMessage());
+    }
 
     }
 

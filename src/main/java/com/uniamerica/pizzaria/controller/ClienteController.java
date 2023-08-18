@@ -47,12 +47,15 @@ public class ClienteController {
     }
     @DeleteMapping("/{id}")
     public ResponseEntity<?> delete(@PathVariable(value = "id")Long id){
-
+        try{
         Cliente cliente = clienteRep.getById(id);
 
 
         clienteRep.delete(cliente);
         return ResponseEntity.ok("Cliente deletado com sucesso!");
+        }catch (Exception e){
+            return ResponseEntity.internalServerError().body("Error: " + e.getMessage());
+        }
 
     }
 

@@ -4,8 +4,5 @@ Itens do pedido:
 - pizza n°: 1 Tamanho:M
 Sabor(es):
 -calabresa
-- pizza n°: 2 Tamanho:M
-Sabor(es):
--calabresa
  Ingrediente(s) retirado(s):
  - batata

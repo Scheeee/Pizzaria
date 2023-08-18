@@ -133,13 +133,15 @@ public class PedidoController {
     }
     @DeleteMapping("/{id}")
     public ResponseEntity<?> delete(@PathVariable(value = "id")Long id){
+        try{
+            Pedido pedido = pedidoRep.getById(id);
 
-        Pedido pedido = pedidoRep.getById(id);
 
-
-        pedidoRep.delete(pedido);
-        return ResponseEntity.ok("Pedido deletado com sucesso!");
-
+            pedidoRep.delete(pedido);
+            return ResponseEntity.ok("Pedido deletado com sucesso!");
+        }catch (Exception e){
+            return ResponseEntity.internalServerError().body("Error: " + e.getMessage());
+        }
     }
 
 

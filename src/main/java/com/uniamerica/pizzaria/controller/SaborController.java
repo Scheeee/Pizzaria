@@ -50,12 +50,14 @@ public class SaborController {
     }
     @DeleteMapping("/{id}")
     public ResponseEntity<?> delete(@PathVariable(value = "id")Long id){
+        try{
+            Sabor sabor = saborRep.getById(id);
 
-        Sabor sabor = saborRep.getById(id);
 
-
-       saborRep.delete(sabor);
-        return ResponseEntity.ok("Sabor deletado com sucesso!");
-
+           saborRep.delete(sabor);
+            return ResponseEntity.ok("Sabor deletado com sucesso!");
+        }catch (Exception e){
+            return ResponseEntity.internalServerError().body("Error: " + e.getMessage());
+        }
     }
 }

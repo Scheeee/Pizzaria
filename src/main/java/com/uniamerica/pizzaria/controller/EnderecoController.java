@@ -50,12 +50,14 @@ public class EnderecoController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<?> delete(@PathVariable(value = "id")Long id){
-
+        try{
         Endereco endereco = enderecoRep.getById(id);
 
 
         enderecoRep.delete(endereco);
         return ResponseEntity.ok("Endereço deletado com sucesso!");
-
+        }catch (Exception e){
+            return ResponseEntity.internalServerError().body("Error: " + e.getMessage());
+        }
     }
 }
