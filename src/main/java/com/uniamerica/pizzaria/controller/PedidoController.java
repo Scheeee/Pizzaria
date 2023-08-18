@@ -93,13 +93,13 @@ public class PedidoController {
     }
     @PutMapping("/{id}/encerrar")
     public ResponseEntity<?> EncerrarPedido(@PathVariable(value = "id") Long id){
-        pedidoRep.findById(id);
+        try {
+            return pedidoService.encerrar(id);
+        }
+        catch (Exception e ){
+            return ResponseEntity.internalServerError().body("Error: " + e.getMessage());
+        }
 
-        Pedido pedidoAtual = pedidoRep.getById(id);
-        pedidoAtual.setStatus(Status.Encerrado);
-
-        pedidoRep.save(pedidoAtual);
-        return ResponseEntity.status(HttpStatus.OK).body(pedidoAtual);
 
     }
 

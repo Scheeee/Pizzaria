@@ -4,6 +4,7 @@ import com.uniamerica.pizzaria.entity.Endereco;
 import com.uniamerica.pizzaria.entity.Pizza;
 import com.uniamerica.pizzaria.entity.Sabor;
 import com.uniamerica.pizzaria.repository.PizzaRep;
+import com.uniamerica.pizzaria.service.PizzaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.ResponseEntity;
@@ -15,6 +16,8 @@ import org.springframework.web.bind.annotation.*;
 public class PizzaController {
     @Autowired
     PizzaRep pizzaRep;
+    @Autowired
+    PizzaService pizzaService;
 
     @GetMapping("/lista")
     public ResponseEntity<?> getAll(){
@@ -24,8 +27,8 @@ public class PizzaController {
     public ResponseEntity<?> inserir(@RequestBody final Pizza pizza){
         try {
 
-            pizzaRep.save(pizza);
-            return ResponseEntity.ok("pizza cadastrada com sucesso!");
+
+            return pizzaService.save(pizza);
 
         }
         catch (Exception e){
