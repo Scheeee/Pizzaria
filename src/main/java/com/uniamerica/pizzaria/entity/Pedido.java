@@ -1,11 +1,13 @@
 package com.uniamerica.pizzaria.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -17,13 +19,14 @@ public class Pedido {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id", nullable = false, unique = true)
     private long id;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
     @Getter @Setter
     @Column( name = "cadastro")
-    private LocalDateTime cadastrado;
-
+    private LocalDate cadastrado;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
     @Getter @Setter
     @Column( name = "finalizado")
-    private LocalDateTime finalizado;
+    private LocalDate finalizado;
     @Setter @ManyToOne
     @JoinColumn(name = "atendente_id")
     private Atendente atendente;
@@ -56,16 +59,16 @@ public class Pedido {
     @Column(name = "status")
     private Status status;
 
-    /*@PrePersist
+    @PrePersist
     private void prePersist(){
-        this.cadastrado = LocalDateTime.now();
+        this.cadastrado = LocalDate.now();
         this.status = Status.Ativo;
     }
     @PreUpdate
     private void preUpdate(){
-        this.finalizado = LocalDateTime.now();
+        this.finalizado = LocalDate.now();
     }
-    */
+
 
 
 }
