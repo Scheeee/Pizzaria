@@ -14,6 +14,7 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
@@ -28,16 +29,30 @@ public class PedidoController {
     PedidoService pedidoService;
 
     @GetMapping("/{data}")
-    public ResponseEntity<?> findById(@PathVariable("data") String dataString){
+    public ResponseEntity<?> findByData(@PathVariable("data") String dataString){
         try {
 
             return new ResponseEntity<>(pedidoService.totais(dataString), HttpStatus.OK);
 
         } catch (Exception e) {
-            // Lida com a exceção caso a data não esteja no formato esperado
             return new ResponseEntity<>("Formato de data inválido.", HttpStatus.BAD_REQUEST);
         }
     }
+    @GetMapping("/comanda/{id}")
+    public ResponseEntity<?> findById(@PathVariable("id") Long id) {
+        try {
+            Pedido pedido = pedidoRep.getById(id);
+            Assert.isTrue(pedido.getStatus() == Status.Ativo, "o pedido solicitado não está ativo");
+            Assert.isTrue(pedido.getPizzas().size() >= 1 , "o pedido solicitado não possui pizzas");
+
+            pedidoService.gerarComanda(pedido);
+            return ResponseEntity.ok("comanda gerada com sucesso!");
+
+        } catch (Exception e) {
+            return ResponseEntity.internalServerError().body("Error: " + e.getMessage());
+        }
+    }
+
     @GetMapping("/ativos")
     public ResponseEntity<?> getativos(){
         return ResponseEntity.ok(pedidoRep.findByStatus(Status.Ativo));

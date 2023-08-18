@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.util.Assert;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;
@@ -84,10 +85,18 @@ public class PedidoService {
             writer.newLine();
             writer.write("Telefone: " + pedido.getCliente().getTelefone() );
             writer.newLine();
-            writer.write("Endereço: " + pedido.getCliente().getEndereco().getRua() + " N°:" + pedido.getCliente().getEndereco().getNumero());
-            writer.newLine();
-            writer.write("Complemento: " + pedido.getCliente().getEndereco().getComplemento() );
-            writer.newLine();
+            if(pedido.isEntrega()) {
+                writer.write("Entrega " );
+                writer.newLine();
+                writer.write("Endereço: " + pedido.getCliente().getEndereco().getRua() + " N°:" + pedido.getCliente().getEndereco().getNumero());
+                writer.newLine();
+                writer.write("Complemento: " + pedido.getCliente().getEndereco().getComplemento());
+                writer.newLine();
+            }
+            else{
+                writer.write("Retirada no balcão " );
+                writer.newLine();
+            }
             writer.write("Itens do pedido:");
             writer.newLine();
             int nPizza = 1;
@@ -121,8 +130,7 @@ public class PedidoService {
                 writer.newLine();
                 nPizza++;
             }
-            writer.write("Total: R$ " + pedido.getValorTotal());
-            writer.newLine();
+
             if(pedido.isDinheiro()){
                 writer.write("Pagamento no Dinheiro");
                 writer.newLine();
@@ -131,6 +139,8 @@ public class PedidoService {
                 writer.write("Pagamento no Cartão");
 
             }
+            writer.write("Total: R$ " + pedido.getValorTotal());
+            writer.newLine();
             System.out.println("Arquivo gerado com sucesso: " + arquivo);
         } catch (IOException e) {
             System.out.println("Erro ao salvar o arquivo: " + e.getMessage());
@@ -143,15 +153,17 @@ public class PedidoService {
         String pasta = "C:\\Users\\Lenovo\\Documents\\desenvolvimento\\pizzaria\\Comanda\\";
         String arquivo = pasta + "pedido_" + pedido.getId() + ".txt";
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(arquivo))) {
-            writer.write("Cliente: " + pedido.getCliente().getNome());
+            writer.write("Atendente: " + pedido.getAtendente().getNome());
             writer.newLine();
-            writer.write("Telefone: " + pedido.getCliente().getTelefone() );
-            writer.newLine();
-            writer.write("Endereço: " + pedido.getCliente().getEndereco().getRua() + " N°:" + pedido.getCliente().getEndereco().getNumero());
-            writer.newLine();
-            writer.write("Complemento: " + pedido.getCliente().getEndereco().getComplemento() );
-            writer.newLine();
-            writer.write("Itens do pedido:");
+            if(pedido.isEntrega()){
+                writer.write("Preparar pedido para entrega");
+                writer.newLine();
+            }
+            else{
+                writer.write("Retirada no balcão");
+                writer.newLine();
+            }
+           writer.write("Itens do pedido:");
             writer.newLine();
             int nPizza = 1;
             for (Pizza pizza : pedido.getPizzas()) {
@@ -180,20 +192,11 @@ public class PedidoService {
                         writer.newLine();
                     }
                 }
-                writer.write(" Valor unitário: R$" + pizza.getValorUnit());
-                writer.newLine();
                 nPizza++;
             }
-            writer.write("Total: R$ " + pedido.getValorTotal());
-            writer.newLine();
-            if(pedido.isDinheiro()){
-                writer.write("Pagamento no Dinheiro");
-                writer.newLine();
-            }
-            else {
-                writer.write("Pagamento no Cartão");
 
-            }
+
+
             System.out.println("Arquivo gerado com sucesso: " + arquivo);
         } catch (IOException e) {
             System.out.println("Erro ao salvar o arquivo: " + e.getMessage());
