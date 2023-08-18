@@ -38,7 +38,10 @@ public class PedidoController {
             return new ResponseEntity<>("Formato de data inválido.", HttpStatus.BAD_REQUEST);
         }
     }
-
+    @GetMapping("/ativos")
+    public ResponseEntity<?> getativos(){
+        return ResponseEntity.ok(pedidoRep.findByStatus(Status.Ativo));
+    }
     @GetMapping("/lista")
     public ResponseEntity<?> getAll(){
         return ResponseEntity.ok(pedidoRep.findAll());

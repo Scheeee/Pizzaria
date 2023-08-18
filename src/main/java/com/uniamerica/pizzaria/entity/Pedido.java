@@ -39,7 +39,7 @@ public class Pedido {
     private List<Pizza> pizzas;
 
     @Getter @Setter
-    @JoinColumn(name = "entrega")
+    @JoinColumn(name = "entrega", nullable = false)
     private boolean entrega;
 
     @Getter
@@ -51,6 +51,11 @@ public class Pedido {
     @Setter
     @JoinColumn(name = "valorTotal")
     private BigDecimal valorTotal;
+
+    @Getter
+    @Setter
+    @JoinColumn(name = "pagamento", nullable = false)
+    private boolean dinheiro;
 
 
     @Getter
