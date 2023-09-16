@@ -113,23 +113,15 @@ public class PedidoService {
                     writer.write("-"+ sabor.getNome() );
                     writer.newLine();
                 }
-                if(pizza.getIngredientes() != null) {
-                    writer.write(" Ingrediente(s) retirado(s):");
 
-                    writer.newLine();
-                    for (String ingrediente : pizza.getIngredientes()) {
-                        writer.write(" - " + ingrediente);
-                        writer.newLine();
-                    }
-                }
-                if(pizza.getAdicionais() != null) {
+               /* if(pizza.getAdicionais() != null) {
                     writer.write(" Adicionais: ");
                     writer.newLine();
                     for (String adicionais : pizza.getAdicionais()) {
                         writer.write(" - " + adicionais);
                         writer.newLine();
                     }
-                }
+                }*/
                 writer.write(" Valor unitário: R$" + pizza.getValorUnit());
                 writer.newLine();
                 nPizza++;
@@ -179,7 +171,7 @@ public class PedidoService {
                     writer.write("-"+ sabor.getNome() );
                     writer.newLine();
                 }
-                if(pizza.getIngredientes() != null) {
+                /*if(pizza.getIngredientes() != null) {
                     writer.write(" Ingrediente(s) retirado(s):");
 
                     writer.newLine();
@@ -195,7 +187,7 @@ public class PedidoService {
                         writer.write(" - " + adicionais);
                         writer.newLine();
                     }
-                }
+                }*/
                 nPizza++;
             }
 

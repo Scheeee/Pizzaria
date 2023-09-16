@@ -1,16 +1,10 @@
 package com.uniamerica.pizzaria.entity;
-
 import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.Setter;
-
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
@@ -36,10 +30,19 @@ public class Pedido {
     @JoinColumn(name = "cliente_id")
     private Cliente cliente;
 
-    @Getter @Setter
-    @OneToMany(mappedBy = "pedido", fetch = FetchType.EAGER)
-    private List<Pizza> pizzas;
+   /* @Getter @Setter
+    @OneToMany(mappedBy = "pedidos", fetch = FetchType.EAGER)
+    private List<Pizza> pizzas;*/
 
+    @Getter
+    @Setter
+    @ManyToMany
+    @JoinTable(
+            name = "pedido_pizza",
+            joinColumns = @JoinColumn(name = "pedido_id"),
+            inverseJoinColumns = @JoinColumn(name = "pizza_id")
+    )
+    private List<Pizza> pizzas;
     @Getter @Setter
     @JoinColumn(name = "entrega", nullable = false)
     private boolean entrega;
@@ -49,6 +52,10 @@ public class Pedido {
 
     @JoinColumn(name = "detalhes")
     private String detalhes;
+    @Getter
+    @Setter
+    @JoinColumn(name = "adicionais")
+    private List<String> adicionais;
 
     @Getter
     @Setter

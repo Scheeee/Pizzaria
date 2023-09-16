@@ -1,18 +1,13 @@
 package com.uniamerica.pizzaria.controller;
-
 import com.uniamerica.pizzaria.DTO.AtendenteDTO;
 import com.uniamerica.pizzaria.entity.Atendente;
 import com.uniamerica.pizzaria.repository.AtendenteRep;
 import jakarta.validation.Valid;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataIntegrityViolationException;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.Optional;
 
 @Controller
 @RequestMapping(value = "/pizzaria/atendente")
@@ -44,7 +39,6 @@ public class AtendenteController {
     public ResponseEntity<?> updateAtendente(@PathVariable(value = "id")Long id,@RequestBody @Valid AtendenteDTO atendente){
 
         Atendente atendenteNovo = atendenteRep.getById(id);
-
         BeanUtils.copyProperties(atendente, atendenteNovo, "id");
         atendenteRep.save(atendenteNovo);
         return ResponseEntity.ok("Atendente atualizado com sucesso!");

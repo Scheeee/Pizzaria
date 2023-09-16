@@ -35,22 +35,14 @@ public class Pizza {
             inverseJoinColumns = @JoinColumn(name = "sabor_id")
     )
     private List<Sabor> sabores;
+    @ManyToMany(mappedBy = "pizzas")
+    private List<Pedido> pedidos;
 
-
-    @Setter
+   /* @Setter
     @ManyToOne
     @JoinColumn(name = "pedido_id")
-    private Pedido pedido;
+    private Pedido pedido;*/
 
-    @Getter
-    @Setter
-    @JoinColumn(name = "ingredientes")
-    private List<String> ingredientes;
-
-    @Getter
-    @Setter
-    @JoinColumn(name = "adicionais")
-    private List<String> adicionais;
 
     @Getter
     @Setter
