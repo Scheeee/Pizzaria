@@ -6,6 +6,7 @@ import com.uniamerica.pizzaria.entity.Endereco;
 import com.uniamerica.pizzaria.entity.Pizza;
 import com.uniamerica.pizzaria.entity.Sabor;
 import com.uniamerica.pizzaria.repository.SaborRep;
+import com.uniamerica.pizzaria.service.SaborService;
 import jakarta.validation.Valid;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +20,8 @@ import org.springframework.web.bind.annotation.*;
 public class SaborController {
     @Autowired
     SaborRep saborRep;
+    @Autowired
+    SaborService saborService;
 
     @GetMapping("/lista")
     public ResponseEntity<?> getAll(){
@@ -29,7 +32,7 @@ public class SaborController {
         try {
             Sabor sabor1 = new Sabor();
             BeanUtils.copyProperties(sabor,sabor1);
-            saborRep.save(sabor1);
+            saborService.saveSabor(sabor1);
             return ResponseEntity.ok("Sabor cadastrado com sucesso!");
 
         }
