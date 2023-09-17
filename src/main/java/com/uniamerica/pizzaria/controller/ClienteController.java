@@ -1,13 +1,13 @@
 package com.uniamerica.pizzaria.controller;
 
-import com.uniamerica.pizzaria.DTO.ClienteDTO;
-import com.uniamerica.pizzaria.entity.Atendente;
+import com.uniamerica.pizzaria.dto.ClienteDTO;
+
 import com.uniamerica.pizzaria.entity.Cliente;
 import com.uniamerica.pizzaria.repository.ClienteRep;
 import jakarta.validation.Valid;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataIntegrityViolationException;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -19,7 +19,7 @@ public class ClienteController {
     @Autowired
     ClienteRep clienteRep;
     @GetMapping("/lista")
-    public ResponseEntity<?> getAll(){
+    public ResponseEntity<?> findAll(){
         return ResponseEntity.ok(clienteRep.findAll());
     }
     @PostMapping

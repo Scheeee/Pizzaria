@@ -10,4 +10,9 @@ class PizzariaApplicationTests {
 	void contextLoads() {
 	}
 
+	@Test
+	void AtendenteTest(){
+
+	}
+
 }

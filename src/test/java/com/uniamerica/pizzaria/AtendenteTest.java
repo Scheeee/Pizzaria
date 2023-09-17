@@ -25,7 +25,7 @@ public class AtendenteTest {
     private  final AtendenteController atendenteController = new AtendenteController();
 
 
-   
+
 
     @BeforeEach
     void injectFindByAll(){
@@ -45,5 +45,8 @@ public class AtendenteTest {
         Assert.assertEquals(1, valor, 0);
 
     }
+
+
+
 
 }

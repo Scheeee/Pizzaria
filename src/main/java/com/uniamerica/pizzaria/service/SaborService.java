@@ -26,7 +26,7 @@ public class SaborService {
 
         saborRep.save(sabor);
         List<Sabor> sabores = saborRep.findAll();
-        Pizza pizza = new Pizza();
+
 
 
 
@@ -51,10 +51,10 @@ public class SaborService {
         pizza3.setValorUnit(BigDecimal.valueOf(35));
         pizzaRep.save(pizza3);
 
-        for(int i = 0; i < sabores.size(); i++){
+        for (Sabor sabore : sabores) {
             Pizza pizza4 = new Pizza();
-            if(sabor != sabores.get(i)) {
-                pizza4.getSabores().add(sabores.get(i));
+            if (sabor != sabore) {
+                pizza4.getSabores().add(sabore);
                 pizza4.setTamanho(Tamanho.M);
                 pizza4.setValorUnit(BigDecimal.valueOf(30));
                 pizzaRep.save(pizza4);
@@ -67,9 +67,9 @@ public class SaborService {
                 pizza5.getSabores().add(sabores.get(i));
                 pizza5.setTamanho(Tamanho.G);
                 pizza5.setValorUnit(BigDecimal.valueOf(40));
-                for (int j = 0; j < sabores.size(); j++) {
-                    if (sabores.get(i) != sabores.get(j) && sabor!= sabores.get(j)) {
-                        pizza5.getSabores().add(sabores.get(j));// testar essa coisa aqui e verificar a possibilidade de diminuir esse cod
+                for (Sabor sabore : sabores) {
+                    if (sabores.get(i) != sabore && sabor != sabore) {
+                        pizza5.getSabores().add(sabore);// testar essa coisa aqui e verificar a possibilidade de diminuir esse cod
                     }
                 }
                 pizzaRep.save(pizza5);

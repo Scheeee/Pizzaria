@@ -2,6 +2,7 @@ package com.uniamerica.pizzaria.entity;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -9,6 +10,7 @@ import java.math.BigDecimal;
 import java.util.List;
 
 @Entity
+
 @Table(name = "pizzas", schema = "public")
 public class Pizza {
 
@@ -37,11 +39,6 @@ public class Pizza {
     private List<Sabor> sabores;
     @ManyToMany(mappedBy = "pizzas")
     private List<Pedido> pedidos;
-
-   /* @Setter
-    @ManyToOne
-    @JoinColumn(name = "pedido_id")
-    private Pedido pedido;*/
 
 
     @Getter

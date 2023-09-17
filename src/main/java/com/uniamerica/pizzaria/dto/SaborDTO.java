@@ -1,24 +1,23 @@
-package com.uniamerica.pizzaria.DTO;
+package com.uniamerica.pizzaria.dto;
 
-import com.uniamerica.pizzaria.entity.Endereco;
+import com.uniamerica.pizzaria.entity.Pizza;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.Getter;
-import lombok.Setter;
-@Data
-public class ClienteDTO {
 
+
+import java.util.List;
+@Data
+public class SaborDTO {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Getter
     @Column(name = "id", nullable = false, unique = true)
     private long id;
 
-
     private String nome;
 
-    private String telefone;
+    private List<String> ingredientes;
 
-    private Endereco endereco;
-
+    private List<Pizza> pizzas;
 }

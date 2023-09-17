@@ -30,9 +30,7 @@ public class Pedido {
     @JoinColumn(name = "cliente_id")
     private Cliente cliente;
 
-   /* @Getter @Setter
-    @OneToMany(mappedBy = "pedidos", fetch = FetchType.EAGER)
-    private List<Pizza> pizzas;*/
+
 
     @Getter
     @Setter

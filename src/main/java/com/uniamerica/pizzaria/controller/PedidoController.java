@@ -1,7 +1,6 @@
 package com.uniamerica.pizzaria.controller;
-import com.uniamerica.pizzaria.DTO.PedidoDTO;
-import com.uniamerica.pizzaria.entity.Cliente;
-import com.uniamerica.pizzaria.entity.Endereco;
+import com.uniamerica.pizzaria.dto.PedidoDTO;
+
 import com.uniamerica.pizzaria.entity.Pedido;
 import com.uniamerica.pizzaria.entity.Status;
 import com.uniamerica.pizzaria.repository.AtendenteRep;
@@ -17,7 +16,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Date;
+
 
 @Controller
 @RequestMapping(value = "/pizzaria/pedido")

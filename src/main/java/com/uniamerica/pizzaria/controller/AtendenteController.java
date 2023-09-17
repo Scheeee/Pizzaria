@@ -1,5 +1,5 @@
 package com.uniamerica.pizzaria.controller;
-import com.uniamerica.pizzaria.DTO.AtendenteDTO;
+import com.uniamerica.pizzaria.dto.AtendenteDTO;
 import com.uniamerica.pizzaria.entity.Atendente;
 import com.uniamerica.pizzaria.repository.AtendenteRep;
 import jakarta.validation.Valid;
@@ -9,6 +9,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @Controller
 @RequestMapping(value = "/pizzaria/atendente")
 public class AtendenteController {
@@ -17,11 +19,11 @@ public class AtendenteController {
     AtendenteRep atendenteRep;
 
     @GetMapping("/lista")
-    public ResponseEntity<?> findAll(){
+    public ResponseEntity<List> findAll(){
         return ResponseEntity.ok(atendenteRep.findAll());
     }
     @PostMapping
-    public ResponseEntity<?> inserir(@RequestBody final AtendenteDTO atendente){
+    public ResponseEntity<Object> inserir(@RequestBody final AtendenteDTO atendente){
         try {
             Atendente atendente1 = new Atendente();
             BeanUtils.copyProperties(atendente,atendente1);
@@ -36,7 +38,7 @@ public class AtendenteController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<?> updateAtendente(@PathVariable(value = "id")Long id,@RequestBody @Valid AtendenteDTO atendente){
+    public ResponseEntity<Object> updateAtendente(@PathVariable(value = "id")Long id,@RequestBody @Valid AtendenteDTO atendente){
 
         Atendente atendenteNovo = atendenteRep.getById(id);
         BeanUtils.copyProperties(atendente, atendenteNovo, "id");
@@ -45,7 +47,7 @@ public class AtendenteController {
 
     }
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> delete(@PathVariable(value = "id")Long id){
+    public ResponseEntity<Object> delete(@PathVariable(value = "id")Long id){
         try {
             Atendente atendente = atendenteRep.getById(id);
 

@@ -1,16 +1,16 @@
 package com.uniamerica.pizzaria.controller;
 
-import com.uniamerica.pizzaria.DTO.PizzaDTO;
-import com.uniamerica.pizzaria.DTO.SaborDTO;
-import com.uniamerica.pizzaria.entity.Endereco;
-import com.uniamerica.pizzaria.entity.Pizza;
+
+import com.uniamerica.pizzaria.dto.SaborDTO;
+
+
 import com.uniamerica.pizzaria.entity.Sabor;
 import com.uniamerica.pizzaria.repository.SaborRep;
 import com.uniamerica.pizzaria.service.SaborService;
 import jakarta.validation.Valid;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataIntegrityViolationException;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;

@@ -7,7 +7,7 @@ import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.List;
+
 
 @Entity
 @Table(name = "clientes", schema = "public")
@@ -37,10 +37,6 @@ public class Cliente {
     @OneToOne(mappedBy = "cliente", fetch = FetchType.EAGER)
     private Endereco endereco;
 
-   /* @Getter @Setter
-    @OneToMany(mappedBy = "cliente", fetch = FetchType.EAGER)
-    private List<Pedido> pedidos;
-    */
 
 
 
