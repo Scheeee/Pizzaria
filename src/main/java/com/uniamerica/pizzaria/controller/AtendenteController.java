@@ -17,7 +17,7 @@ public class AtendenteController {
     AtendenteRep atendenteRep;
 
     @GetMapping("/lista")
-    public ResponseEntity<?> getAll(){
+    public ResponseEntity<?> findAll(){
         return ResponseEntity.ok(atendenteRep.findAll());
     }
     @PostMapping

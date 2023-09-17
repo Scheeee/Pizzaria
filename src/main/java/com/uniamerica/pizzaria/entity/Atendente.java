@@ -4,12 +4,14 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.List;
 
 @Entity
 @Table(name = "atendentes", schema = "public")
+@NoArgsConstructor
 public class Atendente {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -24,8 +26,9 @@ public class Atendente {
     @Column(name="nome", nullable = false)
     private String nome;
 
-    /*@Getter @Setter
-    @OneToMany(mappedBy = "atendente", fetch = FetchType.EAGER)
-    private List<Pedido> pedidos;
-    */
+
+    public Atendente(long id, String nome) {
+        this.id = id;
+        this.nome = nome;
+    }
 }
