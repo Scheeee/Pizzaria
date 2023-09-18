@@ -5,12 +5,14 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 
 
 @Entity
 @Table(name = "clientes", schema = "public")
+@NoArgsConstructor
 public class Cliente {
 
     @Id
@@ -38,7 +40,17 @@ public class Cliente {
     private Endereco endereco;
 
 
+    public Cliente(long id, String nome, String telefone) {
+        this.id = id;
+        this.nome = nome;
+        this.telefone = telefone;
 
+    }
 
-
+    public Cliente(long id, String nome, String telefone, Endereco endereco) {
+        this.id = id;
+        this.nome = nome;
+        this.telefone = telefone;
+        this.endereco = endereco;
+    }
 }

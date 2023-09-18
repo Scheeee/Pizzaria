@@ -1,8 +1,6 @@
 package com.uniamerica.pizzaria.controller;
-import com.uniamerica.pizzaria.dto.AtendenteDTO;
 import com.uniamerica.pizzaria.entity.Atendente;
 import com.uniamerica.pizzaria.repository.AtendenteRep;
-import jakarta.validation.Valid;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -19,11 +17,11 @@ public class AtendenteController {
     AtendenteRep atendenteRep;
 
     @GetMapping("/lista")
-    public ResponseEntity<List> findAll(){
+    public ResponseEntity<List<Atendente>> findAll(){
         return ResponseEntity.ok(atendenteRep.findAll());
     }
     @PostMapping
-    public ResponseEntity<Object> inserir(@RequestBody final AtendenteDTO atendente){
+    public ResponseEntity<Object> inserir(@RequestBody final Atendente atendente){
         try {
             Atendente atendente1 = new Atendente();
             BeanUtils.copyProperties(atendente,atendente1);
@@ -38,7 +36,7 @@ public class AtendenteController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Object> updateAtendente(@PathVariable(value = "id")Long id,@RequestBody @Valid AtendenteDTO atendente){
+    public ResponseEntity<Object> updateAtendente(@PathVariable(value = "id") long id, @RequestBody Atendente atendente){
 
         Atendente atendenteNovo = atendenteRep.getById(id);
         BeanUtils.copyProperties(atendente, atendenteNovo, "id");

@@ -1,26 +1,25 @@
-package com.uniamerica.pizzaria.controller;
+package com.uniamerica.pizzaria.service;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import static org.junit.jupiter.api.Assertions.*;
-
 @SpringBootTest
-class PizzaControllerTest {
+class PedidoServiceTest {
 
     @Test
-    void getAll() {
+    void totais() {
     }
 
     @Test
-    void inserir() {
+    void encerrar() {
     }
 
     @Test
-    void updatePizza() {
+    void salvarPedidoEncerrado() {
     }
 
     @Test
-    void delete() {
+    void gerarComanda() {
     }
 }

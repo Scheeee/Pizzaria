@@ -12,6 +12,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @Controller
 @RequestMapping(value = "/pizzaria/endereco")
 public class EnderecoController {
@@ -19,11 +21,11 @@ public class EnderecoController {
     EnderecoRep enderecoRep;
 
     @GetMapping("/lista")
-    public ResponseEntity<?> getAll(){
+    public ResponseEntity<List<Endereco>> getAll(){
         return ResponseEntity.ok(enderecoRep.findAll());
     }
     @PostMapping
-    public ResponseEntity<?> inserir(@RequestBody final EnderecoDTO endereco){
+    public ResponseEntity<Object> inserir(@RequestBody final Endereco endereco){
         try {
             Endereco endereco1 = new Endereco();
             BeanUtils.copyProperties(endereco,endereco1);
@@ -37,7 +39,7 @@ public class EnderecoController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<?> updateEndereco(@PathVariable(value = "id")Long id,@RequestBody @Valid EnderecoDTO endereco){
+    public ResponseEntity<Object> updateEndereco(@PathVariable(value = "id")Long id,@RequestBody @Valid EnderecoDTO endereco){
 
         Endereco enderecoNovo = enderecoRep.getById(id);
 
@@ -48,7 +50,7 @@ public class EnderecoController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> delete(@PathVariable(value = "id")Long id){
+    public ResponseEntity<Object> delete(@PathVariable(value = "id")Long id){
         try{
         Endereco endereco = enderecoRep.getById(id);
 

@@ -4,9 +4,11 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
+@NoArgsConstructor
 @Table(name = "enderecos", schema = "public")
 public class Endereco {
 
@@ -38,13 +40,26 @@ public class Endereco {
     private String complemento;
 
 
+    @Getter
     @Setter
     @OneToOne
     @JoinColumn(name = "cliente_id")
     private Cliente cliente;
 
 
+    public Endereco(long id, String rua, String numero, String complemento ) {
+        this.id = id;
+        this.rua = rua;
+        this.numero = numero;
+        this.complemento = complemento;
 
+    }
 
-
+    public Endereco(long id, String rua, String numero, String complemento, Cliente cliente) {
+        this.id = id;
+        this.rua = rua;
+        this.numero = numero;
+        this.complemento = complemento;
+        this.cliente = cliente;
+    }
 }

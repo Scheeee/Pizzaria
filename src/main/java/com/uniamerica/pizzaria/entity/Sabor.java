@@ -5,11 +5,13 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.List;
 
 @Entity
+@NoArgsConstructor
 @Table(name = "sabores", schema = "public")
 public class Sabor {
     @Id
@@ -35,4 +37,10 @@ public class Sabor {
 
     @ManyToMany(mappedBy = "sabores")
     private List<Pizza> pizzas;
+
+    public Sabor(long id, String nome, List<String> ingredientes) {
+        this.id = id;
+        this.nome = nome;
+        this.ingredientes = ingredientes;
+    }
 }

@@ -2,8 +2,8 @@ package com.uniamerica.pizzaria.entity;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
-import lombok.Data;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.math.BigDecimal;
@@ -12,6 +12,7 @@ import java.util.List;
 @Entity
 
 @Table(name = "pizzas", schema = "public")
+@NoArgsConstructor
 public class Pizza {
 
     @Id
@@ -46,4 +47,11 @@ public class Pizza {
     @NotNull(message = "Campo não informado")
     @JoinColumn(name = "valorUnidade")
     private BigDecimal valorUnit;
+
+    public Pizza(long id, Tamanho tamanho, List<Sabor> sabores, BigDecimal valorUnit) {
+        this.id = id;
+        this.tamanho = tamanho;
+        this.sabores = sabores;
+        this.valorUnit = valorUnit;
+    }
 }

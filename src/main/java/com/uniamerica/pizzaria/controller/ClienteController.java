@@ -12,6 +12,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @Controller
 @RequestMapping(value = "/pizzaria/cliente")
 public class ClienteController {
@@ -19,11 +21,11 @@ public class ClienteController {
     @Autowired
     ClienteRep clienteRep;
     @GetMapping("/lista")
-    public ResponseEntity<?> findAll(){
+    public ResponseEntity<List<Cliente>> findAll(){
         return ResponseEntity.ok(clienteRep.findAll());
     }
     @PostMapping
-    public ResponseEntity<?> inserir(@RequestBody final ClienteDTO cliente){
+    public ResponseEntity<Object> inserir(@RequestBody final Cliente cliente){
         try {
             Cliente cliente1 = new Cliente();
             BeanUtils.copyProperties(cliente,cliente1);
@@ -36,7 +38,7 @@ public class ClienteController {
         }
     }
     @PutMapping("/{id}")
-    public ResponseEntity<?> updateCliente(@PathVariable(value = "id")Long id,@RequestBody @Valid ClienteDTO cliente){
+    public ResponseEntity<Object> updateCliente(@PathVariable(value = "id")Long id,@RequestBody @Valid ClienteDTO cliente){
 
         Cliente clienteNovo = clienteRep.getById(id);
 
@@ -46,7 +48,7 @@ public class ClienteController {
 
     }
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> delete(@PathVariable(value = "id")Long id){
+    public ResponseEntity<Object> delete(@PathVariable(value = "id")Long id){
         try{
         Cliente cliente = clienteRep.getById(id);
 

@@ -4,7 +4,6 @@ import com.uniamerica.pizzaria.controller.AtendenteController;
 import com.uniamerica.pizzaria.entity.Atendente;
 import com.uniamerica.pizzaria.repository.AtendenteRep;
 import org.junit.Assert;
-import org.junit.BeforeClass;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -14,7 +13,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
+
 
 @SpringBootTest
 public class AtendenteTest {
