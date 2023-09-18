@@ -3,7 +3,6 @@ import com.uniamerica.pizzaria.entity.Sabor;
 import com.uniamerica.pizzaria.repository.PizzaRep;
 import com.uniamerica.pizzaria.repository.SaborRep;
 import com.uniamerica.pizzaria.service.SaborService;
-import org.junit.Assert;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

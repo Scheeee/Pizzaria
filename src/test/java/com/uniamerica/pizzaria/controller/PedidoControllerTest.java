@@ -5,7 +5,8 @@ import com.uniamerica.pizzaria.entity.*;
 import com.uniamerica.pizzaria.repository.*;
 import com.uniamerica.pizzaria.service.PedidoService;
 
-import org.junit.Assert;
+
+
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -176,7 +177,7 @@ class PedidoControllerTest {
         Pedido pedido = pedidocontroller.getBody().get().get(0);
         long id = pedido.getAtendente().getId();
         System.out.println(id);
-        Assert.assertEquals(1L, id, 0);
+        Assertions.assertEquals(1L, id, 0);
     }
 
     @Test
@@ -186,15 +187,15 @@ class PedidoControllerTest {
         Pedido pedido = pedidocontroller.getBody().get().get(0);
         long id = pedido.getCliente().getId();
         System.out.println(id);
-        Assert.assertEquals(1L, id, 0);
+        Assertions.assertEquals(1L, id, 0);
     }
 
     @Test
     void findById() {
         var pedidocontroller = pedidoController.findById(1L);
-        Long id = pedidocontroller.getBody().get().getId().longValue();
+        Long id = pedidocontroller.getBody().get().getId();
         System.out.println(id);
-        Assert.assertEquals(1L, id, 0);
+        Assertions.assertEquals(1L, id, 0);
 
     }
 

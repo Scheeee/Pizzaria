@@ -1,6 +1,6 @@
 package com.uniamerica.pizzaria.dto;
 
-import com.uniamerica.pizzaria.entity.Pizza;
+
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.Getter;
