@@ -64,5 +64,11 @@ class EnderecoControllerTest {
 
     @Test
     void delete() {
+        inserir();
+
+        var delete = enderecoController.delete(1L);
+
+        Assert.assertNotNull(delete);
+        Assert.assertEquals("Endereço deletado com sucesso!", delete.getBody());
     }
 }

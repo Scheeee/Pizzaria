@@ -1,34 +1,11 @@
 package com.uniamerica.pizzaria.entity;
-
-import com.uniamerica.pizzaria.controller.AtendenteController;
-import com.uniamerica.pizzaria.controller.PedidoController;
-import com.uniamerica.pizzaria.repository.AtendenteRep;
-import jakarta.validation.constraints.AssertTrue;
-import org.junit.Assert;
-import org.junit.BeforeClass;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.boot.test.context.SpringBootTest;
 
-import java.util.Optional;
-
-import static org.junit.jupiter.api.Assertions.*;
-
+@SpringBootTest
 class AtendenteTest {
 
-
-    @MockBean
-    AtendenteRep atendenteRep;
-
-    @Autowired
-    private final PedidoController pedidoController = new PedidoController();
-
-    @BeforeClass
-    void injectGetId(){
-        Optional<Atendente> atendente = Optional.of(new Atendente(1L,"Sche"));
-        Mockito.when(atendenteRep.findById(1L)).thenReturn(atendente);
-    }
 
     @Test
     void getId() {
@@ -37,7 +14,7 @@ class AtendenteTest {
 
        long id =  atendente.getId();
 
-        Assert.assertEquals(1L, id, 0);
+        Assertions.assertEquals(1L, id, 0);
 
     }
 
@@ -47,7 +24,7 @@ class AtendenteTest {
 
         String nome = atendente.getNome();
 
-        Assert.assertEquals("Sche", nome);
+        Assertions.assertEquals("Sche", nome);
     }
 
     @Test
@@ -57,6 +34,6 @@ class AtendenteTest {
         atendente.setNome("Gabriele");
 
         String nome = atendente.getNome();
-        Assert.assertEquals("Gabriele", nome);
+        Assertions.assertEquals("Gabriele", nome);
     }
 }

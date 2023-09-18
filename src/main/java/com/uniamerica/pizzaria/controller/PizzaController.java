@@ -27,7 +27,7 @@ public class PizzaController {
         return ResponseEntity.ok(pizzaRep.findAll());
     }
     @PostMapping
-    public ResponseEntity<?> inserir(@RequestBody final PizzaDTO pizza){
+    public ResponseEntity<?> inserir(@RequestBody final Pizza pizza){
         try {
 
             Pizza pizza1 = new Pizza();

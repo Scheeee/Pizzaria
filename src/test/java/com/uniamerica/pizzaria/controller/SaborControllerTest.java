@@ -41,6 +41,16 @@ class SaborControllerTest {
         Mockito.when(saborRep.findAll()).thenReturn(sabores);
 
     }
+    @BeforeEach
+    void injectUpdate(){
+        List<String> ingredientes = new ArrayList<>();
+        ingredientes.add("Calabresa");
+        Sabor sabor = new Sabor(1L,"Calabresa", ingredientes);
+        List<Sabor> sabores = new ArrayList<>();
+
+        sabores.add(sabor);
+        Mockito.when(saborRep.save(sabor)).thenReturn(sabor);
+    }
 
     @Test
     void getAll() {
@@ -66,9 +76,31 @@ class SaborControllerTest {
 
     @Test
     void updateSabor() {
+
+
+        /*List<String> ingredientes = new ArrayList<>();
+        ingredientes.add("Calabresa com Alho");
+
+        Sabor sabor = new Sabor( 1,"Calabresa", ingredientes);
+        saborRep.save(sabor);
+
+        Sabor sabornovo = new Sabor( 2,"Calabresa com alho", ingredientes);
+
+        var sabor1 = saborController.updateSabor(1L,sabornovo);
+
+
+        Assert.assertNotNull(sabor1);
+        Assert.assertEquals("Sabor  com sucesso!", sabor1.getBody());*/
     }
 
     @Test
     void delete() {
+        inserir();
+
+        var delete = saborController.delete(1L);
+
+        Assert.assertNotNull(delete);
+        Assert.assertEquals("Sabor deletado com sucesso!", delete.getBody());
+
     }
 }

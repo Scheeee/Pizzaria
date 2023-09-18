@@ -1,14 +1,7 @@
 package com.uniamerica.pizzaria.entity;
-
-import org.junit.Assert;
-import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 class ClienteTest {
 
@@ -24,7 +17,7 @@ class ClienteTest {
 
         long id =  cliente.getId();
 
-        Assert.assertEquals(1L, id, 0);
+        Assertions.assertEquals(1L, id, 0);
     }
 
     @Test
@@ -33,7 +26,7 @@ class ClienteTest {
 
         String nome =  cliente.getNome();
 
-        Assert.assertEquals("Sche", nome);
+        Assertions.assertEquals("Sche", nome);
 
     }
 
@@ -43,7 +36,7 @@ class ClienteTest {
 
         String tel =  cliente.getTelefone();
 
-        Assert.assertEquals("45-98034-3600", tel);
+        Assertions.assertEquals("45-98034-3600", tel);
 
     }
 
@@ -53,7 +46,7 @@ class ClienteTest {
 
         long id =  cliente.getEndereco().getId();
 
-        Assert.assertEquals(1L, id, 0);
+        Assertions.assertEquals(1L, id, 0);
     }
 
     @Test
@@ -63,7 +56,7 @@ class ClienteTest {
         cliente.setNome("Gabriele");
 
         String nome = cliente.getNome();
-        Assert.assertEquals("Gabriele", nome);
+        Assertions.assertEquals("Gabriele", nome);
     }
 
     @Test
@@ -73,7 +66,7 @@ class ClienteTest {
         cliente.setTelefone("45-99999-3600");
         String tel = cliente.getTelefone();
 
-        Assert.assertEquals("45-99999-3600", tel);
+        Assertions.assertEquals("45-99999-3600", tel);
     }
 
     @Test
@@ -84,6 +77,6 @@ class ClienteTest {
         cliente.setEndereco(endereco1);
         long id =  cliente.getEndereco().getId();
 
-        Assert.assertEquals(2L, id, 0);
+        Assertions.assertEquals(2L, id, 0);
     }
 }

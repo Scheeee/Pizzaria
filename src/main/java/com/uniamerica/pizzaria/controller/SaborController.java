@@ -1,13 +1,9 @@
 package com.uniamerica.pizzaria.controller;
 
 
-import com.uniamerica.pizzaria.dto.SaborDTO;
-
-
 import com.uniamerica.pizzaria.entity.Sabor;
 import com.uniamerica.pizzaria.repository.SaborRep;
 import com.uniamerica.pizzaria.service.SaborService;
-import jakarta.validation.Valid;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -42,7 +38,7 @@ public class SaborController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<?> updateSabor(@PathVariable(value = "id")Long id,@RequestBody @Valid SaborDTO sabor){
+    public ResponseEntity<?> updateSabor(@PathVariable(value = "id")Long id,@RequestBody Sabor sabor){
 
         Sabor saborNovo = saborRep.getById(id);
 

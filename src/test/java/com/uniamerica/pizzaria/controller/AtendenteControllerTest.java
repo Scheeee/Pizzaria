@@ -62,5 +62,13 @@ class AtendenteControllerTest {
 
     @Test
     void delete() {
+        inserir();
+
+        var delete = atendenteController.delete(1L);
+
+        Assert.assertNotNull(delete);
+
+        Assert.assertEquals("Atendente deletado com sucesso!", delete.getBody());
+
     }
 }

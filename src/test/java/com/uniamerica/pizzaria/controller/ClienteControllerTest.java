@@ -67,5 +67,11 @@ class ClienteControllerTest {
 
     @Test
     void delete() {
+        inserir();
+
+        var delete = clienteController.delete(1L);
+
+        Assert.assertNotNull(delete);
+        Assert.assertEquals("Cliente deletado com sucesso!", delete.getBody());
     }
 }
