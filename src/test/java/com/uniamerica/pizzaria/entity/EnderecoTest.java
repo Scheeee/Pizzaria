@@ -1,9 +1,8 @@
 package com.uniamerica.pizzaria.entity;
 
-import org.junit.Assert;
-import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 class EnderecoTest {
 
@@ -18,7 +17,7 @@ class EnderecoTest {
 
         long id = endereco.getId();
 
-        Assert.assertEquals(1L, id, 0);
+        Assertions.assertEquals(1L, id, 0);
 
     }
 
@@ -26,21 +25,21 @@ class EnderecoTest {
     void getRua() {
         String rua = endereco.getRua();
 
-        Assert.assertEquals("Avenida tancredo neves", rua);
+        Assertions.assertEquals("Avenida tancredo neves", rua);
     }
 
     @Test
     void getNumero() {
         String numero = endereco.getNumero();
 
-        Assert.assertEquals("1234", numero);
+        Assertions.assertEquals("1234", numero);
     }
 
     @Test
     void getComplemento() {
         String complemento = endereco.getComplemento();
 
-        Assert.assertEquals("casa 123", complemento);
+        Assertions.assertEquals("casa 123", complemento);
     }
 
     @Test
@@ -48,7 +47,7 @@ class EnderecoTest {
         endereco.setRua("rua 1");
         String rua = endereco.getRua();
 
-        Assert.assertEquals("rua 1", rua);
+        Assertions.assertEquals("rua 1", rua);
 
     }
 
@@ -58,7 +57,7 @@ class EnderecoTest {
         endereco.setNumero("1");
 
         String num = endereco.getNumero();
-        Assert.assertEquals("1", num);
+        Assertions.assertEquals("1", num);
     }
 
     @Test
@@ -67,7 +66,7 @@ class EnderecoTest {
 
         String complemento = endereco.getComplemento();
 
-        Assert.assertEquals("casa 1", complemento);
+        Assertions.assertEquals("casa 1", complemento);
     }
 
     @Test
@@ -76,8 +75,8 @@ class EnderecoTest {
 
         endereco.setCliente(cliente1);
 
-        Long id = endereco.getCliente().getId();
+        long id = endereco.getCliente().getId();
 
-        Assert.assertEquals(2, id, 0 );
+        Assertions.assertEquals(2, id, 0);
     }
 }

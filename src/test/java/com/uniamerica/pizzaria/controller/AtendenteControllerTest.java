@@ -1,7 +1,8 @@
 package com.uniamerica.pizzaria.controller;
 import com.uniamerica.pizzaria.entity.Atendente;
 import com.uniamerica.pizzaria.repository.AtendenteRep;
-import org.junit.Assert;
+
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -38,10 +39,13 @@ class AtendenteControllerTest {
     @Test
     void findAll() {
         var atendentecontroler = atendenteController.findAll();
-        List<Atendente> atendentes = (List<Atendente>) atendentecontroler.getBody();
-        int valor = atendentes.size();
+        List<Atendente> atendentes = atendentecontroler.getBody();
+        int valor = 0;
+        if (atendentes != null) {
+            valor = atendentes.size();
+        }
         System.out.println(valor);
-        Assert.assertEquals(1, valor, 0);
+        Assertions.assertEquals(1, valor, 0);
     }
 
     @Test
@@ -50,8 +54,8 @@ class AtendenteControllerTest {
         var atendente1 = atendenteController.inserir(atendente);
 
 
-       Assert.assertNotNull(atendente1);
-        Assert.assertEquals("Atendente cadastrado(a) com sucesso!", atendente1.getBody());
+       Assertions.assertNotNull(atendente1);
+        Assertions.assertEquals("Atendente cadastrado(a) com sucesso!", atendente1.getBody());
 
     }
 
@@ -66,9 +70,9 @@ class AtendenteControllerTest {
 
         var delete = atendenteController.delete(1L);
 
-        Assert.assertNotNull(delete);
+        Assertions.assertNotNull(delete);
 
-        Assert.assertEquals("Atendente deletado com sucesso!", delete.getBody());
+        Assertions.assertEquals("Atendente deletado com sucesso!", delete.getBody());
 
     }
 }

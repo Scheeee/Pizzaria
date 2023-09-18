@@ -1,6 +1,7 @@
 package com.uniamerica.pizzaria.entity;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
+import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -9,8 +10,9 @@ import java.time.LocalDate;
 import java.util.List;
 
 @Entity
-@Table(name = "pedidos", schema = "public")
+@Data
 @NoArgsConstructor
+
 public class Pedido {
 
     @Id @Getter
@@ -94,5 +96,18 @@ public class Pedido {
         this.detalhes = detalhes;
         this.valorTotal = valorTotal;
         this.dinheiro = dinheiro;
+
     }
+    public Pedido(long id, Atendente atendente, Cliente cliente, List<Pizza> pizzas, boolean entrega, String detalhes, BigDecimal valorTotal, boolean dinheiro, LocalDate cadastrado) {
+        this.id = id;
+        this.atendente = atendente;
+        this.cliente = cliente;
+        this.pizzas = pizzas;
+        this.entrega = entrega;
+        this.detalhes = detalhes;
+        this.valorTotal = valorTotal;
+        this.dinheiro = dinheiro;
+        this.cadastrado = cadastrado;
+    }
+
 }

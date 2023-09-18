@@ -1,6 +1,7 @@
 package com.uniamerica.pizzaria.entity;
 
-import org.junit.Assert;
+
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
@@ -8,7 +9,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
 
 class PizzaTest {
     Sabor sabor = new Sabor(1, "Calabresa", Collections.singletonList("Calabresa"));
@@ -18,14 +18,14 @@ class PizzaTest {
     @Test
     void getId() {
         long id = pizza.getId();
-        Assert.assertEquals(1L, id, 0);
+        Assertions.assertEquals(1L, id, 0);
     }
 
     @Test
     void getTamanho() {
         Tamanho tam = pizza.getTamanho();
 
-        Assert.assertEquals(Tamanho.P, tam);
+        Assertions.assertEquals(Tamanho.P, tam);
     }
 
     @Test
@@ -34,14 +34,14 @@ class PizzaTest {
 
         long id = sabor1.getId();
 
-        Assert.assertEquals(1L, id, 0);
+        Assertions.assertEquals(1L, id, 0);
     }
 
     @Test
     void getValorUnit() {
         BigDecimal valorUnit = pizza.getValorUnit();
 
-        Assert.assertEquals(valor,valorUnit);
+        Assertions.assertEquals(valor, valorUnit);
     }
 
     @Test
@@ -49,7 +49,7 @@ class PizzaTest {
         pizza.setTamanho(Tamanho.M);
         Tamanho tam = pizza.getTamanho();
 
-        Assert.assertEquals(Tamanho.M, tam);
+        Assertions.assertEquals(Tamanho.M, tam);
 
     }
 
@@ -65,7 +65,7 @@ class PizzaTest {
 
         long id = sabor1.getId();
 
-        Assert.assertEquals(2L, id, 0);
+        Assertions.assertEquals(2L, id, 0);
     }
 
     @Test
@@ -73,7 +73,7 @@ class PizzaTest {
         pizza.setValorUnit(new BigDecimal(20));
         BigDecimal valorUnit = pizza.getValorUnit();
 
-        Assert.assertEquals(new BigDecimal(20),valorUnit);
+        Assertions.assertEquals(new BigDecimal(20), valorUnit);
 
     }
 }

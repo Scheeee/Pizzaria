@@ -1,10 +1,10 @@
 package com.uniamerica.pizzaria.controller;
 
-import com.uniamerica.pizzaria.entity.Atendente;
 import com.uniamerica.pizzaria.entity.Cliente;
 import com.uniamerica.pizzaria.entity.Endereco;
 import com.uniamerica.pizzaria.repository.ClienteRep;
 import org.junit.Assert;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -43,10 +43,13 @@ class ClienteControllerTest {
     @Test
     void getAll() {
         var clientecontroler = clienteController.findAll();
-        List<Cliente> clientes = (List<Cliente>) clientecontroler.getBody();
-        int valor = clientes.size();
+        List<Cliente> clientes = clientecontroler.getBody();
+        int valor = 0;
+        if (clientes != null) {
+            valor = clientes.size();
+        }
         System.out.println(valor);
-        Assert.assertEquals(1, valor, 0);
+        Assertions.assertEquals(1, valor, 0);
     }
 
     @Test
@@ -56,8 +59,8 @@ class ClienteControllerTest {
         var cliente1 = clienteController.inserir(cliente);
 
 
-        Assert.assertNotNull(cliente1);
-        Assert.assertEquals("Cliente cadastrado(a) com sucesso!", cliente1.getBody());
+        Assertions.assertNotNull(cliente1);
+        Assertions.assertEquals("Cliente cadastrado(a) com sucesso!", cliente1.getBody());
 
     }
 
@@ -71,7 +74,7 @@ class ClienteControllerTest {
 
         var delete = clienteController.delete(1L);
 
-        Assert.assertNotNull(delete);
-        Assert.assertEquals("Cliente deletado com sucesso!", delete.getBody());
+        Assertions.assertNotNull(delete);
+        Assertions.assertEquals("Cliente deletado com sucesso!", delete.getBody());
     }
 }

@@ -4,6 +4,7 @@ import com.uniamerica.pizzaria.repository.PizzaRep;
 import com.uniamerica.pizzaria.repository.SaborRep;
 import com.uniamerica.pizzaria.service.SaborService;
 import org.junit.Assert;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -56,9 +57,10 @@ class SaborControllerTest {
     void getAll() {
         var saborcontroller = saborController.getAll();
         List<Sabor> sabores = (List<Sabor>) saborcontroller.getBody();
+        assert sabores != null;
         int valor = sabores.size();
         System.out.println(valor);
-        Assert.assertEquals(1, valor, 0);
+        Assertions.assertEquals(1, valor, 0);
     }
 
     @Test
@@ -70,8 +72,8 @@ class SaborControllerTest {
         var sabor1 = saborController.inserir(sabor);
 
 
-        Assert.assertNotNull(sabor1);
-        Assert.assertEquals("Sabor cadastrado com sucesso!", sabor1.getBody());
+        Assertions.assertNotNull(sabor1);
+        Assertions.assertEquals("Sabor cadastrado com sucesso!", sabor1.getBody());
     }
 
     @Test
@@ -99,8 +101,8 @@ class SaborControllerTest {
 
         var delete = saborController.delete(1L);
 
-        Assert.assertNotNull(delete);
-        Assert.assertEquals("Sabor deletado com sucesso!", delete.getBody());
+        Assertions.assertNotNull(delete);
+        Assertions.assertEquals("Sabor deletado com sucesso!", delete.getBody());
 
     }
 }

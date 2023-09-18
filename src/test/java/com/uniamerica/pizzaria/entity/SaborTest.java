@@ -1,13 +1,12 @@
 package com.uniamerica.pizzaria.entity;
 
-import org.junit.Assert;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+
 
 class SaborTest {
 
@@ -17,7 +16,7 @@ class SaborTest {
     void getId() {
         long id = sabor.getId();
 
-        Assert.assertEquals(1L, id, 0);
+        Assertions.assertEquals(1L, id, 0);
     }
 
     @Test
@@ -25,14 +24,14 @@ class SaborTest {
 
         String nome = sabor.getNome();
 
-        Assert.assertEquals("Calabresa", nome);
+        Assertions.assertEquals("Calabresa", nome);
     }
 
     @Test
     void getIngredientes() {
         String ingrediente = sabor.getIngredientes().get(0);
 
-        Assert.assertEquals("Calabresa", ingrediente);
+        Assertions.assertEquals("Calabresa", ingrediente);
     }
 
     @Test
@@ -41,7 +40,7 @@ class SaborTest {
 
         String nome = sabor.getNome();
 
-        Assert.assertEquals("Calabresa com alho", nome);
+        Assertions.assertEquals("Calabresa com alho", nome);
     }
 
     @Test
@@ -53,6 +52,6 @@ class SaborTest {
 
         String ingrediente = sabor.getIngredientes().get(0);
 
-        Assert.assertEquals("alho", ingrediente);
+        Assertions.assertEquals("alho", ingrediente);
     }
 }

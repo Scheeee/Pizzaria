@@ -1,18 +1,14 @@
 package com.uniamerica.pizzaria.entity;
-
-import org.checkerframework.checker.units.qual.A;
-import org.junit.Assert;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.springframework.security.core.parameters.P;
-
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
 
 class PedidoTest {
+
 
     Atendente atendente = new Atendente(1, "Sche");
     Cliente cliente = new Cliente(1,"Sche", "45-98034-3600");
@@ -28,7 +24,7 @@ class PedidoTest {
     void getId() {
         long id = pedido.getId();
 
-        Assert.assertEquals(1L, id, 0);
+        Assertions.assertEquals(1L, id, 0);
 
     }
 
@@ -44,7 +40,7 @@ class PedidoTest {
     @Test
     void getAtendente() {
         long id = pedido.getAtendente().getId();
-        Assert.assertEquals(1L, id, 0);
+        Assertions.assertEquals(1L, id, 0);
 
 
     }
@@ -53,7 +49,7 @@ class PedidoTest {
     void getCliente() {
         long id = pedido.getCliente().getId();
 
-        Assert.assertEquals(1L, id, 0);
+        Assertions.assertEquals(1L, id, 0);
     }
 
     @Test
@@ -62,7 +58,7 @@ class PedidoTest {
 
         long id = pizzas.getId();
 
-        Assert.assertEquals(1L, id, 0);
+        Assertions.assertEquals(1L, id, 0);
 
 
 
@@ -72,7 +68,7 @@ class PedidoTest {
     void isEntrega() {
 
         Boolean entrega = pedido.isEntrega();
-        Assert.assertEquals(false, entrega);
+        Assertions.assertEquals(false, entrega);
     }
 
     @Test
@@ -87,7 +83,7 @@ class PedidoTest {
     void getValorTotal() {
         BigDecimal total = pedido.getValorTotal();
 
-        Assert.assertEquals(valor,total);
+        Assertions.assertEquals(valor, total);
     }
 
     @Test
@@ -95,7 +91,7 @@ class PedidoTest {
 
         Boolean dinheiro = pedido.isDinheiro();
 
-        Assert.assertEquals(true, dinheiro);
+        Assertions.assertEquals(true, dinheiro);
     }
 
     @Test
@@ -120,7 +116,7 @@ class PedidoTest {
 
         pedido.setAtendente(atendente1);
         long id = pedido.getAtendente().getId();
-        Assert.assertEquals(2L, id, 0);
+        Assertions.assertEquals(2L, id, 0);
 
     }
 
@@ -131,7 +127,7 @@ class PedidoTest {
         pedido.setCliente(cliente1);
         long id = pedido.getCliente().getId();
 
-        Assert.assertEquals(2L, id, 0);
+        Assertions.assertEquals(2L, id, 0);
     }
 
     @Test
@@ -148,14 +144,14 @@ class PedidoTest {
 
         long id = pizzas.getId();
 
-        Assert.assertEquals(2L, id, 0);
+        Assertions.assertEquals(2L, id, 0);
     }
 
     @Test
     void setEntrega() {
         pedido.setEntrega(true);
         Boolean entrega = pedido.isEntrega();
-        Assert.assertEquals(true, entrega);
+        Assertions.assertEquals(true, entrega);
     }
 
     @Test
@@ -173,7 +169,7 @@ class PedidoTest {
         pedido.setValorTotal(valor1);
         BigDecimal total = pedido.getValorTotal();
 
-        Assert.assertEquals(valor1,total);
+        Assertions.assertEquals(valor1, total);
     }
 
     @Test
@@ -181,7 +177,7 @@ class PedidoTest {
         pedido.setDinheiro(false);
         Boolean dinheiro = pedido.isDinheiro();
 
-        Assert.assertEquals(false, dinheiro);
+        Assertions.assertEquals(false, dinheiro);
 
     }
 
