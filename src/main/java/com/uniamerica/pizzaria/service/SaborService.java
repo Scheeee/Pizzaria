@@ -52,7 +52,9 @@ public class SaborService {
         pizzaRep.save(pizza3);
 
         for (Sabor sabore : sabores) {
+
             Pizza pizza4 = new Pizza();
+            pizza4.setSabores(sabor1);
             if (sabor != sabore) {
                 pizza4.getSabores().add(sabore);
                 pizza4.setTamanho(Tamanho.M);
@@ -60,9 +62,10 @@ public class SaborService {
                 pizzaRep.save(pizza4);
             }
         }
-        for(int i = 0; i < sabores.size(); i++){
+        for(int i = 1; i < sabores.size(); i++){
+            Pizza pizza5 = new Pizza();
+            pizza5.setSabores(sabor1);
             if(sabor != sabores.get(i)) {
-                Pizza pizza5 = new Pizza();
 
                 pizza5.getSabores().add(sabores.get(i));
                 pizza5.setTamanho(Tamanho.G);

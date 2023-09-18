@@ -1,5 +1,4 @@
 package com.uniamerica.pizzaria.controller;
-
 import com.uniamerica.pizzaria.entity.Atendente;
 import com.uniamerica.pizzaria.repository.AtendenteRep;
 import org.junit.Assert;
@@ -9,7 +8,6 @@ import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,14 +32,7 @@ class AtendenteControllerTest {
         Mockito.when(atendenteRep.findAll()).thenReturn(atendentes);
 
     }
-    @BeforeEach
-    void  injectDelete(){
-        Atendente atendente = new Atendente(1L,"Sche");
 
-
-    //    Mockito.when(atendenteRep.delete(atendente));
-
-    }
 
 
     @Test
@@ -66,8 +57,6 @@ class AtendenteControllerTest {
 
     @Test
     void updateAtendente() {
-
-
 
     }
 

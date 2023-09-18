@@ -14,5 +14,9 @@ class PizzariaApplicationTests {
 	void AtendenteTest(){
 
 	}
+	@Test
+	void AtendenteControllerTest(){
+
+	}
 
 }

@@ -28,7 +28,7 @@ public class SaborController {
         return ResponseEntity.ok(saborRep.findAll());
     }
     @PostMapping
-    public ResponseEntity<?> inserir(@RequestBody final SaborDTO sabor){
+    public ResponseEntity<?> inserir(@RequestBody final Sabor sabor){
         try {
             Sabor sabor1 = new Sabor();
             BeanUtils.copyProperties(sabor,sabor1);
