@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface PedidoRep extends JpaRepository<Pedido,Long> {
@@ -25,7 +26,7 @@ public interface PedidoRep extends JpaRepository<Pedido,Long> {
 
 
 
-    List<Pedido> findByAtendente(Atendente atendente);
+    Optional<List<Pedido>> findByAtendente(Atendente atendente);
 
-    List<Pedido> findByCliente(Cliente cliente);
+    Optional<List<Pedido>> findByCliente(Cliente cliente);
 }

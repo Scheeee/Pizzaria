@@ -1,8 +1,6 @@
 Atendente: Sche
 Retirada no balcão
 Itens do pedido:
-- pizza n°: 1 Tamanho:M
+- pizza n°: 1 Tamanho:P
 Sabor(es):
--calabresa
- Ingrediente(s) retirado(s):
- - batata
+-calabresa com alho

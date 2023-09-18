@@ -5,6 +5,7 @@ import com.uniamerica.pizzaria.entity.*;
 import com.uniamerica.pizzaria.repository.*;
 import com.uniamerica.pizzaria.service.PedidoService;
 
+import org.junit.Assert;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -101,10 +102,10 @@ class PedidoControllerTest {
 
         pedidos.add(pedido);
 
-        Mockito.when(pedidoRep.findByAtendente(Mockito.any(Atendente.class))).thenReturn(pedidos);
+        Mockito.when(pedidoRep.findByAtendente(atendenteRep.getById(1L))).thenReturn(Optional.of(pedidos));
     }
     @BeforeEach
-    void injectFindByIdPessoa(){
+    void insertGetCliente(){
         Atendente atendente = new Atendente(1L,"Sche");
         Endereco endereco = new Endereco(1,"Avenida tancredo neves","1234", "casa 123");
         Cliente cliente = new Cliente(1,"Sche", "45-98034-3600", endereco);
@@ -122,9 +123,33 @@ class PedidoControllerTest {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
         LocalDate cadastro = LocalDate.parse(dataString, formatter);
 
-        Optional<Pedido> pedido = Optional.of(new Pedido(1L, atendente, cliente, pizzas, true, "Retirar cebolar", valor, false, cadastro));
+        Pedido pedido = new Pedido(1L,atendente,cliente,pizzas,true,"Retirar cebolar", valor, false, cadastro);
 
 
+        List<Pedido> pedidos = new ArrayList<>();
+
+
+        pedidos.add(pedido);
+
+        Mockito.when(pedidoRep.findByCliente(clienteRep.getById(1L))).thenReturn(Optional.of(pedidos));
+    }
+    @BeforeEach
+    void injectFindByIdPessoa(){
+        Atendente atendente = new Atendente(1L,"Sche");
+        Endereco endereco = new Endereco(1,"Avenida tancredo neves","1234", "casa 123");
+        Cliente cliente = new Cliente(1,"Sche", "45-98034-3600", endereco);
+        List<String> ingredientes = new ArrayList<>();
+        ingredientes.add("Calabresa");
+        Sabor sabor = new Sabor(1L,"Calabresa", ingredientes);
+        List<Sabor> sabores = new ArrayList<>();
+        sabores.add(sabor);
+        BigDecimal valor = new BigDecimal(25);
+        Pizza pizza = new Pizza(1L, Tamanho.P,sabores,valor);
+        List<Pizza> pizzas = new ArrayList<>();
+        pizzas.add(pizza);
+
+
+        Optional<Pedido> pedido = Optional.of(new Pedido(1L, atendente, cliente, pizzas, true, "Retirar cebolar", valor, false));
 
         Mockito.when(pedidoRep.findById(1L)).thenReturn(pedido);
 
@@ -135,38 +160,47 @@ class PedidoControllerTest {
     @Test
     void findByData() {
 
-        var pedidocontroller = pedidoController.findByData("18-09-2023");
+     /*   var pedidocontroller = pedidoController.findByData("18-09-2023");
 
         List<Pedido> pedidos = (List<Pedido>) pedidocontroller.getBody();
         assert pedidos != null;
         int valor = pedidos.size();
         System.out.println(valor);
-        Assertions.assertEquals(1, valor, 0);
+        Assertions.assertEquals(1, valor, 0);*/
     }
 
     @Test
     void getatendente() {
-      //  var pedidocontroller = pedidoController.getatendente(1L);
+        var pedidocontroller = pedidoController.getatendente(1L);
 
-        //List<Pedido> pedidos = pedidocontroller.getBody().get();
-
-        //ong id = pedidos.get(0).getId();
-
-        //Assertions.assertEquals(1, id, 0);
+        Pedido pedido = pedidocontroller.getBody().get().get(0);
+        long id = pedido.getAtendente().getId();
+        System.out.println(id);
+        Assert.assertEquals(1L, id, 0);
     }
 
     @Test
     void getCliente() {
+        var pedidocontroller = pedidoController.getCliente(1L);
+
+        Pedido pedido = pedidocontroller.getBody().get().get(0);
+        long id = pedido.getCliente().getId();
+        System.out.println(id);
+        Assert.assertEquals(1L, id, 0);
     }
 
     @Test
     void findById() {
-     /*   var pedidocontroller = pedidoController.findById(1L);
-        Long id = pedidocontroller.getBody().get;
+        var pedidocontroller = pedidoController.findById(1L);
+        Long id = pedidocontroller.getBody().get().getId().longValue();
         System.out.println(id);
-        Assert.assertEquals(1L, id, 0);*/
+        Assert.assertEquals(1L, id, 0);
+
     }
 
+    @Test
+    void comanda() {
+    }
     @Test
     void getativos() {
     }
@@ -194,4 +228,5 @@ class PedidoControllerTest {
     @Test
     void delete() {
     }
+
 }

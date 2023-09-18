@@ -16,6 +16,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+import java.util.Optional;
 
 
 @Controller
@@ -31,7 +33,7 @@ public class PedidoController {
     @Autowired
     private AtendenteRep atendenteRep;
 
-    @GetMapping("/{data}")
+    @GetMapping("/data/{data}")
     public ResponseEntity<?> findByData(@PathVariable("data") String dataString){
         try {
             return ResponseEntity.ok(pedidoService.totais(dataString));
@@ -41,26 +43,24 @@ public class PedidoController {
         }
     }
     @GetMapping("/atendente/{id}")
-    public ResponseEntity<?> getatendente(@PathVariable("id") Long id){
-        try {
-            return ResponseEntity.ok(pedidoRep.findByAtendente(atendenteRep.getById(id)));
-        }
-        catch (Exception e){
-            return ResponseEntity.internalServerError().body("Error: " + e.getMessage());
-        }
+    public ResponseEntity<Optional<List<Pedido>>> getatendente(@PathVariable("id") Long id){
+
+
+        Optional<List<Pedido>> pedidos = this.pedidoRep.findByAtendente(atendenteRep.getById(id));
+        return ResponseEntity.ok(pedidos);
     }
     @GetMapping("/cliente/{id}")
-    public ResponseEntity<?> getCliente(@PathVariable("id") Long id){
-       try{
-
-           return ResponseEntity.ok(pedidoRep.findByCliente(clienteRep.getById(id)));
-       }
-       catch (Exception e){
-           return ResponseEntity.internalServerError().body("Error: " + e.getMessage());
-       }
+    public ResponseEntity<Optional<List<Pedido>>> getCliente(@PathVariable("id") Long id){
+        Optional<List<Pedido>> pedidos = this.pedidoRep.findByCliente(clienteRep.getById(id));
+        return ResponseEntity.ok(pedidos);
+    }
+    @GetMapping("/{id}")
+    public ResponseEntity<Optional<Pedido>> findById(@PathVariable("id") Long id) {
+        Optional<Pedido> pessoa = this.pedidoRep.findById(id);
+        return ResponseEntity.ok(pessoa);
     }
     @GetMapping("/comanda/{id}")
-    public ResponseEntity<?> findById(@PathVariable("id") Long id) {
+    public ResponseEntity<?> comanda(@PathVariable("id") Long id) {
         try {
             Pedido pedido = pedidoRep.getById(id);
             Assert.isTrue(pedido.getStatus() == Status.Ativo, "o pedido solicitado não está ativo");

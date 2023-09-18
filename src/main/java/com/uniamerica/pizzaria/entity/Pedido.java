@@ -1,4 +1,5 @@
 package com.uniamerica.pizzaria.entity;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 import lombok.Data;
@@ -10,15 +11,14 @@ import java.time.LocalDate;
 import java.util.List;
 
 @Entity
-@Data
+@Table(name = "pedidos", schema = "public")
 @NoArgsConstructor
-
 public class Pedido {
 
     @Id @Getter
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id", nullable = false, unique = true)
-    private long id;
+    private Long id;
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
     @Getter @Setter
     @Column( name = "cadastro")
@@ -28,13 +28,14 @@ public class Pedido {
     @Column( name = "finalizado")
     private LocalDate finalizado;
     @Getter @Setter @ManyToOne
+    @JsonBackReference // Indica que esta é a parte "de trás" da referência
     @JoinColumn(name = "atendente_id")
     private Atendente atendente;
     @Getter @Setter @ManyToOne
     @JoinColumn(name = "cliente_id")
+    @JsonBackReference // Indica que esta é a parte "de trás" da referência
+
     private Cliente cliente;
-
-
 
     @Getter
     @Setter
@@ -51,7 +52,6 @@ public class Pedido {
 
     @Getter
     @Setter
-
     @JoinColumn(name = "detalhes")
     private String detalhes;
     @Getter

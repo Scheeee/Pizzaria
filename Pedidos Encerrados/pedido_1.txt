@@ -1,0 +1,10 @@
+Cliente: Scheligan
+Telefone: 45-4002-8922
+Retirada no balcão 
+Itens do pedido:
+- pizza n°: 1 Tamanho:P
+Sabor(es):
+-calabresa com alho
+ Valor unitário: R$25.00
+Pagamento no Dinheiro
+Total: R$ 25.00
