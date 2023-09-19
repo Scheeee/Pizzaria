@@ -5,22 +5,17 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
+
 import java.util.Collections;
-import java.util.List;
+
 
 
 class PizzaDTOTest {
     Atendente atendente = new Atendente(1, "Sche");
     Cliente cliente = new Cliente(1,"Sche", "45-98034-3600");
-    Endereco endereco = new Endereco(1,"Avenida tancredo neves","1234", "casa 123", cliente);
 
     Sabor sabor = new Sabor(1, "Calabresa", Collections.singletonList("Calabresa"));
     BigDecimal valor = new BigDecimal("25");
-
-
-    List<PizzaDTO> pizzasDtos = new ArrayList<>();
-
 
 
     Pedido pedido = new Pedido(1, atendente, cliente, false, "retirar cebola",valor, true);
@@ -67,7 +62,7 @@ class PizzaDTOTest {
     @Test
     void testEquals() {
         PizzaDTO pizza2 = new PizzaDTO(1, Tamanho.P, Collections.singletonList(sabor), valor, pedido);
-        Assertions.assertTrue(pizza.equals(pizza2));
+        Assertions.assertEquals(pizza, pizza2);
     }
 
     @Test

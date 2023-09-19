@@ -46,7 +46,7 @@ class SaborDTOTest {
     void canEqual() {
         SaborDTO sabor1 = new SaborDTO(1, "Calabresa", Collections.singletonList("Calabresa"));
         sabor.canEqual(sabor1);
-        Assertions.assertEquals(true, sabor.canEqual(sabor1));
+        Assertions.assertTrue(sabor.canEqual(sabor1));
     }
 
     @Test

@@ -42,4 +42,7 @@ public class PedidoDTO {
     private boolean dinheiro;
 
     private Status status;
+
+    public PedidoDTO(long i, Atendente atendente, Cliente cliente, List<Pizza> singletonList, boolean b, String retirarCebola, BigDecimal valor, boolean b1) {
+    }
 }
