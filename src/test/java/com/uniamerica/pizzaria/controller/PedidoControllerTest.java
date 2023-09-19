@@ -396,7 +396,7 @@ class PedidoControllerTest {
 
     @Test
     void encerrarPedido() {
-        var pedido1 = pedidoController.EncerrarPedido(2L);
+        var pedido1 = pedidoController.encerrarPedido(2L);
 
 
         Assertions.assertNotNull(pedido1);

@@ -16,6 +16,7 @@ import java.util.List;
 public class EnderecoController {
     @Autowired
     EnderecoRep enderecoRep;
+    private static final String erro = "Error:  \" + e.getMessage()";
 
     @GetMapping("/lista")
     public ResponseEntity<List<Endereco>> getAll(){
@@ -31,7 +32,7 @@ public class EnderecoController {
 
         }
         catch (Exception e){
-            return ResponseEntity.internalServerError().body("Error: " + e.getMessage());
+            return ResponseEntity.internalServerError().body(erro);
         }
     }
 
@@ -55,7 +56,7 @@ public class EnderecoController {
         enderecoRep.delete(endereco);
         return ResponseEntity.ok("Endereço deletado com sucesso!");
         }catch (Exception e){
-            return ResponseEntity.internalServerError().body("Error: " + e.getMessage());
+            return ResponseEntity.internalServerError().body(erro);
         }
     }
 }

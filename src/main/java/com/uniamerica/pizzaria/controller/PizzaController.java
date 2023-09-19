@@ -11,6 +11,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @Controller
 @RequestMapping(value = "/pizzaria/pizza")
 public class PizzaController {
@@ -19,26 +21,27 @@ public class PizzaController {
     @Autowired
     PizzaService pizzaService;
 
+    private static final String erro = "Error:  \" + e.getMessage()";
     @GetMapping("/lista")
-    public ResponseEntity<?> getAll(){
+    public ResponseEntity<List<Pizza>> getAll(){
         return ResponseEntity.ok(pizzaRep.findAll());
     }
     @PostMapping
-    public ResponseEntity<?> inserir(@RequestBody final Pizza pizza){
+    public ResponseEntity<Object> inserir(@RequestBody final Pizza pizza){
         try {
 
             Pizza pizza1 = new Pizza();
             BeanUtils.copyProperties(pizza,pizza1);
-            return pizzaService.save(pizza1);
+            return (ResponseEntity<Object>) pizzaService.save(pizza1);
 
         }
         catch (Exception e){
-            return ResponseEntity.internalServerError().body("Error: " + e.getMessage());
+            return ResponseEntity.internalServerError().body(erro);
         }
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<?> updatePizza(@PathVariable(value = "id")Long id,@RequestBody Pizza pizza){
+    public ResponseEntity<Object> updatePizza(@PathVariable(value = "id")Long id,@RequestBody Pizza pizza){
 
         Pizza pizzaNovo = pizzaRep.getReferenceById(id);
 
@@ -48,7 +51,7 @@ public class PizzaController {
 
     }
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> delete(@PathVariable(value = "id")Long id){
+    public ResponseEntity<Object> delete(@PathVariable(value = "id")Long id){
         try {
             Pizza pizza = pizzaRep.getReferenceById(id);
 
@@ -56,7 +59,7 @@ public class PizzaController {
             pizzaRep.delete(pizza);
             return ResponseEntity.ok("Pizza deletada com sucesso!");
         }catch (Exception e){
-            return ResponseEntity.internalServerError().body("Error: " + e.getMessage());
+            return ResponseEntity.internalServerError().body(erro);
         }
 
 

@@ -30,6 +30,7 @@ public class PedidoController {
     private ClienteRep clienteRep;
     @Autowired
     private AtendenteRep atendenteRep;
+    private static final String erro = "Error:  \" + e.getMessage()";
 
     @GetMapping("/{data}")
     public ResponseEntity<String> findByData(@PathVariable("data") String dataString){
@@ -58,7 +59,7 @@ public class PedidoController {
         return ResponseEntity.ok(pessoa);
     }
     @GetMapping("/comanda/{id}")
-    public ResponseEntity<?> comanda(@PathVariable("id") Long id) {
+    public ResponseEntity<String> comanda(@PathVariable("id") Long id) {
         try {
             Pedido pedido = pedidoRep.getReferenceById(id);
             Assert.isTrue(pedido.getStatus() == Status.Ativo, "o pedido solicitado não está ativo");
@@ -68,7 +69,7 @@ public class PedidoController {
             return ResponseEntity.ok("comanda gerada com sucesso!");
 
         } catch (Exception e) {
-            return ResponseEntity.internalServerError().body("Error: " + e.getMessage());
+            return ResponseEntity.internalServerError().body(erro);
         }
     }
 
@@ -78,11 +79,11 @@ public class PedidoController {
     }
 
     @GetMapping("/lista")
-    public ResponseEntity<?> getAll(){
+    public ResponseEntity<List<Pedido>> getAll(){
         return ResponseEntity.ok(pedidoRep.findAll());
     }
     @PostMapping
-    public ResponseEntity<?> inserir(@RequestBody final Pedido pedido){
+    public ResponseEntity<Object> inserir(@RequestBody final Pedido pedido){
         try {
             Pedido pedido1 = new Pedido();
             BeanUtils.copyProperties(pedido,pedido1);
@@ -91,12 +92,12 @@ public class PedidoController {
 
         }
         catch (Exception e){
-            return ResponseEntity.internalServerError().body("Error: " + e.getMessage());
+            return ResponseEntity.internalServerError().body(erro);
         }
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<?> updatePedido(@PathVariable(value = "id")Long id,@RequestBody Pedido pedido){
+    public ResponseEntity<Object> updatePedido(@PathVariable(value = "id")Long id,@RequestBody Pedido pedido){
 
         Pedido pedidoNovo = pedidoRep.getReferenceById(id);
 
@@ -107,7 +108,7 @@ public class PedidoController {
     }
 
     @PutMapping("/{id}/cancelar")
-    public ResponseEntity<?> cancelarPedido(@PathVariable(value = "id") Long id){
+    public ResponseEntity<Object> cancelarPedido(@PathVariable(value = "id") Long id){
         pedidoRep.findById(id);
 
         Pedido pedidoAtual = pedidoRep.getReferenceById(id);
@@ -119,20 +120,20 @@ public class PedidoController {
 
     }
     @PutMapping("/{id}/encerrar")
-    public ResponseEntity<?> EncerrarPedido(@PathVariable(value = "id") Long id){
+    public ResponseEntity<Object> encerrarPedido(@PathVariable(value = "id") Long id){
         try {
              pedidoService.encerrar(id);
             return ResponseEntity.ok("pedido encerrado com sucesso!");
 
         }
         catch (Exception e ){
-            return ResponseEntity.internalServerError().body("Error: " + e.getMessage());
+            return ResponseEntity.internalServerError().body(erro);
         }
 
 
     }
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> delete(@PathVariable(value = "id")Long id){
+    public ResponseEntity<Object> delete(@PathVariable(value = "id")Long id){
         try{
             Pedido pedido = pedidoRep.getReferenceById(id);
 
@@ -140,7 +141,7 @@ public class PedidoController {
             pedidoRep.delete(pedido);
             return ResponseEntity.ok("Pedido deletado com sucesso!");
         }catch (Exception e){
-            return ResponseEntity.internalServerError().body("Error: " + e.getMessage());
+            return ResponseEntity.internalServerError().body(erro);
         }
     }
 
