@@ -1,5 +1,6 @@
 package com.uniamerica.pizzaria.controller;
 
+import com.uniamerica.pizzaria.dto.PizzaDTO;
 import com.uniamerica.pizzaria.entity.*;
 
 import com.uniamerica.pizzaria.repository.PizzaRep;
@@ -78,7 +79,7 @@ class PizzaControllerTest {
         sabores.add(sabor);
 
         BigDecimal valor = new BigDecimal(25);
-        Pizza pizza = new Pizza(1L, Tamanho.P,sabores,valor);
+        PizzaDTO pizza = new PizzaDTO(1L, Tamanho.P,sabores,valor);
         var pizza1 = pizzaController.inserir(pizza);
 
 
@@ -95,7 +96,7 @@ class PizzaControllerTest {
         sabores.add(sabor);
 
         BigDecimal valor = new BigDecimal(25);
-        Pizza pizza = new Pizza(1L, Tamanho.P,sabores,valor);
+        PizzaDTO pizza = new PizzaDTO(1L, Tamanho.P,sabores,valor);
         var pizza1 = pizzaController.updatePizza(1L,pizza);
 
 

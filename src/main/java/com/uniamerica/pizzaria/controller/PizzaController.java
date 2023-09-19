@@ -1,6 +1,7 @@
 package com.uniamerica.pizzaria.controller;
 
 
+import com.uniamerica.pizzaria.dto.PizzaDTO;
 import com.uniamerica.pizzaria.entity.Pizza;
 import com.uniamerica.pizzaria.repository.PizzaRep;
 import com.uniamerica.pizzaria.service.PizzaService;
@@ -27,12 +28,12 @@ public class PizzaController {
         return ResponseEntity.ok(pizzaRep.findAll());
     }
     @PostMapping
-    public ResponseEntity<Object> inserir(@RequestBody final Pizza pizza){
+    public ResponseEntity<Object> inserir(@RequestBody final PizzaDTO pizza){
         try {
 
             Pizza pizza1 = new Pizza();
             BeanUtils.copyProperties(pizza,pizza1);
-            return (ResponseEntity<Object>) pizzaService.save(pizza1);
+            return  pizzaService.save(pizza1);
 
         }
         catch (Exception e){
@@ -41,7 +42,7 @@ public class PizzaController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Object> updatePizza(@PathVariable(value = "id")Long id,@RequestBody Pizza pizza){
+    public ResponseEntity<Object> updatePizza(@PathVariable(value = "id")Long id,@RequestBody PizzaDTO pizza){
 
         Pizza pizzaNovo = pizzaRep.getReferenceById(id);
 

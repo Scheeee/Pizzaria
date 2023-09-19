@@ -26,6 +26,8 @@ public class PedidoService {
         this.pedidoRep = pedidoRep;
 
     }
+
+    String mensagem = "Arquivo gerado com sucesso: ";
     @Transactional(rollbackOn = Exception.class)
     public String totais(String data) {
 
@@ -58,7 +60,6 @@ public class PedidoService {
                 "\nPedidos pagos em dinheiro: " + pedidosDinheiro +
                 "\nPedidos pagos no cartão: " + pedidosCartao;
 
-      //  return  ResponseEntity.ok("Total de pedidos:" + pedidosDoDia + "\n Total de pedidos encerrados: " + pedidosEncerrados +"Total de pedidos cancelados: "+ pedidosCancelados + "\n Pedidos entregues:" + pedidosEntregues + "\n Pedidos  retirados: "+ pedidosRetirados + "Faturamento total:"+ totalValorPedidos+"\n Pedidos pagos em dinheiro :" + pedidosDinheiro + "\n Pedidos pagos no cartão:" + pedidosCartao);
 
     }
 
@@ -129,10 +130,10 @@ public class PedidoService {
             }
             writer.write("Total: R$ " + pedido.getValorTotal());
             writer.newLine();
-            System.out.println("Arquivo gerado com sucesso: " + arquivo);
+
             return ResponseEntity.status(HttpStatus.OK).body("Arquivo gerado com sucesso");
         } catch (IOException e) {
-            System.out.println("Erro ao salvar o arquivo: " + e.getMessage());
+
             return  ResponseEntity.status(HttpStatus.NOT_FOUND).body("Erro ao salvar o arquivo");
         }
 
@@ -172,10 +173,10 @@ public class PedidoService {
 
 
 
-            System.out.println("Arquivo gerado com sucesso: " + arquivo);
-            return ResponseEntity.status(HttpStatus.OK).body("Arquivo gerado com sucesso: " + arquivo);
+
+            return ResponseEntity.status(HttpStatus.OK).body(mensagem + arquivo);
         } catch (IOException e) {
-            System.out.println("Erro ao salvar o arquivo: " + e.getMessage());
+
             return  ResponseEntity.status(HttpStatus.NOT_FOUND).body("Erro ao salvar o arquivo");
         }
 

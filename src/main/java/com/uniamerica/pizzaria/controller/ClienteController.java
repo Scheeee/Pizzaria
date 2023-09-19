@@ -1,5 +1,6 @@
 package com.uniamerica.pizzaria.controller;
 
+import com.uniamerica.pizzaria.dto.ClienteDTO;
 import com.uniamerica.pizzaria.entity.Cliente;
 import com.uniamerica.pizzaria.repository.ClienteRep;
 import org.springframework.beans.BeanUtils;
@@ -24,7 +25,7 @@ public class ClienteController {
         return ResponseEntity.ok(clienteRep.findAll());
     }
     @PostMapping
-    public ResponseEntity<Object> inserir(@RequestBody final Cliente cliente){
+    public ResponseEntity<Object> inserir(@RequestBody final ClienteDTO cliente){
         try {
             Cliente cliente1 = new Cliente();
             BeanUtils.copyProperties(cliente,cliente1);
@@ -37,7 +38,7 @@ public class ClienteController {
         }
     }
     @PutMapping("/{id}")
-    public ResponseEntity<Object> updateCliente(@PathVariable(value = "id")Long id,@RequestBody Cliente cliente){
+    public ResponseEntity<Object> updateCliente(@PathVariable(value = "id")Long id,@RequestBody ClienteDTO cliente){
 
         Cliente clienteNovo = clienteRep.getReferenceById(id);
 

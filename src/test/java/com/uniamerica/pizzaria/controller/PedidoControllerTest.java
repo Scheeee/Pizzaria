@@ -1,6 +1,7 @@
 package com.uniamerica.pizzaria.controller;
 
 
+import com.uniamerica.pizzaria.dto.PedidoDTO;
 import com.uniamerica.pizzaria.entity.*;
 import com.uniamerica.pizzaria.repository.*;
 import com.uniamerica.pizzaria.service.PedidoService;
@@ -341,7 +342,7 @@ class PedidoControllerTest {
         pizzas.add(pizza);
 
 
-        Pedido pedido = new Pedido(1L, atendente, cliente, pizzas, true, "Retirar cebolar", valor, false);
+        PedidoDTO pedido = new PedidoDTO(1L, atendente, cliente, pizzas, true, "Retirar cebolar", valor, false);
 
         var pedido1 = pedidoController.inserir(pedido);
 
@@ -367,7 +368,7 @@ class PedidoControllerTest {
         pizzas.add(pizza);
 
 
-        Pedido pedido = new Pedido(1L, atendente, cliente, pizzas, true, "Retirar cebolar", valor, false);
+        PedidoDTO pedido = new PedidoDTO(1L, atendente, cliente, pizzas, true, "Retirar cebolar", valor, false);
 
 
         var pedido1 = pedidoController.updatePedido(1L,pedido);

@@ -27,4 +27,11 @@ public class SaborDTO {
         this.nome = nome;
         this.ingredientes = ingredientes;
     }
+    public SaborDTO( String nome, List<String> ingredientes) {
+
+        this.nome = nome;
+        this.ingredientes = ingredientes;
+    }
+
+
 }

@@ -1,4 +1,5 @@
 package com.uniamerica.pizzaria.controller;
+import com.uniamerica.pizzaria.dto.AtendenteDTO;
 import com.uniamerica.pizzaria.entity.Atendente;
 import com.uniamerica.pizzaria.repository.AtendenteRep;
 
@@ -57,7 +58,7 @@ class AtendenteControllerTest {
 
     @Test
     void inserir() {
-        Atendente atendente = new Atendente(1L, "Sche");
+        AtendenteDTO atendente = new AtendenteDTO(1L, "Sche");
         var atendente1 = atendenteController.inserir(atendente);
 
 
@@ -68,7 +69,7 @@ class AtendenteControllerTest {
 
     @Test
     void updateAtendente() {
-        Atendente atendente = new Atendente(1L, "Gabriele");
+        AtendenteDTO atendente = new AtendenteDTO(1L, "Gabriele");
         var atendente1 = atendenteController.updateAtendente(1L,atendente);
 
 

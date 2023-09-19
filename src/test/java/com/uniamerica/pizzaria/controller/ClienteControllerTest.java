@@ -1,5 +1,6 @@
 package com.uniamerica.pizzaria.controller;
 
+import com.uniamerica.pizzaria.dto.ClienteDTO;
 import com.uniamerica.pizzaria.entity.Cliente;
 import com.uniamerica.pizzaria.entity.Endereco;
 import com.uniamerica.pizzaria.repository.ClienteRep;
@@ -64,7 +65,7 @@ class ClienteControllerTest {
     @Test
     void inserir() {
         Endereco endereco = new Endereco(1,"Avenida tancredo neves","1234", "casa 123");
-        Cliente cliente = new Cliente(1,"Sche", "45-98034-3600", endereco);
+        ClienteDTO cliente = new ClienteDTO(1,"Sche", "45-98034-3600", endereco);
         var cliente1 = clienteController.inserir(cliente);
 
 
@@ -76,7 +77,7 @@ class ClienteControllerTest {
     @Test
     void updateCliente() {
         Endereco endereco = new Endereco(1,"Avenida tancredo neves","1234", "casa 123");
-        Cliente cliente = new Cliente(1,"Gabriele", "45-98034-3600", endereco);
+        ClienteDTO cliente = new ClienteDTO(1,"Gabriele", "45-98034-3600", endereco);
         var cliente1 = clienteController.updateCliente(1L, cliente);
 
 

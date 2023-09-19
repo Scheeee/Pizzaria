@@ -1,6 +1,7 @@
 package com.uniamerica.pizzaria.controller;
 
 
+import com.uniamerica.pizzaria.dto.SaborDTO;
 import com.uniamerica.pizzaria.entity.Sabor;
 import com.uniamerica.pizzaria.repository.SaborRep;
 import com.uniamerica.pizzaria.service.SaborService;
@@ -27,7 +28,7 @@ public class SaborController {
     }
     private static final String ERRO = "Error:  \" + e.getMessage()";
     @PostMapping
-    public ResponseEntity<Object> inserir(@RequestBody final Sabor sabor){
+    public ResponseEntity<Object> inserir(@RequestBody final SaborDTO sabor){
         try {
             Sabor sabor1 = new Sabor();
             BeanUtils.copyProperties(sabor,sabor1);
@@ -41,7 +42,7 @@ public class SaborController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Object> updateSabor(@PathVariable(value = "id")Long id,@RequestBody Sabor sabor){
+    public ResponseEntity<Object> updateSabor(@PathVariable(value = "id")Long id,@RequestBody SaborDTO sabor){
 
         Sabor saborNovo = saborRep.getReferenceById(id);
 

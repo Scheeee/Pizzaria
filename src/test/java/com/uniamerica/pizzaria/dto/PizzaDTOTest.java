@@ -36,8 +36,11 @@ class PizzaDTOTest {
 
     @Test
     void getPedidoandSetPedido() {
+        Pedido pedido1 = new Pedido(2, atendente, cliente, true, "adicionar catupiry",valor, true);
 
+        pizza.setPedido(pedido1);
 
+        Assertions.assertEquals(pedido1, pizza.getPedido());
 
     }
 

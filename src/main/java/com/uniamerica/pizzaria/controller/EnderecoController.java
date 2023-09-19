@@ -1,5 +1,6 @@
 package com.uniamerica.pizzaria.controller;
 
+import com.uniamerica.pizzaria.dto.EnderecoDTO;
 import com.uniamerica.pizzaria.entity.Endereco;
 import com.uniamerica.pizzaria.repository.EnderecoRep;
 import org.springframework.beans.BeanUtils;
@@ -23,7 +24,7 @@ public class EnderecoController {
         return ResponseEntity.ok(enderecoRep.findAll());
     }
     @PostMapping
-    public ResponseEntity<Object> inserir(@RequestBody final Endereco endereco){
+    public ResponseEntity<Object> inserir(@RequestBody final EnderecoDTO endereco){
         try {
             Endereco endereco1 = new Endereco();
             BeanUtils.copyProperties(endereco,endereco1);
@@ -37,7 +38,7 @@ public class EnderecoController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Object> updateEndereco(@PathVariable(value = "id")Long id,@RequestBody Endereco endereco){
+    public ResponseEntity<Object> updateEndereco(@PathVariable(value = "id")Long id,@RequestBody EnderecoDTO endereco){
 
         Endereco enderecoNovo = enderecoRep.getReferenceById(id);
 

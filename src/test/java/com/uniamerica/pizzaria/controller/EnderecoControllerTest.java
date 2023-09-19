@@ -1,4 +1,5 @@
 package com.uniamerica.pizzaria.controller;
+import com.uniamerica.pizzaria.dto.EnderecoDTO;
 import com.uniamerica.pizzaria.entity.Endereco;
 import com.uniamerica.pizzaria.repository.EnderecoRep;
 import org.junit.jupiter.api.Assertions;
@@ -52,7 +53,7 @@ class EnderecoControllerTest {
 
     @Test
     void inserir() {
-        Endereco endereco = new Endereco(1,"Avenida tancredo neves","1234", "casa 123");
+        EnderecoDTO endereco = new EnderecoDTO(1,"Avenida tancredo neves","1234", "casa 123");
 
         var endereco1 = enderecoController.inserir(endereco);
 
@@ -63,7 +64,7 @@ class EnderecoControllerTest {
 
     @Test
     void updateEndereco() {
-        Endereco endereco = new Endereco(1,"Travessa Oscar Muxfeld","1234", "casa 123");
+        EnderecoDTO endereco = new EnderecoDTO(1,"Travessa Oscar Muxfeld","1234", "casa 123");
 
         var endereco1 = enderecoController.updateEndereco(1L, endereco);
 

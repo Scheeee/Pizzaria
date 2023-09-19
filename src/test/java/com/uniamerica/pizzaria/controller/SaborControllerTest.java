@@ -1,4 +1,5 @@
 package com.uniamerica.pizzaria.controller;
+import com.uniamerica.pizzaria.dto.SaborDTO;
 import com.uniamerica.pizzaria.entity.Sabor;
 import com.uniamerica.pizzaria.repository.PizzaRep;
 import com.uniamerica.pizzaria.repository.SaborRep;
@@ -75,7 +76,7 @@ class SaborControllerTest {
         List<String> ingredientes = new ArrayList<>();
         ingredientes.add("Calabresa");
 
-        Sabor sabor = new Sabor( 1,"Calabresa", ingredientes);
+        SaborDTO sabor = new SaborDTO( 1,"Calabresa", ingredientes);
         var sabor1 = saborController.inserir(sabor);
 
 
@@ -91,7 +92,7 @@ class SaborControllerTest {
         ingredientes.add("Calabresa com Alho");
 
 
-        Sabor sabornovo = new Sabor( "Calabresa com alho", ingredientes);
+        SaborDTO sabornovo = new SaborDTO( "Calabresa com alho", ingredientes);
 
         var sabor1 = saborController.updateSabor(1L,sabornovo);
 

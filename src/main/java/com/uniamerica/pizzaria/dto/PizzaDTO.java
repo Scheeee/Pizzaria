@@ -42,4 +42,12 @@ public class PizzaDTO {
         this.pedido = pedido;
         this.valorUnit = valorUnit;
     }
+    public PizzaDTO(long id, Tamanho tamanho, List<Sabor> sabores, BigDecimal valorUnit) {
+        this.id = id;
+        this.tamanho = tamanho;
+        this.sabores = sabores;
+        this.valorUnit = valorUnit;
+    }
+
+
 }

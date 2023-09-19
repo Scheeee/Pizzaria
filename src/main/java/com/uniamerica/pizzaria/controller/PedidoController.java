@@ -1,5 +1,6 @@
 package com.uniamerica.pizzaria.controller;
 
+import com.uniamerica.pizzaria.dto.PedidoDTO;
 import com.uniamerica.pizzaria.entity.Pedido;
 import com.uniamerica.pizzaria.entity.Status;
 import com.uniamerica.pizzaria.repository.AtendenteRep;
@@ -83,7 +84,7 @@ public class PedidoController {
         return ResponseEntity.ok(pedidoRep.findAll());
     }
     @PostMapping
-    public ResponseEntity<Object> inserir(@RequestBody final Pedido pedido){
+    public ResponseEntity<Object> inserir(@RequestBody final PedidoDTO pedido){
         try {
             Pedido pedido1 = new Pedido();
             BeanUtils.copyProperties(pedido,pedido1);
@@ -97,7 +98,7 @@ public class PedidoController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Object> updatePedido(@PathVariable(value = "id")Long id,@RequestBody Pedido pedido){
+    public ResponseEntity<Object> updatePedido(@PathVariable(value = "id")Long id,@RequestBody PedidoDTO pedido){
 
         Pedido pedidoNovo = pedidoRep.getReferenceById(id);
 
