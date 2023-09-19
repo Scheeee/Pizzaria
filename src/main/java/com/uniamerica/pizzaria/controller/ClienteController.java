@@ -18,7 +18,7 @@ public class ClienteController {
 
     @Autowired
     ClienteRep clienteRep;
-    private static final String erro = "Error:  \" + e.getMessage()";
+    private static final String ERRO = "Error:  \" + e.getMessage()";
     @GetMapping("/lista")
     public ResponseEntity<List<Cliente>> findAll(){
         return ResponseEntity.ok(clienteRep.findAll());
@@ -33,7 +33,7 @@ public class ClienteController {
 
         }
         catch (Exception e){
-            return ResponseEntity.internalServerError().body(erro);
+            return ResponseEntity.internalServerError().body(ERRO);
         }
     }
     @PutMapping("/{id}")
@@ -55,7 +55,7 @@ public class ClienteController {
         clienteRep.delete(cliente);
         return ResponseEntity.ok("Cliente deletado com sucesso!");
         }catch (Exception e){
-            return ResponseEntity.internalServerError().body(erro);
+            return ResponseEntity.internalServerError().body(ERRO);
         }
 
     }

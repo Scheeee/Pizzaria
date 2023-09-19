@@ -113,9 +113,9 @@ class PedidoTest {
 
     @Test
     void getStatusandSetStatus() {
-        pedido.setStatus(Status.Cancelado);
+        pedido.setStatus(Status.CANCELADO);
 
-        Assertions.assertEquals(Status.Cancelado, pedido.getStatus());
+        Assertions.assertEquals(Status.CANCELADO, pedido.getStatus());
 
     }
 

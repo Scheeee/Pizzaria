@@ -82,7 +82,7 @@ class PedidoServiceTest {
 
         Pedido pedido = new Pedido(1L, atendente, cliente, pizzas, true, "Retirar cebolar", valor, false);
 
-        pedido.setStatus(Status.Ativo);
+        pedido.setStatus(Status.ATIVO);
         Mockito.when(pedidoRep.getReferenceById(1L)).thenReturn(pedido);
 
     }

@@ -34,17 +34,17 @@ public class PedidoService {
 
         List<Pedido> hoje = pedidoRep.findByCadastrado(date);
         int pedidosDoDia = hoje.size();
-        List<Pedido> encerrado = pedidoRep.findByStatusAndCadastrado(Status.Encerrado, date);
+        List<Pedido> encerrado = pedidoRep.findByStatusAndCadastrado(Status.ENCERRADO, date);
         int pedidosEncerrados = encerrado.size();
-        List<Pedido> cancelado = pedidoRep.findByStatusAndCadastrado(Status.Cancelado, date);
+        List<Pedido> cancelado = pedidoRep.findByStatusAndCadastrado(Status.CANCELADO, date);
         int pedidosCancelados = cancelado.size();
-        List<Pedido> entregue = pedidoRep.findByEntregaAndStatusAndCadastrado(true,Status.Encerrado, date);
+        List<Pedido> entregue = pedidoRep.findByEntregaAndStatusAndCadastrado(true,Status.ENCERRADO, date);
         int pedidosEntregues = entregue.size();
-        List<Pedido> retirado = pedidoRep.findByEntregaAndStatusAndCadastrado(false,Status.Encerrado, date);
+        List<Pedido> retirado = pedidoRep.findByEntregaAndStatusAndCadastrado(false,Status.ENCERRADO, date);
         int pedidosRetirados = retirado.size();
-        List<Pedido> dinheiro = pedidoRep.findByStatusAndCadastradoAndDinheiro(Status.Encerrado, date, true);
+        List<Pedido> dinheiro = pedidoRep.findByStatusAndCadastradoAndDinheiro(Status.ENCERRADO, date, true);
         int pedidosDinheiro = dinheiro.size();
-        List<Pedido> cartao = pedidoRep.findByStatusAndCadastradoAndDinheiro(Status.Encerrado, date, false);
+        List<Pedido> cartao = pedidoRep.findByStatusAndCadastradoAndDinheiro(Status.ENCERRADO, date, false);
         int pedidosCartao = cartao.size();
 
         BigDecimal totalValorPedidos = encerrado.stream().map(Pedido::getValorTotal).reduce(BigDecimal.ZERO, BigDecimal::add);
@@ -66,7 +66,7 @@ public class PedidoService {
     public ResponseEntity<?> encerrar(Long id) { pedidoRep.findById(id);
 
         Pedido pedidoAtual = pedidoRep.getReferenceById(id);
-        pedidoAtual.setStatus(Status.Encerrado);
+        pedidoAtual.setStatus(Status.ENCERRADO);
 
         BigDecimal ValorPizzas = pedidoAtual.getPizzas().stream().map(Pizza::getValorUnit).reduce(BigDecimal.ZERO, BigDecimal::add);
 

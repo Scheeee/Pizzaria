@@ -21,7 +21,7 @@ public class PizzaController {
     @Autowired
     PizzaService pizzaService;
 
-    private static final String erro = "Error:  \" + e.getMessage()";
+    private static final String ERRO = "Error:  \" + e.getMessage()";
     @GetMapping("/lista")
     public ResponseEntity<List<Pizza>> getAll(){
         return ResponseEntity.ok(pizzaRep.findAll());
@@ -36,7 +36,7 @@ public class PizzaController {
 
         }
         catch (Exception e){
-            return ResponseEntity.internalServerError().body(erro);
+            return ResponseEntity.internalServerError().body(ERRO);
         }
     }
 
@@ -59,7 +59,7 @@ public class PizzaController {
             pizzaRep.delete(pizza);
             return ResponseEntity.ok("Pizza deletada com sucesso!");
         }catch (Exception e){
-            return ResponseEntity.internalServerError().body(erro);
+            return ResponseEntity.internalServerError().body(ERRO);
         }
 
 

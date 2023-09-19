@@ -25,7 +25,7 @@ public class SaborController {
     public ResponseEntity<List<Sabor>> getAll(){
         return ResponseEntity.ok(saborRep.findAll());
     }
-    private static final String erro = "Error:  \" + e.getMessage()";
+    private static final String ERRO = "Error:  \" + e.getMessage()";
     @PostMapping
     public ResponseEntity<Object> inserir(@RequestBody final Sabor sabor){
         try {
@@ -36,7 +36,7 @@ public class SaborController {
 
         }
         catch (Exception e){
-            return ResponseEntity.internalServerError().body(erro);
+            return ResponseEntity.internalServerError().body(ERRO);
         }
     }
 
@@ -59,7 +59,7 @@ public class SaborController {
            saborRep.delete(sabor);
             return ResponseEntity.ok("Sabor deletado com sucesso!");
         }catch (Exception e){
-            return ResponseEntity.internalServerError().body(erro);
+            return ResponseEntity.internalServerError().body(ERRO);
         }
     }
 }

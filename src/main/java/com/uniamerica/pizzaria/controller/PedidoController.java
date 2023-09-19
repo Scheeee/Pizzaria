@@ -30,7 +30,7 @@ public class PedidoController {
     private ClienteRep clienteRep;
     @Autowired
     private AtendenteRep atendenteRep;
-    private static final String erro = "Error:  \" + e.getMessage()";
+    private static final String ERRO = "Error:  \" + e.getMessage()";
 
     @GetMapping("/{data}")
     public ResponseEntity<String> findByData(@PathVariable("data") String dataString){
@@ -62,20 +62,20 @@ public class PedidoController {
     public ResponseEntity<String> comanda(@PathVariable("id") Long id) {
         try {
             Pedido pedido = pedidoRep.getReferenceById(id);
-            Assert.isTrue(pedido.getStatus() == Status.Ativo, "o pedido solicitado não está ativo");
+            Assert.isTrue(pedido.getStatus() == Status.ATIVO, "o pedido solicitado não está ativo");
             Assert.isTrue(pedido.getPizzas().size() >= 1 , "o pedido solicitado não possui pizzas");
 
             pedidoService.gerarComanda(pedido);
             return ResponseEntity.ok("comanda gerada com sucesso!");
 
         } catch (Exception e) {
-            return ResponseEntity.internalServerError().body(erro);
+            return ResponseEntity.internalServerError().body(ERRO);
         }
     }
 
     @GetMapping("/ativos")
     public ResponseEntity<List<Pedido>> getativos(){
-        return ResponseEntity.ok(pedidoRep.findByStatus(Status.Ativo));
+        return ResponseEntity.ok(pedidoRep.findByStatus(Status.ATIVO));
     }
 
     @GetMapping("/lista")
@@ -92,7 +92,7 @@ public class PedidoController {
 
         }
         catch (Exception e){
-            return ResponseEntity.internalServerError().body(erro);
+            return ResponseEntity.internalServerError().body(ERRO);
         }
     }
 
@@ -112,7 +112,7 @@ public class PedidoController {
         pedidoRep.findById(id);
 
         Pedido pedidoAtual = pedidoRep.getReferenceById(id);
-        pedidoAtual.setStatus(Status.Cancelado);
+        pedidoAtual.setStatus(Status.CANCELADO);
 
         pedidoRep.save(pedidoAtual);
         return ResponseEntity.ok("pedido cancelado com sucesso!");
@@ -127,7 +127,7 @@ public class PedidoController {
 
         }
         catch (Exception e ){
-            return ResponseEntity.internalServerError().body(erro);
+            return ResponseEntity.internalServerError().body(ERRO);
         }
 
 
@@ -141,7 +141,7 @@ public class PedidoController {
             pedidoRep.delete(pedido);
             return ResponseEntity.ok("Pedido deletado com sucesso!");
         }catch (Exception e){
-            return ResponseEntity.internalServerError().body(erro);
+            return ResponseEntity.internalServerError().body(ERRO);
         }
     }
 

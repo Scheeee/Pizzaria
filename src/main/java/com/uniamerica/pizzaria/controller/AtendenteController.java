@@ -18,7 +18,7 @@ public class AtendenteController {
     @Autowired
     AtendenteRep atendenteRep;
 
-    private static final String erro = "Error:  \" + e.getMessage()";
+    private static final String ERRO = "Error:  \" + e.getMessage()";
     @GetMapping("/lista")
     public ResponseEntity<List<Atendente>> findAll(){
         return ResponseEntity.ok(atendenteRep.findAll());
@@ -34,7 +34,7 @@ public class AtendenteController {
 
         }
         catch (Exception e){
-            return ResponseEntity.internalServerError().body(erro);
+            return ResponseEntity.internalServerError().body(ERRO);
         }
     }
 
@@ -56,7 +56,7 @@ public class AtendenteController {
             atendenteRep.delete(atendente);
             return ResponseEntity.ok("Atendente deletado com sucesso!");
         }catch (Exception e){
-        return ResponseEntity.internalServerError().body(erro);
+        return ResponseEntity.internalServerError().body(ERRO);
     }
 
     }

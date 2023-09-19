@@ -82,7 +82,7 @@ public class Pedido {
     @PrePersist
     private void prePersist(){
         this.cadastrado = LocalDate.now();
-        this.status = Status.Ativo;
+        this.status = Status.ATIVO;
     }
     @PreUpdate
     private void preUpdate(){

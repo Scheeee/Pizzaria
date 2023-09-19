@@ -32,14 +32,10 @@ class PedidoControllerTest {
     PedidoRep pedidoRep;
     @MockBean
     AtendenteRep atendenteRep;
-    @MockBean
-    EnderecoRep enderecoRep;
+   
     @MockBean
     ClienteRep clienteRep;
-    @MockBean
-    PizzaRep pizzaRep;
-    @MockBean
-    SaborRep saborRep;
+
 
 
     @Autowired
@@ -174,7 +170,7 @@ class PedidoControllerTest {
 
         Pedido pedido = new Pedido(1L, atendente, cliente, pizzas, true, "Retirar cebolar", valor, false);
 
-        pedido.setStatus(Status.Ativo);
+        pedido.setStatus(Status.ATIVO);
         Mockito.when(pedidoRep.getReferenceById(1L)).thenReturn(pedido);
 
     }
@@ -196,7 +192,7 @@ class PedidoControllerTest {
 
         Pedido pedido = new Pedido(2L, atendente, cliente, pizzas, true, "Retirar cebolar", valor, false);
 
-        pedido.setStatus(Status.Ativo);
+        pedido.setStatus(Status.ATIVO);
         Mockito.when(pedidoRep.getReferenceById(2L)).thenReturn(pedido);
 
     }
@@ -219,9 +215,9 @@ class PedidoControllerTest {
         Pedido pedido = new Pedido(1L, atendente, cliente, pizzas, true, "Retirar cebolar", valor, false);
 
         List<Pedido> pedidos = new ArrayList<>();
-        pedido.setStatus(Status.Ativo);
+        pedido.setStatus(Status.ATIVO);
         pedidos.add(pedido);
-        Mockito.when(pedidoRep.findByStatus(Status.Ativo)).thenReturn(pedidos);
+        Mockito.when(pedidoRep.findByStatus(Status.ATIVO)).thenReturn(pedidos);
 
     }
     @BeforeEach
@@ -243,7 +239,7 @@ class PedidoControllerTest {
         Pedido pedido = new Pedido(1L, atendente, cliente, pizzas, true, "Retirar cebolar", valor, false);
 
         List<Pedido> pedidos = new ArrayList<>();
-        pedido.setStatus(Status.Ativo);
+        pedido.setStatus(Status.ATIVO);
         pedidos.add(pedido);
         Mockito.when(pedidoRep.findAll()).thenReturn(pedidos);
 
