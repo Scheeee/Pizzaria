@@ -2,6 +2,8 @@ package com.uniamerica.pizzaria.entity;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import java.math.BigDecimal;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -11,9 +13,8 @@ class PedidoTest {
 
 
     Atendente atendente = new Atendente(1, "Sche");
-    Cliente cliente = new Cliente(1,"Sche", "45-98034-3600");
-    Endereco endereco = new Endereco(1,"Avenida tancredo neves","1234", "casa 123", cliente);
-
+    Endereco endereco = new Endereco(1,"Avenida tancredo neves","1234", "casa 123");
+    Cliente cliente = new Cliente(1,"Sche", "45-98034-3600", endereco);
     BigDecimal valor = new BigDecimal("25");
 
     Sabor sabor = new Sabor(1, "Calabresa", Collections.singletonList("Calabresa"));
@@ -29,12 +30,28 @@ class PedidoTest {
     }
 
     @Test
-    void getCadastrado() {
+    void getCadastradoandSetCadastrado() {
+        String dataString = "18-09-2023";
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+        LocalDate cadastro1 = LocalDate.parse(dataString, formatter);
+        pedido.setCadastrado(cadastro1);
+
+
+        Assertions.assertEquals(cadastro1,
+                pedido.getCadastrado());
 
     }
 
     @Test
-    void getFinalizado() {
+    void getFinalizadoandSetFinalizado() {
+        String dataString = "18-09-2023";
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+        LocalDate data = LocalDate.parse(dataString, formatter);
+        pedido.setFinalizado(data);
+
+
+        Assertions.assertEquals(data,
+                pedido.getFinalizado());
     }
 
     @Test
@@ -72,11 +89,11 @@ class PedidoTest {
     }
 
     @Test
-    void getDetalhes() {
-    }
+    void getDetalhesandSetDetalhes() {
 
-    @Test
-    void getAdicionais() {
+        pedido.setDetalhes("adicionar molho extra");
+
+        Assertions.assertEquals("adicionar molho extra", pedido.getDetalhes());
     }
 
     @Test
@@ -95,20 +112,13 @@ class PedidoTest {
     }
 
     @Test
-    void getStatus() {
+    void getStatusandSetStatus() {
+        pedido.setStatus(Status.Cancelado);
 
-        //Status status = pedido.getStatus();
+        Assertions.assertEquals(Status.Cancelado, pedido.getStatus());
 
-       // Assert.assertEquals(Status.Ativo, status);
     }
 
-    @Test
-    void setCadastrado() {
-    }
-
-    @Test
-    void setFinalizado() {
-    }
 
     @Test
     void setAtendente() {
@@ -154,13 +164,6 @@ class PedidoTest {
         Assertions.assertEquals(true, entrega);
     }
 
-    @Test
-    void setDetalhes() {
-    }
-
-    @Test
-    void setAdicionais() {
-    }
 
     @Test
     void setValorTotal() {
@@ -181,7 +184,5 @@ class PedidoTest {
 
     }
 
-    @Test
-    void setStatus() {
-    }
+
 }
