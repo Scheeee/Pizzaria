@@ -63,14 +63,14 @@ public class PedidoService {
     }
 
     @Transactional(rollbackOn = Exception.class)
-    public ResponseEntity<?> encerrar(Long id) { pedidoRep.findById(id);
+    public ResponseEntity<Object> encerrar(Long id) { pedidoRep.findById(id);
 
         Pedido pedidoAtual = pedidoRep.getReferenceById(id);
         pedidoAtual.setStatus(Status.ENCERRADO);
 
-        BigDecimal ValorPizzas = pedidoAtual.getPizzas().stream().map(Pizza::getValorUnit).reduce(BigDecimal.ZERO, BigDecimal::add);
+        BigDecimal valorPizzas = pedidoAtual.getPizzas().stream().map(Pizza::getValorUnit).reduce(BigDecimal.ZERO, BigDecimal::add);
 
-        pedidoAtual.setValorTotal(ValorPizzas);
+        pedidoAtual.setValorTotal(valorPizzas);
 
         pedidoRep.save(pedidoAtual);
 
@@ -80,7 +80,7 @@ public class PedidoService {
 
     }
     @Transactional(rollbackOn = Exception.class)
-    public ResponseEntity<?> salvarPedidoEncerrado(Pedido pedido) {
+    public ResponseEntity<Object> salvarPedidoEncerrado(Pedido pedido) {
         String pasta = "C:\\Users\\Lenovo\\Documents\\desenvolvimento\\pizzaria\\Pedidos Encerrados\\";
         String arquivo = pasta + "pedido_" + pedido.getId() + ".txt";
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(arquivo))) {

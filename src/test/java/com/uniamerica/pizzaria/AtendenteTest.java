@@ -15,7 +15,7 @@ import java.util.List;
 
 
 @SpringBootTest
-public class AtendenteTest {
+class AtendenteTest {
     @MockBean
     AtendenteRep atendenteRep;
 

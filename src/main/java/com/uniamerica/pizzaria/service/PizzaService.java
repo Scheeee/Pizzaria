@@ -17,7 +17,7 @@ public class PizzaService {
 
 
     @Transactional(rollbackOn = Exception.class)
-    public ResponseEntity<?> save(Pizza pizza) {
+    public ResponseEntity<Object> save(Pizza pizza) {
         Assert.isTrue(pizza.getSabores().size() >= 1,"insira um sabor");
         if( pizza.getTamanho() == Tamanho.P){
             Assert.isTrue(pizza.getSabores().size() == 1,"A pizza P possui apenas um sabor");
