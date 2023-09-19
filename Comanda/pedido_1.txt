@@ -1,6 +1,6 @@
 Atendente: Sche
-Retirada no balcão
+Preparar pedido para entrega
 Itens do pedido:
 - pizza n°: 1 Tamanho:P
 Sabor(es):
--calabresa com alho
+-Calabresa

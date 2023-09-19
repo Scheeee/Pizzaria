@@ -43,6 +43,21 @@ class PizzaControllerTest {
         Mockito.when(pizzaRep.findAll()).thenReturn(pizzas);
 
     }
+    @BeforeEach
+    void injectUpdate(){
+        List<String> ingredientes = new ArrayList<>();
+        ingredientes.add("Calabresa");
+        Sabor sabor = new Sabor(1L,"Calabresa", ingredientes);
+        List<Sabor> sabores = new ArrayList<>();
+        sabores.add(sabor);
+
+        BigDecimal valor = new BigDecimal(25);
+        Pizza pizza = new Pizza(1L, Tamanho.P,sabores,valor);
+
+
+        Mockito.when(pizzaRep.getById(1L)).thenReturn(pizza);
+
+    }
 
     @Test
     void getAll() {
@@ -73,6 +88,20 @@ class PizzaControllerTest {
 
     @Test
     void updatePizza() {
+        List<String> ingredientes = new ArrayList<>();
+        ingredientes.add("Calabresa");
+        Sabor sabor = new Sabor(1L,"Calabresa com alho", ingredientes);
+        List<Sabor> sabores = new ArrayList<>();
+        sabores.add(sabor);
+
+        BigDecimal valor = new BigDecimal(25);
+        Pizza pizza = new Pizza(1L, Tamanho.P,sabores,valor);
+        var pizza1 = pizzaController.updatePizza(1L,pizza);
+
+
+        Assertions.assertNotNull(pizza1);
+        Assertions.assertEquals("pizza atualizada com sucesso!", pizza1.getBody());
+
     }
 
     @Test

@@ -1,10 +1,7 @@
 package com.uniamerica.pizzaria.controller;
 
-import com.uniamerica.pizzaria.dto.ClienteDTO;
-
 import com.uniamerica.pizzaria.entity.Cliente;
 import com.uniamerica.pizzaria.repository.ClienteRep;
-import jakarta.validation.Valid;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -38,7 +35,7 @@ public class ClienteController {
         }
     }
     @PutMapping("/{id}")
-    public ResponseEntity<Object> updateCliente(@PathVariable(value = "id")Long id,@RequestBody @Valid ClienteDTO cliente){
+    public ResponseEntity<Object> updateCliente(@PathVariable(value = "id")Long id,@RequestBody Cliente cliente){
 
         Cliente clienteNovo = clienteRep.getById(id);
 

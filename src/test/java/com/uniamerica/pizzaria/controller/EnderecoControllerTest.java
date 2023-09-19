@@ -33,6 +33,12 @@ class EnderecoControllerTest {
 
         Mockito.when(enderecoRep.findAll()).thenReturn(enderecos);
     }
+    @BeforeEach
+    void injectGetById() {
+        Endereco endereco = new Endereco(1, "Avenida tancredo neves", "1234", "casa 123");
+
+        Mockito.when(enderecoRep.getById(1L)).thenReturn(endereco);
+    }
 
     @Test
     void getAll() {
@@ -57,6 +63,13 @@ class EnderecoControllerTest {
 
     @Test
     void updateEndereco() {
+        Endereco endereco = new Endereco(1,"Travessa Oscar Muxfeld","1234", "casa 123");
+
+        var endereco1 = enderecoController.updateEndereco(1L, endereco);
+
+
+        Assertions.assertNotNull(endereco1);
+        Assertions.assertEquals("endereço atualizado com sucesso!", endereco1.getBody());
     }
 
     @Test

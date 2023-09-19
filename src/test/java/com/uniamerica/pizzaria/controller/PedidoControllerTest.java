@@ -40,11 +40,12 @@ class PedidoControllerTest {
     PizzaRep pizzaRep;
     @MockBean
     SaborRep saborRep;
-    @MockBean
-    PedidoService pedidoService;
+
 
     @Autowired
     private  final PedidoController pedidoController = new PedidoController();
+    @Autowired
+    private  final PedidoService pedidoService = new PedidoService(pedidoRep);
 
     @BeforeEach
     void insertFindByData(){
@@ -155,19 +156,96 @@ class PedidoControllerTest {
         Mockito.when(pedidoRep.findById(1L)).thenReturn(pedido);
 
     }
+    @BeforeEach
+    void injectGetByIdPessoa(){
+        Atendente atendente = new Atendente(1L,"Sche");
+        Endereco endereco = new Endereco(1,"Avenida tancredo neves","1234", "casa 123");
+        Cliente cliente = new Cliente(1,"Sche", "45-98034-3600", endereco);
+        List<String> ingredientes = new ArrayList<>();
+        ingredientes.add("Calabresa");
+        Sabor sabor = new Sabor(1L,"Calabresa", ingredientes);
+        List<Sabor> sabores = new ArrayList<>();
+        sabores.add(sabor);
+        BigDecimal valor = new BigDecimal(25);
+        Pizza pizza = new Pizza(1L, Tamanho.P,sabores,valor);
+        List<Pizza> pizzas = new ArrayList<>();
+        pizzas.add(pizza);
+
+
+        Pedido pedido = new Pedido(1L, atendente, cliente, pizzas, true, "Retirar cebolar", valor, false);
+
+        pedido.setStatus(Status.Ativo);
+        Mockito.when(pedidoRep.getById(1L)).thenReturn(pedido);
+
+    }
+    @BeforeEach
+    void injectGetAtivos(){
+        Atendente atendente = new Atendente(1L,"Sche");
+        Endereco endereco = new Endereco(1,"Avenida tancredo neves","1234", "casa 123");
+        Cliente cliente = new Cliente(1,"Sche", "45-98034-3600", endereco);
+        List<String> ingredientes = new ArrayList<>();
+        ingredientes.add("Calabresa");
+        Sabor sabor = new Sabor(1L,"Calabresa", ingredientes);
+        List<Sabor> sabores = new ArrayList<>();
+        sabores.add(sabor);
+        BigDecimal valor = new BigDecimal(25);
+        Pizza pizza = new Pizza(1L, Tamanho.P,sabores,valor);
+        List<Pizza> pizzas = new ArrayList<>();
+        pizzas.add(pizza);
+
+
+        Pedido pedido = new Pedido(1L, atendente, cliente, pizzas, true, "Retirar cebolar", valor, false);
+
+        List<Pedido> pedidos = new ArrayList<>();
+        pedido.setStatus(Status.Ativo);
+        pedidos.add(pedido);
+        Mockito.when(pedidoRep.findByStatus(Status.Ativo)).thenReturn(pedidos);
+
+    }
+    @BeforeEach
+    void injectGetAll(){
+        Atendente atendente = new Atendente(1L,"Sche");
+        Endereco endereco = new Endereco(1,"Avenida tancredo neves","1234", "casa 123");
+        Cliente cliente = new Cliente(1,"Sche", "45-98034-3600", endereco);
+        List<String> ingredientes = new ArrayList<>();
+        ingredientes.add("Calabresa");
+        Sabor sabor = new Sabor(1L,"Calabresa", ingredientes);
+        List<Sabor> sabores = new ArrayList<>();
+        sabores.add(sabor);
+        BigDecimal valor = new BigDecimal(25);
+        Pizza pizza = new Pizza(1L, Tamanho.P,sabores,valor);
+        List<Pizza> pizzas = new ArrayList<>();
+        pizzas.add(pizza);
+
+
+        Pedido pedido = new Pedido(1L, atendente, cliente, pizzas, true, "Retirar cebolar", valor, false);
+
+        List<Pedido> pedidos = new ArrayList<>();
+        pedido.setStatus(Status.Ativo);
+        pedidos.add(pedido);
+        Mockito.when(pedidoRep.findAll()).thenReturn(pedidos);
+
+    }
 
 
 
     @Test
     void findByData() {
 
-     /*   var pedidocontroller = pedidoController.findByData("18-09-2023");
 
-        List<Pedido> pedidos = (List<Pedido>) pedidocontroller.getBody();
-        assert pedidos != null;
-        int valor = pedidos.size();
-        System.out.println(valor);
-        Assertions.assertEquals(1, valor, 0);*/
+        var pedidocontroller = pedidoController.findByData("18-09-2023");
+
+
+
+        Assertions.assertNotNull(pedidocontroller);
+        Assertions.assertEquals("Total de pedidos: 1\n" +
+                "Total de pedidos encerrados: 0\n" +
+                "Total de pedidos cancelados: 0\n" +
+                "Pedidos entregues: 0\n" +
+                "Pedidos retirados: 0\n" +
+                "Faturamento total: 0\n" +
+                "Pedidos pagos em dinheiro: 0\n" +
+                "Pedidos pagos no cartão: 0", pedidocontroller.getBody());
     }
 
     @Test
@@ -201,33 +279,116 @@ class PedidoControllerTest {
 
     @Test
     void comanda() {
+        var comanda = pedidoController.comanda(1L);
+
+        Assertions.assertNotNull(comanda);
+        Assertions.assertEquals("comanda gerada com sucesso!", comanda.getBody());
     }
     @Test
     void getativos() {
+
+        var pedidocontroller = pedidoController.getativos();
+
+        long id = pedidocontroller.getBody().get(0).getId();
+
+        System.out.println(id);
+        Assertions.assertEquals(1L, id, 0);
     }
 
     @Test
     void getAll() {
+        var pedidocontroller = pedidoController.getAll();
+        List<Pedido> pedidos = (List<Pedido>) pedidocontroller.getBody();
+
+        int valor = pedidos.size();
+
+        System.out.println(valor);
+        Assertions.assertEquals(1, valor, 0);
     }
 
     @Test
     void inserir() {
+        Atendente atendente = new Atendente(1L,"Sche");
+        Endereco endereco = new Endereco(1,"Avenida tancredo neves","1234", "casa 123");
+        Cliente cliente = new Cliente(1,"Sche", "45-98034-3600", endereco);
+        List<String> ingredientes = new ArrayList<>();
+        ingredientes.add("Calabresa");
+        Sabor sabor = new Sabor(1L,"Calabresa", ingredientes);
+        List<Sabor> sabores = new ArrayList<>();
+        sabores.add(sabor);
+        BigDecimal valor = new BigDecimal(25);
+        Pizza pizza = new Pizza(1L, Tamanho.P,sabores,valor);
+        List<Pizza> pizzas = new ArrayList<>();
+        pizzas.add(pizza);
+
+
+        Pedido pedido = new Pedido(1L, atendente, cliente, pizzas, true, "Retirar cebolar", valor, false);
+
+        var pedido1 = pedidoController.inserir(pedido);
+
+
+        Assertions.assertNotNull(pedido1);
+        Assertions.assertEquals("pedido cadastrado com sucesso!", pedido1.getBody());
     }
+
 
     @Test
     void updatePedido() {
+        Atendente atendente = new Atendente(1L,"Sche");
+        Endereco endereco = new Endereco(1,"Avenida tancredo neves","1234", "casa 123");
+        Cliente cliente = new Cliente(1,"Sche", "45-98034-3600", endereco);
+        List<String> ingredientes = new ArrayList<>();
+        ingredientes.add("Calabresa");
+        Sabor sabor = new Sabor(1L,"Calabresa", ingredientes);
+        List<Sabor> sabores = new ArrayList<>();
+        sabores.add(sabor);
+        BigDecimal valor = new BigDecimal(25);
+        Pizza pizza = new Pizza(1L, Tamanho.P,sabores,valor);
+        List<Pizza> pizzas = new ArrayList<>();
+        pizzas.add(pizza);
+
+
+        Pedido pedido = new Pedido(1L, atendente, cliente, pizzas, true, "Retirar cebolar", valor, false);
+
+
+        var pedido1 = pedidoController.updatePedido(1L,pedido);
+
+
+        Assertions.assertNotNull(pedido1);
+        Assertions.assertEquals("pedido atualizado com sucesso!", pedido1.getBody());
+
+
     }
 
     @Test
     void cancelarPedido() {
+
+
+        var pedido1 = pedidoController.cancelarPedido(1L);
+
+
+        Assertions.assertNotNull(pedido1);
+        Assertions.assertEquals("pedido cancelado com sucesso!", pedido1.getBody());
     }
 
     @Test
     void encerrarPedido() {
+        var pedido1 = pedidoController.EncerrarPedido(1L);
+
+
+        Assertions.assertNotNull(pedido1);
+        Assertions.assertEquals("pedido encerrado com sucesso!", pedido1.getBody());
     }
 
     @Test
     void delete() {
+        inserir();
+
+        var delete = pedidoController.delete(1L);
+
+        Assertions.assertNotNull(delete);
+
+        Assertions.assertEquals("Pedido deletado com sucesso!", delete.getBody());
     }
 
 }

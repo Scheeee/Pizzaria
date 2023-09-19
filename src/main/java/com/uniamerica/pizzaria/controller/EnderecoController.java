@@ -1,10 +1,7 @@
 package com.uniamerica.pizzaria.controller;
 
-import com.uniamerica.pizzaria.dto.EnderecoDTO;
-
 import com.uniamerica.pizzaria.entity.Endereco;
 import com.uniamerica.pizzaria.repository.EnderecoRep;
-import jakarta.validation.Valid;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -39,7 +36,7 @@ public class EnderecoController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Object> updateEndereco(@PathVariable(value = "id")Long id,@RequestBody @Valid EnderecoDTO endereco){
+    public ResponseEntity<Object> updateEndereco(@PathVariable(value = "id")Long id,@RequestBody Endereco endereco){
 
         Endereco enderecoNovo = enderecoRep.getById(id);
 

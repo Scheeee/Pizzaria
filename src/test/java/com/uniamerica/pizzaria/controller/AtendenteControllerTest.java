@@ -33,6 +33,13 @@ class AtendenteControllerTest {
         Mockito.when(atendenteRep.findAll()).thenReturn(atendentes);
 
     }
+    @BeforeEach
+    void injectUpdate(){
+        Atendente atendente = new Atendente(1L,"Sche");
+
+        Mockito.when(atendenteRep.getById(1L)).thenReturn(atendente);
+
+    }
 
 
 
@@ -61,6 +68,12 @@ class AtendenteControllerTest {
 
     @Test
     void updateAtendente() {
+        Atendente atendente = new Atendente(1L, "Gabriele");
+        var atendente1 = atendenteController.updateAtendente(1L,atendente);
+
+
+        Assertions.assertNotNull(atendente1);
+        Assertions.assertEquals("Atendente atualizado com sucesso!", atendente1.getBody());
 
     }
 

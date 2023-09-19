@@ -39,6 +39,15 @@ class ClienteControllerTest {
         Mockito.when(clienteRep.findAll()).thenReturn(clientes);
 
     }
+    @BeforeEach
+    void injectUpdate(){
+        Endereco endereco = new Endereco(1,"Avenida tancredo neves","1234", "casa 123");
+        Cliente cliente = new Cliente(1,"Sche", "45-98034-3600", endereco);
+
+
+        Mockito.when(clienteRep.getById(1L)).thenReturn(cliente);
+
+    }
 
     @Test
     void getAll() {
@@ -66,6 +75,13 @@ class ClienteControllerTest {
 
     @Test
     void updateCliente() {
+        Endereco endereco = new Endereco(1,"Avenida tancredo neves","1234", "casa 123");
+        Cliente cliente = new Cliente(1,"Gabriele", "45-98034-3600", endereco);
+        var cliente1 = clienteController.updateCliente(1L, cliente);
+
+
+        Assertions.assertNotNull(cliente1);
+        Assertions.assertEquals("Cliente atualizado com sucesso!", cliente1.getBody());
     }
 
     @Test

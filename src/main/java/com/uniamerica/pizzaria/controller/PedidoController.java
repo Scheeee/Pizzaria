@@ -1,5 +1,4 @@
 package com.uniamerica.pizzaria.controller;
-import com.uniamerica.pizzaria.dto.PedidoDTO;
 
 import com.uniamerica.pizzaria.entity.Pedido;
 import com.uniamerica.pizzaria.entity.Status;
@@ -7,7 +6,6 @@ import com.uniamerica.pizzaria.repository.AtendenteRep;
 import com.uniamerica.pizzaria.repository.ClienteRep;
 import com.uniamerica.pizzaria.repository.PedidoRep;
 import com.uniamerica.pizzaria.service.PedidoService;
-import jakarta.validation.Valid;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -33,8 +31,8 @@ public class PedidoController {
     @Autowired
     private AtendenteRep atendenteRep;
 
-    @GetMapping("/data/{data}")
-    public ResponseEntity<?> findByData(@PathVariable("data") String dataString){
+    @GetMapping("/{data}")
+    public ResponseEntity<String> findByData(@PathVariable("data") String dataString){
         try {
             return ResponseEntity.ok(pedidoService.totais(dataString));
 
@@ -75,7 +73,7 @@ public class PedidoController {
     }
 
     @GetMapping("/ativos")
-    public ResponseEntity<?> getativos(){
+    public ResponseEntity<List<Pedido>> getativos(){
         return ResponseEntity.ok(pedidoRep.findByStatus(Status.Ativo));
     }
 
@@ -84,7 +82,7 @@ public class PedidoController {
         return ResponseEntity.ok(pedidoRep.findAll());
     }
     @PostMapping
-    public ResponseEntity<?> inserir(@RequestBody final PedidoDTO pedido){
+    public ResponseEntity<?> inserir(@RequestBody final Pedido pedido){
         try {
             Pedido pedido1 = new Pedido();
             BeanUtils.copyProperties(pedido,pedido1);
@@ -98,7 +96,7 @@ public class PedidoController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<?> updatePedido(@PathVariable(value = "id")Long id,@RequestBody @Valid PedidoDTO pedido){
+    public ResponseEntity<?> updatePedido(@PathVariable(value = "id")Long id,@RequestBody Pedido pedido){
 
         Pedido pedidoNovo = pedidoRep.getById(id);
 
@@ -116,13 +114,16 @@ public class PedidoController {
         pedidoAtual.setStatus(Status.Cancelado);
 
         pedidoRep.save(pedidoAtual);
-        return ResponseEntity.status(HttpStatus.OK).body(pedidoAtual);
+        return ResponseEntity.ok("pedido cancelado com sucesso!");
+
 
     }
     @PutMapping("/{id}/encerrar")
     public ResponseEntity<?> EncerrarPedido(@PathVariable(value = "id") Long id){
         try {
-            return pedidoService.encerrar(id);
+             pedidoService.encerrar(id);
+            return ResponseEntity.ok("pedido encerrado com sucesso!");
+
         }
         catch (Exception e ){
             return ResponseEntity.internalServerError().body("Error: " + e.getMessage());

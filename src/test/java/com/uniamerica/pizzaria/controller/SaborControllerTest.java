@@ -42,7 +42,7 @@ class SaborControllerTest {
 
     }
     @BeforeEach
-    void injectUpdate(){
+    void injectInserir(){
         List<String> ingredientes = new ArrayList<>();
         ingredientes.add("Calabresa");
         Sabor sabor = new Sabor(1L,"Calabresa", ingredientes);
@@ -50,6 +50,14 @@ class SaborControllerTest {
 
         sabores.add(sabor);
         Mockito.when(saborRep.save(sabor)).thenReturn(sabor);
+    }
+    @BeforeEach
+    void injectUpdate(){
+        List<String> ingredientes = new ArrayList<>();
+        ingredientes.add("Calabresa");
+        Sabor sabor = new Sabor(1L,"Calabresa", ingredientes);
+
+        Mockito.when(saborRep.getById(1L)).thenReturn(sabor);
     }
 
     @Test
@@ -79,19 +87,17 @@ class SaborControllerTest {
     void updateSabor() {
 
 
-        /*List<String> ingredientes = new ArrayList<>();
+        List<String> ingredientes = new ArrayList<>();
         ingredientes.add("Calabresa com Alho");
 
-        Sabor sabor = new Sabor( 1,"Calabresa", ingredientes);
-        saborRep.save(sabor);
 
-        Sabor sabornovo = new Sabor( 2,"Calabresa com alho", ingredientes);
+        Sabor sabornovo = new Sabor( "Calabresa com alho", ingredientes);
 
         var sabor1 = saborController.updateSabor(1L,sabornovo);
 
 
-        Assert.assertNotNull(sabor1);
-        Assert.assertEquals("Sabor  com sucesso!", sabor1.getBody());*/
+        Assertions.assertNotNull(sabor1);
+        Assertions.assertEquals("sabor atualizado com sucesso!", sabor1.getBody());
     }
 
     @Test

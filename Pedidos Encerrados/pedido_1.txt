@@ -1,10 +1,11 @@
-Cliente: Scheligan
-Telefone: 45-4002-8922
-Retirada no balcão 
+Cliente: Sche
+Telefone: 45-98034-3600
+Entrega 
+Endereço: Avenida tancredo neves N°:1234
+Complemento: casa 123
 Itens do pedido:
 - pizza n°: 1 Tamanho:P
 Sabor(es):
--calabresa com alho
- Valor unitário: R$25.00
-Pagamento no Dinheiro
-Total: R$ 25.00
+-Calabresa
+ Valor unitário: R$25
+Pagamento no CartãoTotal: R$ 25
