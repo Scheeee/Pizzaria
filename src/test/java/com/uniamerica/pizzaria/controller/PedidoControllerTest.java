@@ -157,7 +157,7 @@ class PedidoControllerTest {
 
     }
     @BeforeEach
-    void injectGetByIdPessoa(){
+    void injectGetByIdPedido(){
         Atendente atendente = new Atendente(1L,"Sche");
         Endereco endereco = new Endereco(1,"Avenida tancredo neves","1234", "casa 123");
         Cliente cliente = new Cliente(1,"Sche", "45-98034-3600", endereco);
@@ -238,14 +238,15 @@ class PedidoControllerTest {
 
 
         Assertions.assertNotNull(pedidocontroller);
-        Assertions.assertEquals("Total de pedidos: 1\n" +
-                "Total de pedidos encerrados: 0\n" +
-                "Total de pedidos cancelados: 0\n" +
-                "Pedidos entregues: 0\n" +
-                "Pedidos retirados: 0\n" +
-                "Faturamento total: 0\n" +
-                "Pedidos pagos em dinheiro: 0\n" +
-                "Pedidos pagos no cartão: 0", pedidocontroller.getBody());
+        Assertions.assertEquals("""
+                Total de pedidos: 1
+                Total de pedidos encerrados: 0
+                Total de pedidos cancelados: 0
+                Pedidos entregues: 0
+                Pedidos retirados: 0
+                Faturamento total: 0
+                Pedidos pagos em dinheiro: 0
+                Pedidos pagos no cartão: 0""", pedidocontroller.getBody());
     }
 
     @Test

@@ -3,7 +3,7 @@ package com.uniamerica.pizzaria.controller;
 import com.uniamerica.pizzaria.entity.Cliente;
 import com.uniamerica.pizzaria.entity.Endereco;
 import com.uniamerica.pizzaria.repository.ClienteRep;
-import org.junit.Assert;
+
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

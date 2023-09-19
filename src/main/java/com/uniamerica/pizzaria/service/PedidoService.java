@@ -49,7 +49,7 @@ public class PedidoService {
 
         BigDecimal totalValorPedidos = encerrado.stream().map(Pedido::getValorTotal).reduce(BigDecimal.ZERO, BigDecimal::add);
 
-        String resposta = "Total de pedidos: " + pedidosDoDia +
+        return "Total de pedidos: " + pedidosDoDia +
         "\nTotal de pedidos encerrados: " + pedidosEncerrados +
                 "\nTotal de pedidos cancelados: " + pedidosCancelados +
                 "\nPedidos entregues: " + pedidosEntregues +
@@ -57,7 +57,6 @@ public class PedidoService {
                 "\nFaturamento total: " + totalValorPedidos +
                 "\nPedidos pagos em dinheiro: " + pedidosDinheiro +
                 "\nPedidos pagos no cartão: " + pedidosCartao;
-        return resposta;
 
       //  return  ResponseEntity.ok("Total de pedidos:" + pedidosDoDia + "\n Total de pedidos encerrados: " + pedidosEncerrados +"Total de pedidos cancelados: "+ pedidosCancelados + "\n Pedidos entregues:" + pedidosEntregues + "\n Pedidos  retirados: "+ pedidosRetirados + "Faturamento total:"+ totalValorPedidos+"\n Pedidos pagos em dinheiro :" + pedidosDinheiro + "\n Pedidos pagos no cartão:" + pedidosCartao);
 
@@ -81,7 +80,7 @@ public class PedidoService {
 
     }
     @Transactional(rollbackOn = Exception.class)
-    public void salvarPedidoEncerrado(Pedido pedido) {
+    public ResponseEntity<?> salvarPedidoEncerrado(Pedido pedido) {
         String pasta = "C:\\Users\\Lenovo\\Documents\\desenvolvimento\\pizzaria\\Pedidos Encerrados\\";
         String arquivo = pasta + "pedido_" + pedido.getId() + ".txt";
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(arquivo))) {
@@ -114,14 +113,7 @@ public class PedidoService {
                     writer.newLine();
                 }
 
-               /* if(pizza.getAdicionais() != null) {
-                    writer.write(" Adicionais: ");
-                    writer.newLine();
-                    for (String adicionais : pizza.getAdicionais()) {
-                        writer.write(" - " + adicionais);
-                        writer.newLine();
-                    }
-                }*/
+
                 writer.write(" Valor unitário: R$" + pizza.getValorUnit());
                 writer.newLine();
                 nPizza++;
@@ -138,14 +130,17 @@ public class PedidoService {
             writer.write("Total: R$ " + pedido.getValorTotal());
             writer.newLine();
             System.out.println("Arquivo gerado com sucesso: " + arquivo);
+            return ResponseEntity.status(HttpStatus.OK).body("Arquivo gerado com sucesso");
         } catch (IOException e) {
             System.out.println("Erro ao salvar o arquivo: " + e.getMessage());
+            return  ResponseEntity.status(HttpStatus.NOT_FOUND).body("Erro ao salvar o arquivo");
         }
+
 
     }
 
     @Transactional(rollbackOn = Exception.class)
-    public void gerarComanda(Pedido pedido) {
+    public ResponseEntity<String> gerarComanda(Pedido pedido) {
         String pasta = "C:\\Users\\Lenovo\\Documents\\desenvolvimento\\pizzaria\\Comanda\\";
         String arquivo = pasta + "pedido_" + pedido.getId() + ".txt";
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(arquivo))) {
@@ -171,31 +166,17 @@ public class PedidoService {
                     writer.write("-"+ sabor.getNome() );
                     writer.newLine();
                 }
-                /*if(pizza.getIngredientes() != null) {
-                    writer.write(" Ingrediente(s) retirado(s):");
 
-                    writer.newLine();
-                    for (String ingrediente : pizza.getIngredientes()) {
-                        writer.write(" - " + ingrediente);
-                        writer.newLine();
-                    }
-                }
-                if(pizza.getAdicionais() != null) {
-                    writer.write(" Adicionais: ");
-                    writer.newLine();
-                    for (String adicionais : pizza.getAdicionais()) {
-                        writer.write(" - " + adicionais);
-                        writer.newLine();
-                    }
-                }*/
                 nPizza++;
             }
 
 
 
             System.out.println("Arquivo gerado com sucesso: " + arquivo);
+            return ResponseEntity.status(HttpStatus.OK).body("Arquivo gerado com sucesso: " + arquivo);
         } catch (IOException e) {
             System.out.println("Erro ao salvar o arquivo: " + e.getMessage());
+            return  ResponseEntity.status(HttpStatus.NOT_FOUND).body("Erro ao salvar o arquivo");
         }
 
     }

@@ -1,9 +1,8 @@
 package com.uniamerica.pizzaria;
-
 import com.uniamerica.pizzaria.controller.AtendenteController;
 import com.uniamerica.pizzaria.entity.Atendente;
 import com.uniamerica.pizzaria.repository.AtendenteRep;
-import org.junit.Assert;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -38,10 +37,10 @@ public class AtendenteTest {
     @Test
     void testFindAll(){
         var atendentecontroler = atendenteController.findAll();
-        List<Atendente> atendentes = (List<Atendente>) atendentecontroler.getBody();
+        List<Atendente> atendentes = atendentecontroler.getBody();
         int valor = atendentes.size();
         System.out.println(valor);
-        Assert.assertEquals(1, valor, 0);
+        Assertions.assertEquals(1, valor, 0);
 
     }
 

@@ -18,5 +18,25 @@ class PizzariaApplicationTests {
 	void AtendenteControllerTest(){
 
 	}
+	@Test
+	void ClienteControllerTest(){
+
+	}
+	@Test
+	void EnderecoControllerTest(){
+
+	}
+	@Test
+	void PedidoControllerTest(){
+
+	}
+	@Test
+	void PizzaControllerTest(){
+
+	}
+	@Test
+	void SaborControllerTest(){
+
+	}
 
 }
