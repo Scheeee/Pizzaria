@@ -22,8 +22,9 @@ public class SaborDTO {
     private List<String> ingredientes;
 
 
-    public SaborDTO(long i, String calabresa, List<String> calabresa1) {
+    public SaborDTO(long id, String nome, List<String> ingredientes) {
+        this.id = id;
+        this.nome = nome;
+        this.ingredientes = ingredientes;
     }
-
-
 }

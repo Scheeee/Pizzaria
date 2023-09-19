@@ -48,15 +48,21 @@ class AtendenteDTOTest {
 
     @Test
     void testHashCode() {
+        AtendenteDTO atendente1 = new AtendenteDTO(1L, "Sche");
+        AtendenteDTO atendente2 = new AtendenteDTO(1L, "Sche");
 
+
+        Assertions.assertEquals(atendente1.hashCode(), atendente2.hashCode());;
 
     }
 
     @Test
     void testToString() {
+        Assertions.assertEquals("AtendenteDTO(id=1, nome=Sche)", atendente.toString());
 
 
     }
+
 
 
 }

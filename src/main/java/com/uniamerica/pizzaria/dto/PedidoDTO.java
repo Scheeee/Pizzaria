@@ -43,6 +43,17 @@ public class PedidoDTO {
 
     private Status status;
 
-    public PedidoDTO(long i, Atendente atendente, Cliente cliente, List<Pizza> singletonList, boolean b, String retirarCebola, BigDecimal valor, boolean b1) {
+    public PedidoDTO(long id,Atendente atendente, Cliente cliente, List<Pizza> pizzas, boolean entrega, String detalhes, BigDecimal valorTotal, boolean dinheiro) {
+        this.id = id;
+        this.atendente = atendente;
+        this.cliente = cliente;
+        this.pizzas = pizzas;
+        this.entrega = entrega;
+        this.detalhes = detalhes;
+        this.valorTotal = valorTotal;
+        this.dinheiro = dinheiro;
+
     }
+
+
 }

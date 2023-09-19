@@ -6,7 +6,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import lombok.Data;
 import lombok.Getter;
-import lombok.ToString;
+
 
 @Data
 public class AtendenteDTO {
@@ -18,6 +18,8 @@ public class AtendenteDTO {
 
     private String nome;
 
-    public AtendenteDTO(long l, String sche) {
+    public AtendenteDTO(long id, String nome) {
+        this.id = id;
+        this.nome = nome;
     }
 }

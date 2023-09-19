@@ -19,7 +19,7 @@ class PizzaDTOTest {
 
 
     Pedido pedido = new Pedido(1, atendente, cliente, false, "retirar cebola",valor, true);
-    PizzaDTO pizza = new PizzaDTO(1, Tamanho.P, Collections.singletonList(sabor), valor, pedido);
+    PizzaDTO pizza = new PizzaDTO(1, Tamanho.P, Collections.singletonList(sabor), pedido, valor);
     @Test
     void getTamanhoandSetTamanho() {
         pizza.setTamanho(Tamanho.GG);
@@ -61,16 +61,25 @@ class PizzaDTOTest {
 
     @Test
     void testEquals() {
-        PizzaDTO pizza2 = new PizzaDTO(1, Tamanho.P, Collections.singletonList(sabor), valor, pedido);
+        PizzaDTO pizza2 = new PizzaDTO(1, Tamanho.P, Collections.singletonList(sabor), pedido, valor);
         Assertions.assertEquals(pizza, pizza2);
     }
 
     @Test
     void canEqual() {
-        PizzaDTO pizza2 = new PizzaDTO(1, Tamanho.P, Collections.singletonList(sabor), valor, pedido);
+        PizzaDTO pizza2 = new PizzaDTO(1, Tamanho.P, Collections.singletonList(sabor), pedido, valor);
         Assertions.assertTrue(pizza.canEqual(pizza2));
     }
 
+    @Test
+    void testHashCode(){
+        PizzaDTO pizza2 = new PizzaDTO(1, Tamanho.P, Collections.singletonList(sabor), pedido, valor);
+        Assertions.assertEquals(pizza.hashCode(), pizza2.hashCode());
+    }
+    @Test
+    void testToString(){
+        Assertions.assertEquals("PizzaDTO(id=1, tamanho=P, sabores=[com.uniamerica.pizzaria.entity.Sabor@4b5a5ed1], pedido=com.uniamerica.pizzaria.entity.Pedido@59d016c9, valorUnit=25)", pizza.toString());
+    }
 
 
 

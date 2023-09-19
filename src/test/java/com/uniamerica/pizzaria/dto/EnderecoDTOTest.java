@@ -11,7 +11,7 @@ class EnderecoDTOTest {
 
 
     ClienteDTO cliente = new ClienteDTO(1,"Sche", "45-98034-3600");
-    EnderecoDTO endereco = new EnderecoDTO(1,"Avenida tancredo neves","1234", "casa 123", cliente);
+    EnderecoDTO endereco = new EnderecoDTO(1,"Avenida tancredo neves","1234", "casa 123");
     @Test
     void getRuaandSetRua() {
 
@@ -52,18 +52,29 @@ class EnderecoDTOTest {
 
     @Test
     void testEquals() {
-        EnderecoDTO endereco2 = new EnderecoDTO(1,"Avenida tancredo neves","1234", "casa 123", cliente);
+        EnderecoDTO endereco2 = new EnderecoDTO(1,"Avenida tancredo neves","1234", "casa 123");
 
         Assertions.assertEquals(endereco, endereco2);
     }
 
     @Test
     void canEqual() {
-        EnderecoDTO endereco2 = new EnderecoDTO(1,"Avenida tancredo neves","1234", "casa 123", cliente);
+        EnderecoDTO endereco2 = new EnderecoDTO(1,"Avenida tancredo neves","1234", "casa 123");
 
         Assertions.assertTrue(endereco.canEqual(endereco2));
     }
+    @Test
+    void testHashCode(){
+        EnderecoDTO endereco2 = new EnderecoDTO(1,"Avenida tancredo neves","1234", "casa 123");
 
+        Assertions.assertEquals(endereco.hashCode(), endereco2.hashCode());
+    }
+
+    @Test
+    void testToString(){
+
+        Assertions.assertEquals("EnderecoDTO(id=1, rua=Avenida tancredo neves, numero=1234, complemento=casa 123, cliente=null)", endereco.toString());
+    }
 
 
 

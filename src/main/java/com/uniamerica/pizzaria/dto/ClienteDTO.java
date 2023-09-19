@@ -21,9 +21,19 @@ public class ClienteDTO {
 
     private Endereco endereco;
 
-    public ClienteDTO(long i, String sche, String s, Endereco endereco) {
+
+    public ClienteDTO(long id, String nome, String telefone, Endereco endereco) {
+        this.id = id;
+        this.nome = nome;
+        this.telefone = telefone;
+        this.endereco = endereco;
     }
 
-    public ClienteDTO(long i, String sche, String s) {
+    public ClienteDTO(long id, String nome, String telefone) {
+        this.id = id;
+        this.nome = nome;
+        this.telefone = telefone;
     }
+
+
 }

@@ -1,6 +1,4 @@
 package com.uniamerica.pizzaria.dto;
-
-import com.uniamerica.pizzaria.entity.Cliente;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.Getter;
@@ -25,6 +23,11 @@ public class EnderecoDTO {
 
     private ClienteDTO cliente;
 
-    public EnderecoDTO(long i, String avenidaTancredoNeves, String s, String s1, ClienteDTO cliente) {
+    public EnderecoDTO(long id, String rua, String numero, String complemento) {
+        this.id = id;
+        this.rua = rua;
+        this.numero = numero;
+        this.complemento = complemento;
+
     }
 }

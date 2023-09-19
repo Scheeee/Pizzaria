@@ -34,6 +34,12 @@ public class PizzaDTO {
 
     private BigDecimal valorUnit;
 
-    public PizzaDTO(long i, Tamanho p, List<Sabor> singletonList, BigDecimal valor, Pedido pedido) {
+
+    public PizzaDTO(long id, Tamanho tamanho, List<Sabor> sabores, Pedido pedido, BigDecimal valorUnit) {
+        this.id = id;
+        this.tamanho = tamanho;
+        this.sabores = sabores;
+        this.pedido = pedido;
+        this.valorUnit = valorUnit;
     }
 }
