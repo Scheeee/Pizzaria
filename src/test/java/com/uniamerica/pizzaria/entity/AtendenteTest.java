@@ -36,4 +36,5 @@ class AtendenteTest {
         String nome = atendente.getNome();
         Assertions.assertEquals("Gabriele", nome);
     }
+
 }

@@ -76,6 +76,9 @@ public class Pedido {
     @Column(name = "status")
     private Status status;
 
+    public Pedido(long i, Atendente atendente, Cliente cliente, boolean b, String retirarCebola, BigDecimal valor, boolean b1) {
+    }
+
     @PrePersist
     private void prePersist(){
         this.cadastrado = LocalDate.now();

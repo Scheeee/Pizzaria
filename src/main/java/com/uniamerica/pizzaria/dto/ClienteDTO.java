@@ -21,4 +21,9 @@ public class ClienteDTO {
 
     private Endereco endereco;
 
+    public ClienteDTO(long i, String sche, String s, Endereco endereco) {
+    }
+
+    public ClienteDTO(long i, String sche, String s) {
+    }
 }

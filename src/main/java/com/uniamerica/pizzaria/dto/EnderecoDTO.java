@@ -23,5 +23,8 @@ public class EnderecoDTO {
 
 
 
-    private Cliente cliente;
+    private ClienteDTO cliente;
+
+    public EnderecoDTO(long i, String avenidaTancredoNeves, String s, String s1, ClienteDTO cliente) {
+    }
 }

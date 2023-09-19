@@ -26,11 +26,14 @@ public class PizzaDTO {
     private Pedido pedido;
 
 
-    private List<String> ingredientes;
 
 
-    private List<String> adicionais;
+
+
 
 
     private BigDecimal valorUnit;
+
+    public PizzaDTO(long i, Tamanho p, List<Sabor> singletonList, BigDecimal valor, Pedido pedido) {
+    }
 }
