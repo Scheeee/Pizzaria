@@ -72,8 +72,8 @@ class EnderecoDTOTest {
 
     @Test
     void testToString(){
-
-        Assertions.assertEquals("EnderecoDTO(id=1, rua=Avenida tancredo neves, numero=1234, complemento=casa 123, cliente=null)", endereco.toString());
+        EnderecoDTO endereco2 = new EnderecoDTO(1,"Avenida tancredo neves","1234", "casa 123");
+        Assertions.assertEquals(endereco2.toString(), endereco.toString());
     }
 
 

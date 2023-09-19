@@ -1,0 +1,11 @@
+Cliente: Sche
+Telefone: 45-98034-3600
+Entrega 
+Endereço: Avenida tancredo neves N°:1234
+Complemento: casa 123
+Itens do pedido:
+- pizza n°: 1 Tamanho:P
+Sabor(es):
+-Calabresa
+ Valor unitário: R$25
+Pagamento no CartãoTotal: R$ 25

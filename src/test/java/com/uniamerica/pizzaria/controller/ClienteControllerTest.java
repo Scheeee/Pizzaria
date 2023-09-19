@@ -45,7 +45,7 @@ class ClienteControllerTest {
         Cliente cliente = new Cliente(1,"Sche", "45-98034-3600", endereco);
 
 
-        Mockito.when(clienteRep.getById(1L)).thenReturn(cliente);
+        Mockito.when(clienteRep.getReferenceById(1L)).thenReturn(cliente);
 
     }
 

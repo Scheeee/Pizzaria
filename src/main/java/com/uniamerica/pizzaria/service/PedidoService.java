@@ -65,7 +65,7 @@ public class PedidoService {
     @Transactional(rollbackOn = Exception.class)
     public ResponseEntity<?> encerrar(Long id) { pedidoRep.findById(id);
 
-        Pedido pedidoAtual = pedidoRep.getById(id);
+        Pedido pedidoAtual = pedidoRep.getReferenceById(id);
         pedidoAtual.setStatus(Status.Encerrado);
 
         BigDecimal ValorPizzas = pedidoAtual.getPizzas().stream().map(Pizza::getValorUnit).reduce(BigDecimal.ZERO, BigDecimal::add);

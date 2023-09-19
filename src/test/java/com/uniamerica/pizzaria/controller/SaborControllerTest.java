@@ -57,7 +57,7 @@ class SaborControllerTest {
         ingredientes.add("Calabresa");
         Sabor sabor = new Sabor(1L,"Calabresa", ingredientes);
 
-        Mockito.when(saborRep.getById(1L)).thenReturn(sabor);
+        Mockito.when(saborRep.getReferenceById(1L)).thenReturn(sabor);
     }
 
     @Test

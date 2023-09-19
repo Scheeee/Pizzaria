@@ -104,7 +104,7 @@ class PedidoControllerTest {
 
         pedidos.add(pedido);
 
-        Mockito.when(pedidoRep.findByAtendente(atendenteRep.getById(1L))).thenReturn(Optional.of(pedidos));
+        Mockito.when(pedidoRep.findByAtendente(atendenteRep.getReferenceById(1L))).thenReturn(Optional.of(pedidos));
     }
     @BeforeEach
     void insertGetCliente(){
@@ -133,7 +133,7 @@ class PedidoControllerTest {
 
         pedidos.add(pedido);
 
-        Mockito.when(pedidoRep.findByCliente(clienteRep.getById(1L))).thenReturn(Optional.of(pedidos));
+        Mockito.when(pedidoRep.findByCliente(clienteRep.getReferenceById(1L))).thenReturn(Optional.of(pedidos));
     }
     @BeforeEach
     void injectFindByIdPessoa(){
@@ -175,7 +175,29 @@ class PedidoControllerTest {
         Pedido pedido = new Pedido(1L, atendente, cliente, pizzas, true, "Retirar cebolar", valor, false);
 
         pedido.setStatus(Status.Ativo);
-        Mockito.when(pedidoRep.getById(1L)).thenReturn(pedido);
+        Mockito.when(pedidoRep.getReferenceById(1L)).thenReturn(pedido);
+
+    }
+    @BeforeEach
+    void injectGetByIdEncerrar(){
+        Atendente atendente = new Atendente(1L,"Sche");
+        Endereco endereco = new Endereco(1,"Avenida tancredo neves","1234", "casa 123");
+        Cliente cliente = new Cliente(1,"Sche", "45-98034-3600", endereco);
+        List<String> ingredientes = new ArrayList<>();
+        ingredientes.add("Calabresa");
+        Sabor sabor = new Sabor(1L,"Calabresa", ingredientes);
+        List<Sabor> sabores = new ArrayList<>();
+        sabores.add(sabor);
+        BigDecimal valor = new BigDecimal(25);
+        Pizza pizza = new Pizza(1L, Tamanho.P,sabores,valor);
+        List<Pizza> pizzas = new ArrayList<>();
+        pizzas.add(pizza);
+
+
+        Pedido pedido = new Pedido(2L, atendente, cliente, pizzas, true, "Retirar cebolar", valor, false);
+
+        pedido.setStatus(Status.Ativo);
+        Mockito.when(pedidoRep.getReferenceById(2L)).thenReturn(pedido);
 
     }
     @BeforeEach
@@ -374,7 +396,7 @@ class PedidoControllerTest {
 
     @Test
     void encerrarPedido() {
-        var pedido1 = pedidoController.EncerrarPedido(1L);
+        var pedido1 = pedidoController.EncerrarPedido(2L);
 
 
         Assertions.assertNotNull(pedido1);

@@ -44,12 +44,12 @@ public class PedidoController {
     public ResponseEntity<Optional<List<Pedido>>> getatendente(@PathVariable("id") Long id){
 
 
-        Optional<List<Pedido>> pedidos = this.pedidoRep.findByAtendente(atendenteRep.getById(id));
+        Optional<List<Pedido>> pedidos = this.pedidoRep.findByAtendente(atendenteRep.getReferenceById(id));
         return ResponseEntity.ok(pedidos);
     }
     @GetMapping("/cliente/{id}")
     public ResponseEntity<Optional<List<Pedido>>> getCliente(@PathVariable("id") Long id){
-        Optional<List<Pedido>> pedidos = this.pedidoRep.findByCliente(clienteRep.getById(id));
+        Optional<List<Pedido>> pedidos = this.pedidoRep.findByCliente(clienteRep.getReferenceById(id));
         return ResponseEntity.ok(pedidos);
     }
     @GetMapping("/{id}")
@@ -60,7 +60,7 @@ public class PedidoController {
     @GetMapping("/comanda/{id}")
     public ResponseEntity<?> comanda(@PathVariable("id") Long id) {
         try {
-            Pedido pedido = pedidoRep.getById(id);
+            Pedido pedido = pedidoRep.getReferenceById(id);
             Assert.isTrue(pedido.getStatus() == Status.Ativo, "o pedido solicitado não está ativo");
             Assert.isTrue(pedido.getPizzas().size() >= 1 , "o pedido solicitado não possui pizzas");
 
@@ -98,7 +98,7 @@ public class PedidoController {
     @PutMapping("/{id}")
     public ResponseEntity<?> updatePedido(@PathVariable(value = "id")Long id,@RequestBody Pedido pedido){
 
-        Pedido pedidoNovo = pedidoRep.getById(id);
+        Pedido pedidoNovo = pedidoRep.getReferenceById(id);
 
         BeanUtils.copyProperties(pedido, pedidoNovo, "id");
         pedidoRep.save(pedidoNovo);
@@ -110,7 +110,7 @@ public class PedidoController {
     public ResponseEntity<?> cancelarPedido(@PathVariable(value = "id") Long id){
         pedidoRep.findById(id);
 
-        Pedido pedidoAtual = pedidoRep.getById(id);
+        Pedido pedidoAtual = pedidoRep.getReferenceById(id);
         pedidoAtual.setStatus(Status.Cancelado);
 
         pedidoRep.save(pedidoAtual);
@@ -134,7 +134,7 @@ public class PedidoController {
     @DeleteMapping("/{id}")
     public ResponseEntity<?> delete(@PathVariable(value = "id")Long id){
         try{
-            Pedido pedido = pedidoRep.getById(id);
+            Pedido pedido = pedidoRep.getReferenceById(id);
 
 
             pedidoRep.delete(pedido);

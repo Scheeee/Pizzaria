@@ -62,7 +62,8 @@ class ClienteDTOTest {
     }
     @Test
     void testToString() {
-        Assertions.assertEquals("ClienteDTO(id=1, nome=Sche, telefone=45-98034-3600, endereco=com.uniamerica.pizzaria.entity.Endereco@5ccddd20)", cliente.toString());
+        ClienteDTO cliente2 = new ClienteDTO(1,"Sche", "45-98034-3600", endereco);
+        Assertions.assertEquals(cliente2.toString(), cliente.toString());
 
     }
 

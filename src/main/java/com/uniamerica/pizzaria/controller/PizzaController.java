@@ -40,7 +40,7 @@ public class PizzaController {
     @PutMapping("/{id}")
     public ResponseEntity<?> updatePizza(@PathVariable(value = "id")Long id,@RequestBody Pizza pizza){
 
-        Pizza pizzaNovo = pizzaRep.getById(id);
+        Pizza pizzaNovo = pizzaRep.getReferenceById(id);
 
         BeanUtils.copyProperties(pizza, pizzaNovo, "id");
         pizzaRep.save(pizzaNovo);
@@ -50,7 +50,7 @@ public class PizzaController {
     @DeleteMapping("/{id}")
     public ResponseEntity<?> delete(@PathVariable(value = "id")Long id){
         try {
-            Pizza pizza = pizzaRep.getById(id);
+            Pizza pizza = pizzaRep.getReferenceById(id);
 
 
             pizzaRep.delete(pizza);

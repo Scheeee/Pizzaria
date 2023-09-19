@@ -55,7 +55,7 @@ class PizzaControllerTest {
         Pizza pizza = new Pizza(1L, Tamanho.P,sabores,valor);
 
 
-        Mockito.when(pizzaRep.getById(1L)).thenReturn(pizza);
+        Mockito.when(pizzaRep.getReferenceById(1L)).thenReturn(pizza);
 
     }
 

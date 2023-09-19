@@ -37,7 +37,7 @@ public class ClienteController {
     @PutMapping("/{id}")
     public ResponseEntity<Object> updateCliente(@PathVariable(value = "id")Long id,@RequestBody Cliente cliente){
 
-        Cliente clienteNovo = clienteRep.getById(id);
+        Cliente clienteNovo = clienteRep.getReferenceById(id);
 
         BeanUtils.copyProperties(cliente, clienteNovo, "id");
         clienteRep.save(clienteNovo);
@@ -47,7 +47,7 @@ public class ClienteController {
     @DeleteMapping("/{id}")
     public ResponseEntity<Object> delete(@PathVariable(value = "id")Long id){
         try{
-        Cliente cliente = clienteRep.getById(id);
+        Cliente cliente = clienteRep.getReferenceById(id);
 
 
         clienteRep.delete(cliente);

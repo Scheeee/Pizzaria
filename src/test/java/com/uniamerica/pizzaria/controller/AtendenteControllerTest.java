@@ -37,7 +37,7 @@ class AtendenteControllerTest {
     void injectUpdate(){
         Atendente atendente = new Atendente(1L,"Sche");
 
-        Mockito.when(atendenteRep.getById(1L)).thenReturn(atendente);
+        Mockito.when(atendenteRep.getReferenceById(1L)).thenReturn(atendente);
 
     }
 

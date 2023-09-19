@@ -40,7 +40,7 @@ public class SaborController {
     @PutMapping("/{id}")
     public ResponseEntity<?> updateSabor(@PathVariable(value = "id")Long id,@RequestBody Sabor sabor){
 
-        Sabor saborNovo = saborRep.getById(id);
+        Sabor saborNovo = saborRep.getReferenceById(id);
 
         BeanUtils.copyProperties(sabor, saborNovo, "id");
         saborRep.save(saborNovo);
@@ -50,7 +50,7 @@ public class SaborController {
     @DeleteMapping("/{id}")
     public ResponseEntity<?> delete(@PathVariable(value = "id")Long id){
         try{
-            Sabor sabor = saborRep.getById(id);
+            Sabor sabor = saborRep.getReferenceById(id);
 
 
            saborRep.delete(sabor);

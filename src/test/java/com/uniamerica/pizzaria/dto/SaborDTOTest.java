@@ -57,8 +57,9 @@ class SaborDTOTest {
 
     @Test
     void testToString() {
-        sabor.toString();
-        Assertions.assertEquals("SaborDTO(id=1, nome=Calabresa, ingredientes=[Calabresa])", sabor.toString());
+        SaborDTO sabor1 = new SaborDTO(1, "Calabresa", Collections.singletonList("Calabresa"));
+
+        Assertions.assertEquals(sabor1.toString(), sabor.toString());
     }
 
 

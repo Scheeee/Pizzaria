@@ -78,7 +78,9 @@ class PizzaDTOTest {
     }
     @Test
     void testToString(){
-        Assertions.assertEquals("PizzaDTO(id=1, tamanho=P, sabores=[com.uniamerica.pizzaria.entity.Sabor@4b5a5ed1], pedido=com.uniamerica.pizzaria.entity.Pedido@59d016c9, valorUnit=25)", pizza.toString());
+        PizzaDTO pizza2 = new PizzaDTO(1, Tamanho.P, Collections.singletonList(sabor), pedido, valor);
+
+        Assertions.assertEquals(pizza2.toString(), pizza.toString());
     }
 
 

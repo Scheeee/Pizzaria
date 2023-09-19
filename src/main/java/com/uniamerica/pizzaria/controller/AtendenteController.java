@@ -38,7 +38,7 @@ public class AtendenteController {
     @PutMapping("/{id}")
     public ResponseEntity<Object> updateAtendente(@PathVariable(value = "id") long id, @RequestBody Atendente atendente){
 
-        Atendente atendenteNovo = atendenteRep.getById(id);
+        Atendente atendenteNovo = atendenteRep.getReferenceById(id);
         BeanUtils.copyProperties(atendente, atendenteNovo, "id");
         atendenteRep.save(atendenteNovo);
         return ResponseEntity.ok("Atendente atualizado com sucesso!");
@@ -47,7 +47,7 @@ public class AtendenteController {
     @DeleteMapping("/{id}")
     public ResponseEntity<Object> delete(@PathVariable(value = "id")Long id){
         try {
-            Atendente atendente = atendenteRep.getById(id);
+            Atendente atendente = atendenteRep.getReferenceById(id);
 
 
             atendenteRep.delete(atendente);

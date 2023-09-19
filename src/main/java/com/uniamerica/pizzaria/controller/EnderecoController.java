@@ -38,7 +38,7 @@ public class EnderecoController {
     @PutMapping("/{id}")
     public ResponseEntity<Object> updateEndereco(@PathVariable(value = "id")Long id,@RequestBody Endereco endereco){
 
-        Endereco enderecoNovo = enderecoRep.getById(id);
+        Endereco enderecoNovo = enderecoRep.getReferenceById(id);
 
         BeanUtils.copyProperties(endereco, enderecoNovo, "id");
         enderecoRep.save(enderecoNovo);
@@ -49,7 +49,7 @@ public class EnderecoController {
     @DeleteMapping("/{id}")
     public ResponseEntity<Object> delete(@PathVariable(value = "id")Long id){
         try{
-        Endereco endereco = enderecoRep.getById(id);
+        Endereco endereco = enderecoRep.getReferenceById(id);
 
 
         enderecoRep.delete(endereco);

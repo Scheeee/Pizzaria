@@ -37,7 +37,7 @@ class EnderecoControllerTest {
     void injectGetById() {
         Endereco endereco = new Endereco(1, "Avenida tancredo neves", "1234", "casa 123");
 
-        Mockito.when(enderecoRep.getById(1L)).thenReturn(endereco);
+        Mockito.when(enderecoRep.getReferenceById(1L)).thenReturn(endereco);
     }
 
     @Test

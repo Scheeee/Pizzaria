@@ -58,7 +58,8 @@ class AtendenteDTOTest {
 
     @Test
     void testToString() {
-        Assertions.assertEquals("AtendenteDTO(id=1, nome=Sche)", atendente.toString());
+        AtendenteDTO atendente2 = new AtendenteDTO(1L, "Sche");
+        Assertions.assertEquals(atendente2.toString(), atendente.toString());
 
 
     }

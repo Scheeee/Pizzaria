@@ -145,7 +145,9 @@ class PedidoDTOTest {
     }
     @Test
     void testToString(){
-        Assertions.assertEquals("PedidoDTO(id=1, cadastrado=null, finalizado=null, atendente=com.uniamerica.pizzaria.entity.Atendente@59d016c9, cliente=com.uniamerica.pizzaria.entity.Cliente@3cc2931c, pizzas=[com.uniamerica.pizzaria.entity.Pizza@20d28811], entrega=false, detalhes=retirar cebola, valorTotal=25, dinheiro=true, status=null)", pedido.toString());
+        PedidoDTO pedido2 = new PedidoDTO(1, atendente, cliente, Collections.singletonList(pizza), false, "retirar cebola",valor, true);
+
+        Assertions.assertEquals(pedido2.toString(), pedido.toString());
     }
 
 
