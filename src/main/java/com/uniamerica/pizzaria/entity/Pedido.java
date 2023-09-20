@@ -54,10 +54,6 @@ public class Pedido {
     @Setter
     @JoinColumn(name = "detalhes")
     private String detalhes;
-    @Getter
-    @Setter
-    @JoinColumn(name = "adicionais")
-    private List<String> adicionais;
 
     @Getter
     @Setter
@@ -78,12 +74,12 @@ public class Pedido {
 
 
     @PrePersist
-    private void prePersist(){
+    public void prePersist(){
         this.cadastrado = LocalDate.now();
         this.status = Status.ATIVO;
     }
     @PreUpdate
-    private void preUpdate(){
+    public void preUpdate(){
         this.finalizado = LocalDate.now();
     }
 

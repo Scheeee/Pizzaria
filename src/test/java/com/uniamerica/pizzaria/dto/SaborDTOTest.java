@@ -61,6 +61,13 @@ class SaborDTOTest {
 
         Assertions.assertEquals(sabor1.toString(), sabor.toString());
     }
+    @Test
+    void TestNull(){
+        SaborDTO saborDTO = new SaborDTO();
+
+        Assertions.assertEquals(0, saborDTO.getId());
+
+    }
 
 
 }

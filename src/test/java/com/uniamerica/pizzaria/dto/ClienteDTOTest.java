@@ -67,6 +67,13 @@ class ClienteDTOTest {
 
     }
 
+    @Test
+    void TestNull(){
+        ClienteDTO clienteDTO = new ClienteDTO();
+
+        Assertions.assertEquals(0, clienteDTO.getId());
+
+    }
 
 
 }

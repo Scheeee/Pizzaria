@@ -43,11 +43,6 @@ class PizzaDTOTest {
         Assertions.assertEquals(pedido1, pizza.getPedido());
 
     }
-
-
-
-
-
     @Test
     void getValorUnitandSetValorUnit() {
 
@@ -86,6 +81,13 @@ class PizzaDTOTest {
         Assertions.assertEquals(pizza2.toString(), pizza.toString());
     }
 
+    @Test
+    void TestNull(){
+        PizzaDTO pizzaDTO = new PizzaDTO();
+
+        Assertions.assertEquals(0, pizzaDTO.getId());
+
+    }
 
 
 }

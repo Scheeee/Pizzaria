@@ -149,6 +149,13 @@ class PedidoDTOTest {
 
         Assertions.assertEquals(pedido2.toString(), pedido.toString());
     }
+    @Test
+    void TestNull(){
+        PedidoDTO pedidoDTO = new PedidoDTO();
+
+        Assertions.assertEquals(0, pedidoDTO.getId());
+
+    }
 
 
 

@@ -10,8 +10,12 @@ import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.http.HttpStatus;
+
 import java.util.ArrayList;
 import java.util.List;
+
+import static org.mockito.Mockito.when;
 
 @SpringBootTest
 class AtendenteControllerTest {
@@ -31,16 +35,17 @@ class AtendenteControllerTest {
         List<Atendente> atendentes = new ArrayList<>();
 
         atendentes.add(atendente);
-        Mockito.when(atendenteRep.findAll()).thenReturn(atendentes);
+        when(atendenteRep.findAll()).thenReturn(atendentes);
 
     }
     @BeforeEach
     void injectUpdate(){
         Atendente atendente = new Atendente(1L,"Sche");
 
-        Mockito.when(atendenteRep.getReferenceById(1L)).thenReturn(atendente);
+        when(atendenteRep.getReferenceById(1L)).thenReturn(atendente);
 
     }
+
 
 
 
@@ -66,16 +71,7 @@ class AtendenteControllerTest {
         Assertions.assertEquals("Atendente cadastrado(a) com sucesso!", atendente1.getBody());
 
     }
-    @Test
-    void inserirErro() {
-        AtendenteDTO atendente = new AtendenteDTO(1L, "Sche");
-        var atendente1 = atendenteController.inserir(atendente);
 
-
-        Assertions.assertNotNull(atendente1);
-        Assertions.assertEquals("Atendente cadastrado(a) com sucesso!", atendente1.getBody());
-
-    }
     @Test
     void updateAtendente() {
         AtendenteDTO atendente = new AtendenteDTO(1L, "Gabriele");

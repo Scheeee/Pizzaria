@@ -183,6 +183,18 @@ class PedidoTest {
         Assertions.assertEquals(false, dinheiro);
 
     }
+    @Test
+    void testPrePersist(){
+        pedido.prePersist();
+
+        Assertions.assertEquals(LocalDate.now(), pedido.getCadastrado());
+    }
+    @Test
+    void testPreUpdate(){
+        pedido.preUpdate();
+
+        Assertions.assertEquals(LocalDate.now(), pedido.getFinalizado());
+    }
 
 
 }

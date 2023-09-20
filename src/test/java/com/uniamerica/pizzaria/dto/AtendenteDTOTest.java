@@ -63,6 +63,13 @@ class AtendenteDTOTest {
 
 
     }
+    @Test
+    void TestNull(){
+        AtendenteDTO atendenteDTO = new AtendenteDTO();
+
+        Assertions.assertEquals(0, atendenteDTO.getId());
+
+    }
 
 
 

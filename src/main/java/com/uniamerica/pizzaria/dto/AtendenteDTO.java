@@ -22,4 +22,8 @@ public class AtendenteDTO {
         this.id = id;
         this.nome = nome;
     }
+
+    public AtendenteDTO() {
+
+    }
 }

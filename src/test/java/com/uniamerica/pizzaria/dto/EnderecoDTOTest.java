@@ -77,6 +77,13 @@ class EnderecoDTOTest {
         Assertions.assertEquals(endereco2.toString(), endereco.toString());
     }
 
+    @Test
+    void TestNull(){
+        EnderecoDTO enderecoDTO = new EnderecoDTO();
+
+        Assertions.assertEquals(0, enderecoDTO.getId());
+
+    }
 
 
 }
