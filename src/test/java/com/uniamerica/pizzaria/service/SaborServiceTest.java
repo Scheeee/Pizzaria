@@ -4,7 +4,9 @@ import com.uniamerica.pizzaria.entity.Sabor;
 import com.uniamerica.pizzaria.repository.PizzaRep;
 import com.uniamerica.pizzaria.repository.SaborRep;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -25,20 +27,12 @@ class SaborServiceTest {
 
     @Autowired
     private final SaborService saborService = new SaborService();
-    @Test
-    void saveSabor() {
-        List<String> ingredientes = new ArrayList<>();
-        ingredientes.add("Calabresa");
-        Sabor sabor = new Sabor(1L,"Calabresa", ingredientes);
-        var sabor1 =  saborService.saveSabor(sabor);
-        Assertions.assertNotNull(sabor1);
-        Assertions.assertEquals(HttpStatus.CREATED, sabor1.getStatusCode());
-    }
-    @Test
-    void saveSabores() {
-        List<String> ingredientes = new ArrayList<>();
-        ingredientes.add("Calabresa");
 
+    @BeforeEach
+    void injectsabores(){
+
+        List<String> ingredientes = new ArrayList<>();
+        ingredientes.add("Calabresa");
         Sabor sabor = new Sabor(1L,"Calabresa", ingredientes);
         List<String> ingredientes2 = new ArrayList<>();
         ingredientes2.add("frango");
@@ -46,6 +40,20 @@ class SaborServiceTest {
         List<String> ingredientes3 = new ArrayList<>();
         ingredientes3.add("queijo");
         Sabor sabor3 = new Sabor(3L, "4 queijos",ingredientes3);
+        List<Sabor> sabores = new ArrayList<>();
+
+        sabores.add(sabor);
+        sabores.add(sabor2);
+        sabores.add(sabor3);
+        Mockito.when(saborRep.findAll()).thenReturn(sabores);
+
+
+    }
+    @Test
+    void saveSabor() {
+        List<String> ingredientes = new ArrayList<>();
+        ingredientes.add("Calabresa");
+        Sabor sabor = new Sabor(1L,"Calabresa", ingredientes);
         var sabor1 =  saborService.saveSabor(sabor);
         Assertions.assertNotNull(sabor1);
         Assertions.assertEquals(HttpStatus.CREATED, sabor1.getStatusCode());
