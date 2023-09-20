@@ -39,7 +39,11 @@ public class Cliente {
     @OneToOne(mappedBy = "cliente", fetch = FetchType.EAGER)
     private Endereco endereco;
 
+    public Cliente(String nome, String telefone) {
+        this.nome = nome;
+        this.telefone = telefone;
 
+    }
     public Cliente(long id, String nome, String telefone) {
         this.id = id;
         this.nome = nome;
@@ -47,10 +51,13 @@ public class Cliente {
 
     }
 
+
     public Cliente(long id, String nome, String telefone, Endereco endereco) {
         this.id = id;
         this.nome = nome;
         this.telefone = telefone;
         this.endereco = endereco;
     }
+
+
 }

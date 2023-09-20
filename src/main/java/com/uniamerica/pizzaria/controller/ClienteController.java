@@ -3,6 +3,7 @@ package com.uniamerica.pizzaria.controller;
 import com.uniamerica.pizzaria.dto.ClienteDTO;
 import com.uniamerica.pizzaria.entity.Cliente;
 import com.uniamerica.pizzaria.repository.ClienteRep;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -19,7 +20,7 @@ public class ClienteController {
 
     @Autowired
     ClienteRep clienteRep;
-    private static final String ERRO = "Error:  \" + e.getMessage()";
+    private static final String ERRO = "Error:  ";
     @GetMapping("/lista")
     public ResponseEntity<List<Cliente>> findAll(){
         return ResponseEntity.ok(clienteRep.findAll());
@@ -27,14 +28,15 @@ public class ClienteController {
     @PostMapping
     public ResponseEntity<Object> inserir(@RequestBody final ClienteDTO cliente){
         try {
-            Cliente cliente1 = new Cliente();
-            BeanUtils.copyProperties(cliente,cliente1);
+            ModelMapper modelMapper = new ModelMapper();
+            Cliente cliente1 = modelMapper.map(cliente, Cliente.class);
+
             clienteRep.save(cliente1);
             return ResponseEntity.ok("Cliente cadastrado(a) com sucesso!");
 
         }
         catch (Exception e){
-            return ResponseEntity.internalServerError().body(ERRO);
+            return ResponseEntity.internalServerError().body(ERRO+e.getMessage());
         }
     }
     @PutMapping("/{id}")
@@ -56,7 +58,7 @@ public class ClienteController {
         clienteRep.delete(cliente);
         return ResponseEntity.ok("Cliente deletado com sucesso!");
         }catch (Exception e){
-            return ResponseEntity.internalServerError().body(ERRO);
+            return ResponseEntity.internalServerError().body(ERRO+ e.getMessage());
         }
 
     }

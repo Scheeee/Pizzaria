@@ -5,6 +5,7 @@ import com.uniamerica.pizzaria.dto.PizzaDTO;
 import com.uniamerica.pizzaria.entity.Pizza;
 import com.uniamerica.pizzaria.repository.PizzaRep;
 import com.uniamerica.pizzaria.service.PizzaService;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -22,7 +23,7 @@ public class PizzaController {
     @Autowired
     PizzaService pizzaService;
 
-    private static final String ERRO = "Error:  \" + e.getMessage()";
+    private static final String ERRO = "Error: ";
     @GetMapping("/lista")
     public ResponseEntity<List<Pizza>> getAll(){
         return ResponseEntity.ok(pizzaRep.findAll());
@@ -31,13 +32,14 @@ public class PizzaController {
     public ResponseEntity<Object> inserir(@RequestBody final PizzaDTO pizza){
         try {
 
-            Pizza pizza1 = new Pizza();
+            ModelMapper modelMapper = new ModelMapper();
+            Pizza pizza1 =  modelMapper.map(pizza, Pizza.class);
             BeanUtils.copyProperties(pizza,pizza1);
             return  pizzaService.save(pizza1);
 
         }
         catch (Exception e){
-            return ResponseEntity.internalServerError().body(ERRO);
+            return ResponseEntity.internalServerError().body(ERRO+ e.getMessage());
         }
     }
 
@@ -60,7 +62,7 @@ public class PizzaController {
             pizzaRep.delete(pizza);
             return ResponseEntity.ok("Pizza deletada com sucesso!");
         }catch (Exception e){
-            return ResponseEntity.internalServerError().body(ERRO);
+            return ResponseEntity.internalServerError().body(ERRO+ e.getMessage());
         }
 
 

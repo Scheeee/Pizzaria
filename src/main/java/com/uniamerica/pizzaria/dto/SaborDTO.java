@@ -4,7 +4,7 @@ package com.uniamerica.pizzaria.dto;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
+
 
 
 import java.util.List;
@@ -34,4 +34,6 @@ public class SaborDTO {
     }
 
 
+    public SaborDTO() {
+    }
 }

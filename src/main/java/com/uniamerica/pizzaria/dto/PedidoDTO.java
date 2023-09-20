@@ -8,7 +8,7 @@ import com.uniamerica.pizzaria.entity.Status;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
+
 
 
 import java.math.BigDecimal;
@@ -55,4 +55,6 @@ public class PedidoDTO {
     }
 
 
+    public PedidoDTO() {
+    }
 }

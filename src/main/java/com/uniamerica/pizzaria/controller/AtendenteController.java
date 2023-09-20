@@ -2,6 +2,7 @@ package com.uniamerica.pizzaria.controller;
 import com.uniamerica.pizzaria.dto.AtendenteDTO;
 import com.uniamerica.pizzaria.entity.Atendente;
 import com.uniamerica.pizzaria.repository.AtendenteRep;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -19,7 +20,7 @@ public class AtendenteController {
     @Autowired
     AtendenteRep atendenteRep;
 
-    private static final String ERRO = "Error:  \" + e.getMessage()";
+    private static final String ERRO = "Error: ";
     @GetMapping("/lista")
     public ResponseEntity<List<Atendente>> findAll(){
         return ResponseEntity.ok(atendenteRep.findAll());
@@ -27,15 +28,15 @@ public class AtendenteController {
     @PostMapping
     public ResponseEntity<Object> inserir(@RequestBody final AtendenteDTO atendente){
         try {
-            Atendente atendente1 = new Atendente();
-            BeanUtils.copyProperties(atendente,atendente1);
+            ModelMapper modelMapper = new ModelMapper();
+            Atendente atendente1 = modelMapper.map(atendente, Atendente.class);
 
             atendenteRep.save(atendente1);
             return ResponseEntity.ok("Atendente cadastrado(a) com sucesso!");
 
         }
         catch (Exception e){
-            return ResponseEntity.internalServerError().body(ERRO);
+            return ResponseEntity.internalServerError().body(ERRO+e.getMessage());
         }
     }
 
@@ -57,7 +58,7 @@ public class AtendenteController {
             atendenteRep.delete(atendente);
             return ResponseEntity.ok("Atendente deletado com sucesso!");
         }catch (Exception e){
-        return ResponseEntity.internalServerError().body(ERRO);
+        return ResponseEntity.internalServerError().body(ERRO+e.getMessage());
     }
 
     }

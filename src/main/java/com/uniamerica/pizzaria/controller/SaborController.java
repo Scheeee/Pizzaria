@@ -5,6 +5,7 @@ import com.uniamerica.pizzaria.dto.SaborDTO;
 import com.uniamerica.pizzaria.entity.Sabor;
 import com.uniamerica.pizzaria.repository.SaborRep;
 import com.uniamerica.pizzaria.service.SaborService;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -26,18 +27,20 @@ public class SaborController {
     public ResponseEntity<List<Sabor>> getAll(){
         return ResponseEntity.ok(saborRep.findAll());
     }
-    private static final String ERRO = "Error:  \" + e.getMessage()";
+    private static final String ERRO = "Error:  + e.getMessage()";
     @PostMapping
     public ResponseEntity<Object> inserir(@RequestBody final SaborDTO sabor){
         try {
-            Sabor sabor1 = new Sabor();
+            ModelMapper modelMapper = new ModelMapper();
+            Sabor sabor1 =  modelMapper.map(sabor, Sabor.class);
+
             BeanUtils.copyProperties(sabor,sabor1);
             saborService.saveSabor(sabor1);
             return ResponseEntity.ok("Sabor cadastrado com sucesso!");
 
         }
         catch (Exception e){
-            return ResponseEntity.internalServerError().body(ERRO);
+            return ResponseEntity.internalServerError().body(ERRO+ e.getMessage());
         }
     }
 
@@ -60,7 +63,7 @@ public class SaborController {
            saborRep.delete(sabor);
             return ResponseEntity.ok("Sabor deletado com sucesso!");
         }catch (Exception e){
-            return ResponseEntity.internalServerError().body(ERRO);
+            return ResponseEntity.internalServerError().body(ERRO+ e.getMessage());
         }
     }
 }

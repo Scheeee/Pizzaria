@@ -2,6 +2,7 @@ package com.uniamerica.pizzaria.dto;
 
 
 
+import com.uniamerica.pizzaria.entity.Cliente;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -10,7 +11,7 @@ import org.junit.jupiter.api.Test;
 class EnderecoDTOTest {
 
 
-    ClienteDTO cliente = new ClienteDTO(1,"Sche", "45-98034-3600");
+
     EnderecoDTO endereco = new EnderecoDTO(1,"Avenida tancredo neves","1234", "casa 123");
     @Test
     void getRuaandSetRua() {
@@ -34,7 +35,7 @@ class EnderecoDTOTest {
 
     @Test
     void getClienteandSetCliente() {
-        ClienteDTO cliente2 = new ClienteDTO(2,"Gabriele", "45-98034-3600");
+        Cliente cliente2 = new Cliente(2,"Gabriele", "45-98034-3600");
 
         endereco.setCliente(cliente2);
 

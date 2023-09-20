@@ -7,6 +7,7 @@ import com.uniamerica.pizzaria.repository.AtendenteRep;
 import com.uniamerica.pizzaria.repository.ClienteRep;
 import com.uniamerica.pizzaria.repository.PedidoRep;
 import com.uniamerica.pizzaria.service.PedidoService;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -31,7 +32,7 @@ public class PedidoController {
     private ClienteRep clienteRep;
     @Autowired
     private AtendenteRep atendenteRep;
-    private static final String ERRO = "Error:  \" + e.getMessage()";
+    private static final String ERRO = "Error:  ";
 
     @GetMapping("/{data}")
     public ResponseEntity<String> findByData(@PathVariable("data") String dataString){
@@ -86,14 +87,15 @@ public class PedidoController {
     @PostMapping
     public ResponseEntity<Object> inserir(@RequestBody final PedidoDTO pedido){
         try {
-            Pedido pedido1 = new Pedido();
+            ModelMapper modelMapper = new ModelMapper();
+            Pedido pedido1 =  modelMapper.map(pedido, Pedido.class);
             BeanUtils.copyProperties(pedido,pedido1);
            pedidoRep.save(pedido1);
             return ResponseEntity.ok("pedido cadastrado com sucesso!");
 
         }
         catch (Exception e){
-            return ResponseEntity.internalServerError().body(ERRO);
+            return ResponseEntity.internalServerError().body(ERRO+ e.getMessage());
         }
     }
 
@@ -142,7 +144,7 @@ public class PedidoController {
             pedidoRep.delete(pedido);
             return ResponseEntity.ok("Pedido deletado com sucesso!");
         }catch (Exception e){
-            return ResponseEntity.internalServerError().body(ERRO);
+            return ResponseEntity.internalServerError().body(ERRO+ e.getMessage());
         }
     }
 

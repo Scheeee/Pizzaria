@@ -3,6 +3,7 @@ package com.uniamerica.pizzaria.controller;
 import com.uniamerica.pizzaria.dto.EnderecoDTO;
 import com.uniamerica.pizzaria.entity.Endereco;
 import com.uniamerica.pizzaria.repository.EnderecoRep;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -17,7 +18,7 @@ import java.util.List;
 public class EnderecoController {
     @Autowired
     EnderecoRep enderecoRep;
-    private static final String ERRO = "Error:  \" + e.getMessage()";
+    private static final String ERRO = "Error:  ";
 
     @GetMapping("/lista")
     public ResponseEntity<List<Endereco>> getAll(){
@@ -26,14 +27,15 @@ public class EnderecoController {
     @PostMapping
     public ResponseEntity<Object> inserir(@RequestBody final EnderecoDTO endereco){
         try {
-            Endereco endereco1 = new Endereco();
-            BeanUtils.copyProperties(endereco,endereco1);
+            ModelMapper modelMapper = new ModelMapper();
+            Endereco endereco1 = modelMapper.map(endereco, Endereco.class);
+
             enderecoRep.save(endereco1);
             return ResponseEntity.ok("Endereço cadastrado com sucesso!");
 
         }
         catch (Exception e){
-            return ResponseEntity.internalServerError().body(ERRO);
+            return ResponseEntity.internalServerError().body(ERRO+ e.getMessage());
         }
     }
 
@@ -57,7 +59,7 @@ public class EnderecoController {
         enderecoRep.delete(endereco);
         return ResponseEntity.ok("Endereço deletado com sucesso!");
         }catch (Exception e){
-            return ResponseEntity.internalServerError().body(ERRO);
+            return ResponseEntity.internalServerError().body(ERRO+ e.getMessage());
         }
     }
 }

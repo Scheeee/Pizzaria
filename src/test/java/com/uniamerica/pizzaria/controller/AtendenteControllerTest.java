@@ -66,7 +66,16 @@ class AtendenteControllerTest {
         Assertions.assertEquals("Atendente cadastrado(a) com sucesso!", atendente1.getBody());
 
     }
+    @Test
+    void inserirErro() {
+        AtendenteDTO atendente = new AtendenteDTO(1L, "Sche");
+        var atendente1 = atendenteController.inserir(atendente);
 
+
+        Assertions.assertNotNull(atendente1);
+        Assertions.assertEquals("Atendente cadastrado(a) com sucesso!", atendente1.getBody());
+
+    }
     @Test
     void updateAtendente() {
         AtendenteDTO atendente = new AtendenteDTO(1L, "Gabriele");

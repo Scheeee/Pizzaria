@@ -36,4 +36,6 @@ public class ClienteDTO {
     }
 
 
+    public ClienteDTO() {
+    }
 }
