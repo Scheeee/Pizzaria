@@ -141,7 +141,7 @@ public class PedidoService {
     }
 
     @Transactional(rollbackOn = Exception.class)
-    public ResponseEntity<String> gerarComanda(Pedido pedido) {
+    public ResponseEntity<Object> gerarComanda(Pedido pedido) {
         String pasta = "C:\\Users\\Lenovo\\Documents\\desenvolvimento\\pizzaria\\Comanda\\";
         String arquivo = pasta + "pedido_" + pedido.getId() + ".txt";
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(arquivo))) {

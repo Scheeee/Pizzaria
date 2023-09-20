@@ -34,4 +34,20 @@ class SaborServiceTest {
         Assertions.assertNotNull(sabor1);
         Assertions.assertEquals(HttpStatus.CREATED, sabor1.getStatusCode());
     }
+    @Test
+    void saveSabores() {
+        List<String> ingredientes = new ArrayList<>();
+        ingredientes.add("Calabresa");
+
+        Sabor sabor = new Sabor(1L,"Calabresa", ingredientes);
+        List<String> ingredientes2 = new ArrayList<>();
+        ingredientes2.add("frango");
+        Sabor sabor2 = new Sabor(2L, "Strogonoff",ingredientes2);
+        List<String> ingredientes3 = new ArrayList<>();
+        ingredientes3.add("queijo");
+        Sabor sabor3 = new Sabor(3L, "4 queijos",ingredientes3);
+        var sabor1 =  saborService.saveSabor(sabor);
+        Assertions.assertNotNull(sabor1);
+        Assertions.assertEquals(HttpStatus.CREATED, sabor1.getStatusCode());
+    }
 }

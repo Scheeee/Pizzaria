@@ -9,11 +9,21 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.HttpStatus;
+
+
+
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
+
+import static org.junit.Assert.assertThrows;
+import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.Mockito.*;
 
 
 @SpringBootTest
@@ -142,6 +152,32 @@ class PedidoServiceTest {
         Assertions.assertNotNull(pedido1);
         Assertions.assertEquals(HttpStatus.OK, pedido1.getStatusCode());
     }
+    @Test
+    void salvarPedidoEncerradoBalcao() {
+        Atendente atendente = new Atendente(1L,"Sche");
+        Endereco endereco = new Endereco(1,"Avenida tancredo neves","1234", "casa 123");
+        Cliente cliente = new Cliente(1,"Sche", "45-98034-3600", endereco);
+        List<String> ingredientes = new ArrayList<>();
+        ingredientes.add("Calabresa");
+        Sabor sabor = new Sabor(1L,"Calabresa", ingredientes);
+        List<Sabor> sabores = new ArrayList<>();
+        sabores.add(sabor);
+        BigDecimal valor = new BigDecimal(25);
+        Pizza pizza = new Pizza(1L, Tamanho.P,sabores,valor);
+        List<Pizza> pizzas = new ArrayList<>();
+        pizzas.add(pizza);
+
+
+        Pedido pedido = new Pedido(1L, atendente, cliente, pizzas, false, "Retirar cebolar", valor, true);
+
+
+        var pedido1 = pedidoService.salvarPedidoEncerrado(pedido);
+
+
+
+        Assertions.assertNotNull(pedido1);
+        Assertions.assertEquals(HttpStatus.OK, pedido1.getStatusCode());
+    }
 
     @Test
     void gerarComanda() {
@@ -171,4 +207,34 @@ class PedidoServiceTest {
         Assertions.assertEquals(HttpStatus.OK, pedido1.getStatusCode());
 
     }
+    @Test
+    void gerarComandaBalcao() {
+
+        Atendente atendente = new Atendente(1L,"Sche");
+        Endereco endereco = new Endereco(1,"Avenida tancredo neves","1234", "casa 123");
+        Cliente cliente = new Cliente(1,"Sche", "45-98034-3600", endereco);
+        List<String> ingredientes = new ArrayList<>();
+        ingredientes.add("Calabresa");
+        Sabor sabor = new Sabor(1L,"Calabresa", ingredientes);
+        List<Sabor> sabores = new ArrayList<>();
+        sabores.add(sabor);
+        BigDecimal valor = new BigDecimal(25);
+        Pizza pizza = new Pizza(1L, Tamanho.P,sabores,valor);
+        List<Pizza> pizzas = new ArrayList<>();
+        pizzas.add(pizza);
+
+
+        Pedido pedido = new Pedido(1L, atendente, cliente, pizzas, false, "Retirar cebolar", valor, true);
+
+
+        var pedido1 = pedidoService.gerarComanda(pedido);
+
+
+
+        Assertions.assertNotNull(pedido1);
+        Assertions.assertEquals(HttpStatus.OK, pedido1.getStatusCode());
+
+    }
+
+
 }
