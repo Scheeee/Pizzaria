@@ -26,9 +26,6 @@ class AtendenteControllerTest {
     @Autowired
     private  final AtendenteController atendenteController = new AtendenteController();
 
-
-
-
     @BeforeEach
     void injectFindByAll(){
         Atendente atendente = new Atendente(1L,"Sche");
@@ -69,6 +66,16 @@ class AtendenteControllerTest {
 
        Assertions.assertNotNull(atendente1);
         Assertions.assertEquals("Atendente cadastrado(a) com sucesso!", atendente1.getBody());
+
+    }
+    @Test
+    void inserirErrado() {
+
+        var atendente1 = atendenteController.inserir(new AtendenteDTO());
+
+
+        Assertions.assertNotNull(atendente1);
+        Assertions.assertEquals("Error: null", atendente1.getBody());
 
     }
 

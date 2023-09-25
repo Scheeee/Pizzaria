@@ -87,6 +87,7 @@ public class PedidoController {
     @PostMapping
     public ResponseEntity<Object> inserir(@RequestBody final PedidoDTO pedido){
         try {
+
             ModelMapper modelMapper = new ModelMapper();
             Pedido pedido1 =  modelMapper.map(pedido, Pedido.class);
             BeanUtils.copyProperties(pedido,pedido1);

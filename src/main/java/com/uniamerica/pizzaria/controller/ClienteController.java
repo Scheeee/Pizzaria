@@ -4,6 +4,7 @@ import com.uniamerica.pizzaria.dto.ClienteDTO;
 import com.uniamerica.pizzaria.entity.Cliente;
 import com.uniamerica.pizzaria.repository.ClienteRep;
 import org.modelmapper.ModelMapper;
+import org.modelmapper.internal.util.Assert;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -28,6 +29,7 @@ public class ClienteController {
     @PostMapping
     public ResponseEntity<Object> inserir(@RequestBody final ClienteDTO cliente){
         try {
+            Assert.notNull(cliente.getNome());
             ModelMapper modelMapper = new ModelMapper();
             Cliente cliente1 = modelMapper.map(cliente, Cliente.class);
 

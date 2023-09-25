@@ -3,6 +3,7 @@ import com.uniamerica.pizzaria.dto.AtendenteDTO;
 import com.uniamerica.pizzaria.entity.Atendente;
 import com.uniamerica.pizzaria.repository.AtendenteRep;
 import org.modelmapper.ModelMapper;
+import org.modelmapper.internal.util.Assert;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -28,6 +29,7 @@ public class AtendenteController {
     @PostMapping
     public ResponseEntity<Object> inserir(@RequestBody final AtendenteDTO atendente){
         try {
+            Assert.notNull(atendente.getNome());
             ModelMapper modelMapper = new ModelMapper();
             Atendente atendente1 = modelMapper.map(atendente, Atendente.class);
 

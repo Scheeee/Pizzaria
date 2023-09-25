@@ -62,6 +62,8 @@ class EnderecoControllerTest {
         Assertions.assertEquals("Endereço cadastrado com sucesso!", endereco1.getBody());
     }
 
+
+
     @Test
     void updateEndereco() {
         EnderecoDTO endereco = new EnderecoDTO(1,"Travessa Oscar Muxfeld","1234", "casa 123");

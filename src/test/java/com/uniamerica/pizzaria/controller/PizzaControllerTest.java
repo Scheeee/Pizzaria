@@ -88,6 +88,14 @@ class PizzaControllerTest {
     }
 
     @Test
+    void inserirErro(){
+        var pizza1 = pizzaController.inserir(new PizzaDTO());
+
+
+        Assertions.assertNotNull(pizza1);
+        Assertions.assertEquals("Error: null", pizza1.getBody());
+    }
+    @Test
     void updatePizza() {
         List<String> ingredientes = new ArrayList<>();
         ingredientes.add("Calabresa");

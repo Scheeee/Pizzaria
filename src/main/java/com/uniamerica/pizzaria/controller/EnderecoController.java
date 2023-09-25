@@ -4,6 +4,7 @@ import com.uniamerica.pizzaria.dto.EnderecoDTO;
 import com.uniamerica.pizzaria.entity.Endereco;
 import com.uniamerica.pizzaria.repository.EnderecoRep;
 import org.modelmapper.ModelMapper;
+import org.modelmapper.internal.util.Assert;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -27,8 +28,10 @@ public class EnderecoController {
     @PostMapping
     public ResponseEntity<Object> inserir(@RequestBody final EnderecoDTO endereco){
         try {
+
             ModelMapper modelMapper = new ModelMapper();
             Endereco endereco1 = modelMapper.map(endereco, Endereco.class);
+            Assert.notNull(endereco1);
 
             enderecoRep.save(endereco1);
             return ResponseEntity.ok("Endereço cadastrado com sucesso!");

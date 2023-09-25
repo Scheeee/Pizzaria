@@ -71,7 +71,16 @@ class ClienteControllerTest {
         Assertions.assertEquals("Cliente cadastrado(a) com sucesso!", cliente1.getBody());
 
     }
+    @Test
+    void inserirErro() {
 
+        var cliente1 = clienteController.inserir(new ClienteDTO());
+
+
+        Assertions.assertNotNull(cliente1);
+        Assertions.assertEquals("Error:  null", cliente1.getBody());
+
+    }
     @Test
     void updateCliente() {
         Endereco endereco = new Endereco(1,"Avenida tancredo neves","1234", "casa 123");

@@ -83,6 +83,15 @@ class SaborControllerTest {
         Assertions.assertNotNull(sabor1);
         Assertions.assertEquals("Sabor cadastrado com sucesso!", sabor1.getBody());
     }
+    @Test
+    void inserirErro() {
+
+        var sabor1 = saborController.inserir(new SaborDTO());
+
+
+        Assertions.assertNotNull(sabor1);
+        Assertions.assertEquals("Sabor cadastrado com sucesso!", sabor1.getBody());
+    }
 
     @Test
     void updateSabor() {

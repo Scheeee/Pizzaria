@@ -5,7 +5,9 @@ import com.uniamerica.pizzaria.dto.PizzaDTO;
 import com.uniamerica.pizzaria.entity.Pizza;
 import com.uniamerica.pizzaria.repository.PizzaRep;
 import com.uniamerica.pizzaria.service.PizzaService;
+import jakarta.validation.constraints.AssertTrue;
 import org.modelmapper.ModelMapper;
+import org.modelmapper.internal.util.Assert;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -32,6 +34,7 @@ public class PizzaController {
     public ResponseEntity<Object> inserir(@RequestBody final PizzaDTO pizza){
         try {
 
+            Assert.notNull(pizza.getSabores());
             ModelMapper modelMapper = new ModelMapper();
             Pizza pizza1 =  modelMapper.map(pizza, Pizza.class);
             BeanUtils.copyProperties(pizza,pizza1);
