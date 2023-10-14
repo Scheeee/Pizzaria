@@ -1,5 +1,4 @@
 package com.uniamerica.pizzaria.controller;
-
 import com.uniamerica.pizzaria.dto.EnderecoDTO;
 import com.uniamerica.pizzaria.entity.Endereco;
 import com.uniamerica.pizzaria.repository.EnderecoRep;
@@ -7,13 +6,10 @@ import org.modelmapper.ModelMapper;
 import org.modelmapper.internal.util.Assert;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
-
 @Controller
 @RequestMapping(value = "/pizzaria/endereco")
 public class EnderecoController {

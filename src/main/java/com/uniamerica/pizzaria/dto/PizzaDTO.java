@@ -22,16 +22,7 @@ public class PizzaDTO {
 
     private Tamanho tamanho;
     private List<Sabor> sabores;
-
     private Pedido pedido;
-
-
-
-
-
-
-
-
     private BigDecimal valorUnit;
 
 

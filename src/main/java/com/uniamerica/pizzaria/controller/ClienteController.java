@@ -8,6 +8,7 @@ import org.modelmapper.internal.util.Assert;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -24,7 +25,12 @@ public class ClienteController {
     private static final String ERRO = "Error:  ";
     @GetMapping("/lista")
     public ResponseEntity<List<Cliente>> findAll(){
-        return ResponseEntity.ok(clienteRep.findAll());
+        try {
+            List<Cliente> lista = clienteRep.findAll();
+            return new ResponseEntity<>(lista, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+        }
     }
     @PostMapping
     public ResponseEntity<Object> inserir(@RequestBody final ClienteDTO cliente){

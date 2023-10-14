@@ -1,17 +1,9 @@
 package com.uniamerica.pizzaria.dto;
-
-
-
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-
-
-
 class AtendenteDTOTest {
 
     AtendenteDTO atendente = new AtendenteDTO(1L, "Sche");
-
-
 
     @Test
     void setNomeandgetNome() {
@@ -26,9 +18,6 @@ class AtendenteDTOTest {
 
         Assertions.assertEquals(2, atendente.getId());
     }
-
-
-
     @Test
     void testEquals() {
 
@@ -70,7 +59,5 @@ class AtendenteDTOTest {
         Assertions.assertEquals(0, atendenteDTO.getId());
 
     }
-
-
 
 }
