@@ -33,9 +33,8 @@ class SaborControllerTest {
 
     @BeforeEach
     void injectFindByAll(){
-        List<String> ingredientes = new ArrayList<>();
-        ingredientes.add("Calabresa");
-        Sabor sabor = new Sabor(1L,"Calabresa", ingredientes);
+
+        Sabor sabor = new Sabor(1L,"Calabresa", "Calabresa");
         List<Sabor> sabores = new ArrayList<>();
 
         sabores.add(sabor);
@@ -44,9 +43,8 @@ class SaborControllerTest {
     }
     @BeforeEach
     void injectInserir(){
-        List<String> ingredientes = new ArrayList<>();
-        ingredientes.add("Calabresa");
-        Sabor sabor = new Sabor(1L,"Calabresa", ingredientes);
+
+        Sabor sabor = new Sabor(1L,"Calabresa", "Calabresa");
         List<Sabor> sabores = new ArrayList<>();
 
         sabores.add(sabor);
@@ -54,9 +52,8 @@ class SaborControllerTest {
     }
     @BeforeEach
     void injectUpdate(){
-        List<String> ingredientes = new ArrayList<>();
-        ingredientes.add("Calabresa");
-        Sabor sabor = new Sabor(1L,"Calabresa", ingredientes);
+
+        Sabor sabor = new Sabor(1L,"Calabresa", "Calabresa");
 
         Mockito.when(saborRep.getReferenceById(1L)).thenReturn(sabor);
     }
@@ -73,8 +70,7 @@ class SaborControllerTest {
 
     @Test
     void inserir() {
-        List<String> ingredientes = new ArrayList<>();
-        ingredientes.add("Calabresa");
+        String ingredientes = "Calabresa";
 
         SaborDTO sabor = new SaborDTO( 1,"Calabresa", ingredientes);
         var sabor1 = saborController.inserir(sabor);
@@ -97,11 +93,10 @@ class SaborControllerTest {
     void updateSabor() {
 
 
-        List<String> ingredientes = new ArrayList<>();
-        ingredientes.add("Calabresa com Alho");
 
 
-        SaborDTO sabornovo = new SaborDTO( "Calabresa com alho", ingredientes);
+
+        SaborDTO sabornovo = new SaborDTO( "Calabresa com alho", "Calabresa, Alho");
 
         var sabor1 = saborController.updateSabor(1L,sabornovo);
 

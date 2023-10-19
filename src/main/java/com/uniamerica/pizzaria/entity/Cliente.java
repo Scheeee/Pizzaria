@@ -38,7 +38,7 @@ public class Cliente {
 
     @Getter @Setter
     @OneToOne(mappedBy = "cliente", fetch = FetchType.EAGER)
-    @JsonIgnore
+    //@JsonIgnore
     private Endereco endereco;
 
     public Cliente(String nome, String telefone) {

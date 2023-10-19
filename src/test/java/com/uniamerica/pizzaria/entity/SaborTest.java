@@ -10,7 +10,7 @@ import java.util.List;
 
 class SaborTest {
 
-    Sabor sabor = new Sabor(1, "Calabresa", Collections.singletonList("Calabresa"));
+    Sabor sabor = new Sabor(1, "Calabresa", "Calabresa");
 
     @Test
     void getId() {
@@ -29,7 +29,7 @@ class SaborTest {
 
     @Test
     void getIngredientes() {
-        String ingrediente = sabor.getIngredientes().get(0);
+        String ingrediente = sabor.getIngredientes();
 
         Assertions.assertEquals("Calabresa", ingrediente);
     }
@@ -45,12 +45,12 @@ class SaborTest {
 
     @Test
     void setIngredientes() {
-        List<String> ing = new ArrayList<>();
 
-        ing.add("alho");
-        sabor.setIngredientes(ing);
 
-        String ingrediente = sabor.getIngredientes().get(0);
+
+        sabor.setIngredientes("alho");
+
+        String ingrediente = sabor.getIngredientes();
 
         Assertions.assertEquals("alho", ingrediente);
     }

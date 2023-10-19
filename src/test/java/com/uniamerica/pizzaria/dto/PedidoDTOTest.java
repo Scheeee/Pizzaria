@@ -18,7 +18,7 @@ class PedidoDTOTest {
     Cliente cliente = new Cliente(1,"Sche", "45-98034-3600", endereco);
     BigDecimal valor = new BigDecimal("25");
 
-    Sabor sabor = new Sabor(1, "Calabresa", Collections.singletonList("Calabresa"));
+    Sabor sabor = new Sabor(1, "Calabresa", "Calabresa");
     Pizza pizza = new Pizza(1, Tamanho.P, Collections.singletonList(sabor), valor);
 
     PedidoDTO pedido = new PedidoDTO(1, atendente, cliente, Collections.singletonList(pizza), false, "retirar cebola",valor, true);

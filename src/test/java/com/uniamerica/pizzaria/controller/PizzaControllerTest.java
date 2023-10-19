@@ -29,9 +29,8 @@ class PizzaControllerTest {
 
     @BeforeEach
     void injectFindByAll(){
-        List<String> ingredientes = new ArrayList<>();
-        ingredientes.add("Calabresa");
-        Sabor sabor = new Sabor(1L,"Calabresa", ingredientes);
+
+        Sabor sabor = new Sabor(1L,"Calabresa", "Calabresa");
         List<Sabor> sabores = new ArrayList<>();
         sabores.add(sabor);
 
@@ -46,9 +45,8 @@ class PizzaControllerTest {
     }
     @BeforeEach
     void injectUpdate(){
-        List<String> ingredientes = new ArrayList<>();
-        ingredientes.add("Calabresa");
-        Sabor sabor = new Sabor(1L,"Calabresa", ingredientes);
+
+        Sabor sabor = new Sabor(1L,"Calabresa", "Calabresa");
         List<Sabor> sabores = new ArrayList<>();
         sabores.add(sabor);
 
@@ -72,9 +70,8 @@ class PizzaControllerTest {
 
     @Test
     void inserir() {
-        List<String> ingredientes = new ArrayList<>();
-        ingredientes.add("Calabresa");
-        Sabor sabor = new Sabor(1L,"Calabresa", ingredientes);
+
+        Sabor sabor = new Sabor(1L,"Calabresa", "Calabresa");
         List<Sabor> sabores = new ArrayList<>();
         sabores.add(sabor);
 
@@ -97,9 +94,8 @@ class PizzaControllerTest {
     }
     @Test
     void updatePizza() {
-        List<String> ingredientes = new ArrayList<>();
-        ingredientes.add("Calabresa");
-        Sabor sabor = new Sabor(1L,"Calabresa com alho", ingredientes);
+
+        Sabor sabor = new Sabor(1L,"Calabresa com alho", "Calabresa");
         List<Sabor> sabores = new ArrayList<>();
         sabores.add(sabor);
 

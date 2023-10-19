@@ -40,7 +40,7 @@ public class ClienteController {
             Cliente cliente1 = modelMapper.map(cliente, Cliente.class);
 
             clienteRep.save(cliente1);
-            return ResponseEntity.ok("Cliente cadastrado(a) com sucesso!");
+            return new ResponseEntity<>(HttpStatus.OK);
 
         }
         catch (Exception e){

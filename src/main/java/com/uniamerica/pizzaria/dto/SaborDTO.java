@@ -19,15 +19,15 @@ public class SaborDTO {
 
     private String nome;
 
-    private List<String> ingredientes;
+    private String ingredientes;
 
 
-    public SaborDTO(long id, String nome, List<String> ingredientes) {
+    public SaborDTO(long id, String nome, String ingredientes) {
         this.id = id;
         this.nome = nome;
         this.ingredientes = ingredientes;
     }
-    public SaborDTO( String nome, List<String> ingredientes) {
+    public SaborDTO( String nome, String ingredientes) {
 
         this.nome = nome;
         this.ingredientes = ingredientes;

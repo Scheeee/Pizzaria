@@ -12,6 +12,7 @@ import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.http.HttpStatusCode;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -68,7 +69,7 @@ class ClienteControllerTest {
 
 
         Assertions.assertNotNull(cliente1);
-        Assertions.assertEquals("Cliente cadastrado(a) com sucesso!", cliente1.getBody());
+        Assertions.assertEquals(HttpStatusCode.valueOf(200), cliente1.getStatusCode());
 
     }
     @Test
@@ -78,7 +79,7 @@ class ClienteControllerTest {
 
 
         Assertions.assertNotNull(cliente1);
-        Assertions.assertEquals("Error:  null", cliente1.getBody());
+        Assertions.assertEquals(HttpStatusCode.valueOf(500), cliente1.getStatusCode());
 
     }
     @Test

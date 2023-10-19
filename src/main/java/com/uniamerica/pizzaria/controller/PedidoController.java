@@ -1,6 +1,7 @@
 package com.uniamerica.pizzaria.controller;
 
 import com.uniamerica.pizzaria.dto.PedidoDTO;
+import com.uniamerica.pizzaria.entity.Atendente;
 import com.uniamerica.pizzaria.entity.Pedido;
 import com.uniamerica.pizzaria.entity.Status;
 import com.uniamerica.pizzaria.repository.AtendenteRep;
@@ -34,7 +35,7 @@ public class PedidoController {
     private AtendenteRep atendenteRep;
     private static final String ERRO = "Error:  ";
 
-    @GetMapping("/{data}")
+    @GetMapping("/data/{data}")
     public ResponseEntity<String> findByData(@PathVariable("data") String dataString){
         try {
             return ResponseEntity.ok(pedidoService.totais(dataString));
@@ -60,14 +61,15 @@ public class PedidoController {
         Optional<Pedido> pessoa = this.pedidoRep.findById(id);
         return ResponseEntity.ok(pessoa);
     }
-    @GetMapping("/comanda/{id}")
-    public ResponseEntity<String> comanda(@PathVariable("id") Long id) {
+    @GetMapping("/comanda/{id}/{atendente}")
+    public ResponseEntity<String> comanda(@PathVariable("id") Long id,@PathVariable("atendente") Long idAtendente){
         try {
             Pedido pedido = pedidoRep.getReferenceById(id);
+          Atendente atendente = atendenteRep.getReferenceById(idAtendente);
             Assert.isTrue(pedido.getStatus() == Status.ATIVO, "o pedido solicitado não está ativo");
             Assert.isTrue(pedido.getPizzas().size() >= 1 , "o pedido solicitado não possui pizzas");
 
-            pedidoService.gerarComanda(pedido);
+            pedidoService.gerarComanda(pedido,atendente);
             return ResponseEntity.ok("comanda gerada com sucesso!");
 
         } catch (Exception e) {

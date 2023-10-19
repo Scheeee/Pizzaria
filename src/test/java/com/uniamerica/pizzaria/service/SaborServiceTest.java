@@ -31,15 +31,11 @@ class SaborServiceTest {
     @BeforeEach
     void injectsabores(){
 
-        List<String> ingredientes = new ArrayList<>();
-        ingredientes.add("Calabresa");
-        Sabor sabor = new Sabor(1L,"Calabresa", ingredientes);
-        List<String> ingredientes2 = new ArrayList<>();
-        ingredientes2.add("frango");
-        Sabor sabor2 = new Sabor(2L, "Strogonoff",ingredientes2);
-        List<String> ingredientes3 = new ArrayList<>();
-        ingredientes3.add("queijo");
-        Sabor sabor3 = new Sabor(3L, "4 queijos",ingredientes3);
+        Sabor sabor = new Sabor(1L,"Calabresa", "Calabresa");
+
+        Sabor sabor2 = new Sabor(2L, "Strogonoff","frango");
+
+        Sabor sabor3 = new Sabor(3L, "4 queijos","queijo");
         List<Sabor> sabores = new ArrayList<>();
 
         sabores.add(sabor);
@@ -51,9 +47,8 @@ class SaborServiceTest {
     }
     @Test
     void saveSabor() {
-        List<String> ingredientes = new ArrayList<>();
-        ingredientes.add("Calabresa");
-        Sabor sabor = new Sabor(1L,"Calabresa", ingredientes);
+
+        Sabor sabor = new Sabor(1L,"Calabresa","Calabresa");
         var sabor1 =  saborService.saveSabor(sabor);
         Assertions.assertNotNull(sabor1);
         Assertions.assertEquals(HttpStatus.CREATED, sabor1.getStatusCode());

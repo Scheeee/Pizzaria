@@ -50,9 +50,8 @@ class PedidoServiceTest {
         Atendente atendente = new Atendente(1L,"Sche");
         Endereco endereco = new Endereco(1,"Avenida tancredo neves","1234", "casa 123");
         Cliente cliente = new Cliente(1,"Sche", "45-98034-3600", endereco);
-        List<String> ingredientes = new ArrayList<>();
-        ingredientes.add("Calabresa");
-        Sabor sabor = new Sabor(1L,"Calabresa", ingredientes);
+
+        Sabor sabor = new Sabor(1L,"Calabresa", "calabresa");
         List<Sabor> sabores = new ArrayList<>();
         sabores.add(sabor);
         BigDecimal valor = new BigDecimal(25);
@@ -79,9 +78,8 @@ class PedidoServiceTest {
         Atendente atendente = new Atendente(1L,"Sche");
         Endereco endereco = new Endereco(1,"Avenida tancredo neves","1234", "casa 123");
         Cliente cliente = new Cliente(1,"Sche", "45-98034-3600", endereco);
-        List<String> ingredientes = new ArrayList<>();
-        ingredientes.add("Calabresa");
-        Sabor sabor = new Sabor(1L,"Calabresa", ingredientes);
+
+        Sabor sabor = new Sabor(1L,"Calabresa", "calabresa");
         List<Sabor> sabores = new ArrayList<>();
         sabores.add(sabor);
         BigDecimal valor = new BigDecimal(25);
@@ -131,9 +129,8 @@ class PedidoServiceTest {
         Atendente atendente = new Atendente(1L,"Sche");
         Endereco endereco = new Endereco(1,"Avenida tancredo neves","1234", "casa 123");
         Cliente cliente = new Cliente(1,"Sche", "45-98034-3600", endereco);
-        List<String> ingredientes = new ArrayList<>();
-        ingredientes.add("Calabresa");
-        Sabor sabor = new Sabor(1L,"Calabresa", ingredientes);
+
+        Sabor sabor = new Sabor(1L,"Calabresa", "calabresa");
         List<Sabor> sabores = new ArrayList<>();
         sabores.add(sabor);
         BigDecimal valor = new BigDecimal(25);
@@ -157,9 +154,8 @@ class PedidoServiceTest {
         Atendente atendente = new Atendente(1L,"Sche");
         Endereco endereco = new Endereco(1,"Avenida tancredo neves","1234", "casa 123");
         Cliente cliente = new Cliente(1,"Sche", "45-98034-3600", endereco);
-        List<String> ingredientes = new ArrayList<>();
-        ingredientes.add("Calabresa");
-        Sabor sabor = new Sabor(1L,"Calabresa", ingredientes);
+
+        Sabor sabor = new Sabor(1L,"Calabresa", "calabresa");
         List<Sabor> sabores = new ArrayList<>();
         sabores.add(sabor);
         BigDecimal valor = new BigDecimal(25);
@@ -185,9 +181,8 @@ class PedidoServiceTest {
         Atendente atendente = new Atendente(1L,"Sche");
         Endereco endereco = new Endereco(1,"Avenida tancredo neves","1234", "casa 123");
         Cliente cliente = new Cliente(1,"Sche", "45-98034-3600", endereco);
-        List<String> ingredientes = new ArrayList<>();
-        ingredientes.add("Calabresa");
-        Sabor sabor = new Sabor(1L,"Calabresa", ingredientes);
+
+        Sabor sabor = new Sabor(1L,"Calabresa", "calabresa");
         List<Sabor> sabores = new ArrayList<>();
         sabores.add(sabor);
         BigDecimal valor = new BigDecimal(25);
@@ -199,7 +194,7 @@ class PedidoServiceTest {
         Pedido pedido = new Pedido(1L, atendente, cliente, pizzas, true, "Retirar cebolar", valor, false);
 
 
-        var pedido1 = pedidoService.gerarComanda(pedido);
+        var pedido1 = pedidoService.gerarComanda(pedido, atendente);
 
 
 
@@ -213,9 +208,8 @@ class PedidoServiceTest {
         Atendente atendente = new Atendente(1L,"Sche");
         Endereco endereco = new Endereco(1,"Avenida tancredo neves","1234", "casa 123");
         Cliente cliente = new Cliente(1,"Sche", "45-98034-3600", endereco);
-        List<String> ingredientes = new ArrayList<>();
-        ingredientes.add("Calabresa");
-        Sabor sabor = new Sabor(1L,"Calabresa", ingredientes);
+
+        Sabor sabor = new Sabor(1L,"Calabresa", "calabresa");
         List<Sabor> sabores = new ArrayList<>();
         sabores.add(sabor);
         BigDecimal valor = new BigDecimal(25);
@@ -227,7 +221,7 @@ class PedidoServiceTest {
         Pedido pedido = new Pedido(1L, atendente, cliente, pizzas, false, "Retirar cebolar", valor, true);
 
 
-        var pedido1 = pedidoService.gerarComanda(pedido);
+        var pedido1 = pedidoService.gerarComanda(pedido, atendente);
 
 
 

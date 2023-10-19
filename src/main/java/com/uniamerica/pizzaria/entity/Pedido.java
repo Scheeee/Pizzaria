@@ -33,10 +33,8 @@ public class Pedido {
     private Atendente atendente;
     @Getter @Setter @ManyToOne
     @JoinColumn(name = "cliente_id")
-    @JsonBackReference // Indica que esta é a parte "de trás" da referência
-
+   // @JsonBackReference // Indica que esta é a parte "de trás" da referência
     private Cliente cliente;
-
     @Getter
     @Setter
     @ManyToMany
@@ -49,30 +47,23 @@ public class Pedido {
     @Getter @Setter
     @JoinColumn(name = "entrega", nullable = false)
     private boolean entrega;
-
     @Getter
     @Setter
     @JoinColumn(name = "detalhes")
     private String detalhes;
-
     @Getter
     @Setter
     @JoinColumn(name = "valorTotal")
     private BigDecimal valorTotal;
-
     @Getter
     @Setter
     @JoinColumn(name = "pagamento", nullable = false)
     private boolean dinheiro;
-
-
     @Getter
     @Setter
     @Enumerated(EnumType.STRING)
     @Column(name = "status")
     private Status status;
-
-
     @PrePersist
     public void prePersist(){
         this.cadastrado = LocalDate.now();
@@ -92,7 +83,6 @@ public class Pedido {
         this.valorTotal = valorTotal;
         this.dinheiro = dinheiro;
     }
-
     public Pedido(long id, Atendente atendente, Cliente cliente, List<Pizza> pizzas, boolean entrega, String detalhes, BigDecimal valorTotal, boolean dinheiro) {
         this.id = id;
         this.atendente = atendente;

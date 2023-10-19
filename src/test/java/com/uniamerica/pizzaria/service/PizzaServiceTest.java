@@ -29,9 +29,8 @@ class PizzaServiceTest {
     private final PizzaService pizzaService = new PizzaService();
     @BeforeEach
     void injectSave(){
-        List<String> ingredientes = new ArrayList<>();
-        ingredientes.add("Calabresa");
-        Sabor sabor = new Sabor(1L,"Calabresa", ingredientes);
+
+        Sabor sabor = new Sabor(1L,"Calabresa", "Calabresa");
         List<Sabor> sabores = new ArrayList<>();
         sabores.add(sabor);
 
@@ -45,9 +44,8 @@ class PizzaServiceTest {
 
     @Test
     void saveP() {
-        List<String> ingredientes = new ArrayList<>();
-        ingredientes.add("Calabresa");
-        Sabor sabor = new Sabor(1L,"Calabresa", ingredientes);
+
+        Sabor sabor = new Sabor(1L,"Calabresa", "Calabresa");
         List<Sabor> sabores = new ArrayList<>();
         sabores.add(sabor);
 
@@ -61,12 +59,9 @@ class PizzaServiceTest {
     }
     @Test
     void saveM() {
-        List<String> ingredientes = new ArrayList<>();
-        ingredientes.add("Calabresa");
-        Sabor sabor = new Sabor(1L,"Calabresa", ingredientes);
-        List<String> ingredientes2 = new ArrayList<>();
-        ingredientes.add("Alguma coisa");
-        Sabor sabor2 = new Sabor(2L, "Portuguesa", ingredientes2);
+
+        Sabor sabor = new Sabor(1L,"Calabresa", "Calabresa");
+        Sabor sabor2 = new Sabor(2L, "Portuguesa", "Calabresa");
         List<Sabor> sabores = new ArrayList<>();
         sabores.add(sabor);
         sabores.add(sabor2);
@@ -81,15 +76,12 @@ class PizzaServiceTest {
     }
     @Test
     void saveG() {
-        List<String> ingredientes = new ArrayList<>();
-        ingredientes.add("Calabresa");
-        Sabor sabor = new Sabor(1L,"Calabresa", ingredientes);
-        List<String> ingredientes2 = new ArrayList<>();
-        ingredientes.add("Alguma coisa");
-        Sabor sabor2 = new Sabor(2L, "Portuguesa", ingredientes2);
-        List<String> ingredientes3 = new ArrayList<>();
-        ingredientes.add("Frango");
-        Sabor sabor3 = new Sabor(2L, "Strogonoff", ingredientes3);
+
+        Sabor sabor = new Sabor(1L,"Calabresa", "Calabresa");
+
+        Sabor sabor2 = new Sabor(2L, "Portuguesa","Alguma coisa");
+
+        Sabor sabor3 = new Sabor(2L, "Strogonoff", "frango");
         List<Sabor> sabores = new ArrayList<>();
         sabores.add(sabor);
         sabores.add(sabor2);
@@ -105,18 +97,14 @@ class PizzaServiceTest {
     }
     @Test
     void saveGG() {
-        List<String> ingredientes = new ArrayList<>();
-        ingredientes.add("Calabresa");
-        Sabor sabor = new Sabor(1L,"Calabresa", ingredientes);
-        List<String> ingredientes2 = new ArrayList<>();
-        ingredientes.add("Alguma coisa");
-        Sabor sabor2 = new Sabor(2L, "Portuguesa", ingredientes2);
-        List<String> ingredientes3 = new ArrayList<>();
-        ingredientes.add("Frango");
-        Sabor sabor3 = new Sabor(2L, "Strogonoff", ingredientes3);
-        List<String> ingredientes4 = new ArrayList<>();
-        ingredientes.add("4 queijos");
-        Sabor sabor4 = new Sabor(2L, "4 queijos", ingredientes4);
+
+        Sabor sabor = new Sabor(1L,"Calabresa", "Calabresa");
+
+        Sabor sabor2 = new Sabor(2L, "Portuguesa", "Alguma coisa");
+
+        Sabor sabor3 = new Sabor(2L, "Strogonoff", "Frango");
+
+        Sabor sabor4 = new Sabor(2L, "4 queijos","4 queijos");
 
         List<Sabor> sabores = new ArrayList<>();
         sabores.add(sabor);

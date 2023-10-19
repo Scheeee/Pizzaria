@@ -82,7 +82,7 @@ public class PedidoService {
     }
     @Transactional(rollbackOn = Exception.class)
     public ResponseEntity<Object> salvarPedidoEncerrado(Pedido pedido) {
-        String pasta = "C:\\Users\\Lenovo\\Documents\\desenvolvimento\\pizzaria\\Pedidos Encerrados\\";
+        String pasta = "C:\\Users\\Lenovo\\Documents\\desenvolvimentoFront\\Pizzaria\\pizzaria\\backend\\Pedidos Encerrados\\";
         String arquivo = pasta + "pedido_" + pedido.getId() + ".txt";
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(arquivo))) {
             writer.write("Cliente: " + pedido.getCliente().getNome());
@@ -141,11 +141,11 @@ public class PedidoService {
     }
 
     @Transactional(rollbackOn = Exception.class)
-    public ResponseEntity<Object> gerarComanda(Pedido pedido) {
-        String pasta = "C:\\Users\\Lenovo\\Documents\\desenvolvimento\\pizzaria\\Comanda\\";
+    public ResponseEntity<Object> gerarComanda(Pedido pedido, Atendente atendente) {
+        String pasta = "C:\\Users\\Lenovo\\Documents\\desenvolvimentoFront\\Pizzaria\\pizzaria\\backend\\Comanda\\";
         String arquivo = pasta + "pedido_" + pedido.getId() + ".txt";
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(arquivo))) {
-            writer.write("Atendente: " + pedido.getAtendente().getNome());
+            writer.write("Atendente: " + atendente.getNome());
             writer.newLine();
             if(pedido.isEntrega()){
                 writer.write("Preparar pedido para entrega");

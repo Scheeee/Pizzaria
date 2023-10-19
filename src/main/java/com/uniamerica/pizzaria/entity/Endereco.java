@@ -1,5 +1,6 @@
 package com.uniamerica.pizzaria.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
@@ -38,11 +39,10 @@ public class Endereco {
     @Size(max = 50, message = "A quantidade de caracteres é inválida")
     @Column(name = "complemento")
     private String complemento;
-
-
     @Getter
     @Setter
     @OneToOne
+    @JsonIgnore
     @JoinColumn(name = "cliente_id")
     private Cliente cliente;
 

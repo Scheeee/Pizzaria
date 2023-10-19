@@ -33,7 +33,7 @@ class PedidoControllerTest {
     PedidoRep pedidoRep;
     @MockBean
     AtendenteRep atendenteRep;
-   
+
     @MockBean
     ClienteRep clienteRep;
 
@@ -49,9 +49,8 @@ class PedidoControllerTest {
         Atendente atendente = new Atendente(1L,"Sche");
         Endereco endereco = new Endereco(1,"Avenida tancredo neves","1234", "casa 123");
         Cliente cliente = new Cliente(1,"Sche", "45-98034-3600", endereco);
-        List<String> ingredientes = new ArrayList<>();
-        ingredientes.add("Calabresa");
-        Sabor sabor = new Sabor(1L,"Calabresa", ingredientes);
+
+        Sabor sabor = new Sabor(1L,"Calabresa", "Calabresa");
         List<Sabor> sabores = new ArrayList<>();
         sabores.add(sabor);
         BigDecimal valor = new BigDecimal(25);
@@ -79,9 +78,8 @@ class PedidoControllerTest {
         Atendente atendente = new Atendente(1L,"Sche");
         Endereco endereco = new Endereco(1,"Avenida tancredo neves","1234", "casa 123");
         Cliente cliente = new Cliente(1,"Sche", "45-98034-3600", endereco);
-        List<String> ingredientes = new ArrayList<>();
-        ingredientes.add("Calabresa");
-        Sabor sabor = new Sabor(1L,"Calabresa", ingredientes);
+
+        Sabor sabor = new Sabor(1L,"Calabresa", "Calabresa");
         List<Sabor> sabores = new ArrayList<>();
         sabores.add(sabor);
         BigDecimal valor = new BigDecimal(25);
@@ -108,9 +106,8 @@ class PedidoControllerTest {
         Atendente atendente = new Atendente(1L,"Sche");
         Endereco endereco = new Endereco(1,"Avenida tancredo neves","1234", "casa 123");
         Cliente cliente = new Cliente(1,"Sche", "45-98034-3600", endereco);
-        List<String> ingredientes = new ArrayList<>();
-        ingredientes.add("Calabresa");
-        Sabor sabor = new Sabor(1L,"Calabresa", ingredientes);
+
+        Sabor sabor = new Sabor(1L,"Calabresa", "Calabresa");
         List<Sabor> sabores = new ArrayList<>();
         sabores.add(sabor);
         BigDecimal valor = new BigDecimal(25);
@@ -137,9 +134,8 @@ class PedidoControllerTest {
         Atendente atendente = new Atendente(1L,"Sche");
         Endereco endereco = new Endereco(1,"Avenida tancredo neves","1234", "casa 123");
         Cliente cliente = new Cliente(1,"Sche", "45-98034-3600", endereco);
-        List<String> ingredientes = new ArrayList<>();
-        ingredientes.add("Calabresa");
-        Sabor sabor = new Sabor(1L,"Calabresa", ingredientes);
+
+        Sabor sabor = new Sabor(1L,"Calabresa", "Calabresa");
         List<Sabor> sabores = new ArrayList<>();
         sabores.add(sabor);
         BigDecimal valor = new BigDecimal(25);
@@ -158,9 +154,8 @@ class PedidoControllerTest {
         Atendente atendente = new Atendente(1L,"Sche");
         Endereco endereco = new Endereco(1,"Avenida tancredo neves","1234", "casa 123");
         Cliente cliente = new Cliente(1,"Sche", "45-98034-3600", endereco);
-        List<String> ingredientes = new ArrayList<>();
-        ingredientes.add("Calabresa");
-        Sabor sabor = new Sabor(1L,"Calabresa", ingredientes);
+
+        Sabor sabor = new Sabor(1L,"Calabresa", "Calabresa");
         List<Sabor> sabores = new ArrayList<>();
         sabores.add(sabor);
         BigDecimal valor = new BigDecimal(25);
@@ -180,9 +175,8 @@ class PedidoControllerTest {
         Atendente atendente = new Atendente(1L,"Sche");
         Endereco endereco = new Endereco(1,"Avenida tancredo neves","1234", "casa 123");
         Cliente cliente = new Cliente(1,"Sche", "45-98034-3600", endereco);
-        List<String> ingredientes = new ArrayList<>();
-        ingredientes.add("Calabresa");
-        Sabor sabor = new Sabor(1L,"Calabresa", ingredientes);
+
+        Sabor sabor = new Sabor(1L,"Calabresa", "Calabresa");
         List<Sabor> sabores = new ArrayList<>();
         sabores.add(sabor);
         BigDecimal valor = new BigDecimal(25);
@@ -202,9 +196,7 @@ class PedidoControllerTest {
         Atendente atendente = new Atendente(1L,"Sche");
         Endereco endereco = new Endereco(1,"Avenida tancredo neves","1234", "casa 123");
         Cliente cliente = new Cliente(1,"Sche", "45-98034-3600", endereco);
-        List<String> ingredientes = new ArrayList<>();
-        ingredientes.add("Calabresa");
-        Sabor sabor = new Sabor(1L,"Calabresa", ingredientes);
+        Sabor sabor = new Sabor(1L,"Calabresa", "Calabresa");
         List<Sabor> sabores = new ArrayList<>();
         sabores.add(sabor);
         BigDecimal valor = new BigDecimal(25);
@@ -226,9 +218,8 @@ class PedidoControllerTest {
         Atendente atendente = new Atendente(1L,"Sche");
         Endereco endereco = new Endereco(1,"Avenida tancredo neves","1234", "casa 123");
         Cliente cliente = new Cliente(1,"Sche", "45-98034-3600", endereco);
-        List<String> ingredientes = new ArrayList<>();
-        ingredientes.add("Calabresa");
-        Sabor sabor = new Sabor(1L,"Calabresa", ingredientes);
+
+        Sabor sabor = new Sabor(1L,"Calabresa", "Calabresa");
         List<Sabor> sabores = new ArrayList<>();
         sabores.add(sabor);
         BigDecimal valor = new BigDecimal(25);
@@ -331,9 +322,8 @@ class PedidoControllerTest {
         Atendente atendente = new Atendente(1L,"Sche");
         Endereco endereco = new Endereco(1,"Avenida tancredo neves","1234", "casa 123");
         Cliente cliente = new Cliente(1,"Sche", "45-98034-3600", endereco);
-        List<String> ingredientes = new ArrayList<>();
-        ingredientes.add("Calabresa");
-        Sabor sabor = new Sabor(1L,"Calabresa", ingredientes);
+
+        Sabor sabor = new Sabor(1L,"Calabresa", "Calabresa");
         List<Sabor> sabores = new ArrayList<>();
         sabores.add(sabor);
         BigDecimal valor = new BigDecimal(25);
@@ -357,9 +347,8 @@ class PedidoControllerTest {
         Atendente atendente = new Atendente(1L,"Sche");
         Endereco endereco = new Endereco(1,"Avenida tancredo neves","1234", "casa 123");
         Cliente cliente = new Cliente(1,"Sche", "45-98034-3600", endereco);
-        List<String> ingredientes = new ArrayList<>();
-        ingredientes.add("Calabresa");
-        Sabor sabor = new Sabor(1L,"Calabresa", ingredientes);
+
+        Sabor sabor = new Sabor(1L,"Calabresa", "Calabresa");
         List<Sabor> sabores = new ArrayList<>();
         sabores.add(sabor);
         BigDecimal valor = new BigDecimal(25);

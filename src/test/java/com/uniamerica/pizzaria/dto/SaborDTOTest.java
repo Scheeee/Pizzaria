@@ -12,7 +12,7 @@ import java.util.Collections;
 class SaborDTOTest {
 
 
-    SaborDTO sabor = new SaborDTO(1, "Calabresa", Collections.singletonList("Calabresa"));
+    SaborDTO sabor = new SaborDTO(1, "Calabresa", "Calabresa");
 
 
     @Test
@@ -29,14 +29,14 @@ class SaborDTOTest {
 
     @Test
     void setIngredientesandGet() {
-        sabor.setIngredientes(Collections.singletonList("alho"));
+        sabor.setIngredientes("alho");
 
-        Assertions.assertEquals("alho", sabor.getIngredientes().get(0));
+        Assertions.assertEquals("alho", sabor.getIngredientes());
     }
 
     @Test
     void testEquals() {
-        SaborDTO sabor1 = new SaborDTO(1, "Calabresa", Collections.singletonList("Calabresa"));
+        SaborDTO sabor1 = new SaborDTO(1, "Calabresa", "Calabresa");
         sabor.equals(sabor1);
 
         Assertions.assertEquals(sabor, sabor1);
@@ -44,20 +44,20 @@ class SaborDTOTest {
 
     @Test
     void canEqual() {
-        SaborDTO sabor1 = new SaborDTO(1, "Calabresa", Collections.singletonList("Calabresa"));
+        SaborDTO sabor1 = new SaborDTO(1, "Calabresa", "Calabresa");
         sabor.canEqual(sabor1);
         Assertions.assertTrue(sabor.canEqual(sabor1));
     }
 
     @Test
     void testHashCode() {
-        SaborDTO sabor1 = new SaborDTO(1, "Calabresa", Collections.singletonList("Calabresa"));
+        SaborDTO sabor1 = new SaborDTO(1, "Calabresa", "Calabresa");
         Assertions.assertEquals(sabor.hashCode(), sabor1.hashCode());
     }
 
     @Test
     void testToString() {
-        SaborDTO sabor1 = new SaborDTO(1, "Calabresa", Collections.singletonList("Calabresa"));
+        SaborDTO sabor1 = new SaborDTO(1, "Calabresa", "Calabresa");
 
         Assertions.assertEquals(sabor1.toString(), sabor.toString());
     }

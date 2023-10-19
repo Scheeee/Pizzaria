@@ -14,7 +14,7 @@ class PizzaDTOTest {
     Atendente atendente = new Atendente(1, "Sche");
     Cliente cliente = new Cliente(1,"Sche", "45-98034-3600");
 
-    Sabor sabor = new Sabor(1, "Calabresa", Collections.singletonList("Calabresa"));
+    Sabor sabor = new Sabor(1, "Calabresa","Calabresa");
     BigDecimal valor = new BigDecimal("25");
 
 
@@ -29,7 +29,7 @@ class PizzaDTOTest {
 
     @Test
     void getSaboresandSetSabores() {
-        Sabor sabor1 = new Sabor(1, "Strogonoff", Collections.singletonList("frango"));
+        Sabor sabor1 = new Sabor(1, "Strogonoff", "frango");
         pizza.setSabores(Collections.singletonList(sabor1));
         Assertions.assertEquals(sabor1, pizza.getSabores().get(0));
     }

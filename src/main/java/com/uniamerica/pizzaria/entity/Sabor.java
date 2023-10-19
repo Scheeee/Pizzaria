@@ -32,13 +32,13 @@ public class Sabor {
     @Setter
     @NotNull(message = "Campo não informado")
     @Column(name = "ingrediente")
-    private List<String> ingredientes;
+    private String ingredientes;
 
 
     @ManyToMany(mappedBy = "sabores")
     private List<Pizza> pizzas;
 
-    public Sabor(long id, String nome, List<String> ingredientes) {
+    public Sabor(long id, String nome, String ingredientes) {
         this.id = id;
         this.nome = nome;
         this.ingredientes = ingredientes;

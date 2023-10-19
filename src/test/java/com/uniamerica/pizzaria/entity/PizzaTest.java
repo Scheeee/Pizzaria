@@ -11,7 +11,7 @@ import java.util.List;
 
 
 class PizzaTest {
-    Sabor sabor = new Sabor(1, "Calabresa", Collections.singletonList("Calabresa"));
+    Sabor sabor = new Sabor(1, "Calabresa", "Calabresa");
     BigDecimal valor = new BigDecimal("25");
     Pizza pizza = new Pizza(1, Tamanho.P, Collections.singletonList(sabor), valor);
 
@@ -57,7 +57,7 @@ class PizzaTest {
     void setSabores() {
         List<Sabor> list = new ArrayList<>();
 
-        Sabor saborNovo = new Sabor(2, "Calabresa", Collections.singletonList("Calabresa"));
+        Sabor saborNovo = new Sabor(2, "Calabresa", "Calabresa");
 
         list.add(saborNovo);
         pizza.setSabores(list);
