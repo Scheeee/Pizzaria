@@ -1,10 +1,8 @@
 package com.uniamerica.pizzaria.dto;
 
 
-import com.uniamerica.pizzaria.entity.Atendente;
-import com.uniamerica.pizzaria.entity.Cliente;
-import com.uniamerica.pizzaria.entity.Pizza;
-import com.uniamerica.pizzaria.entity.Status;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.uniamerica.pizzaria.entity.*;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.Getter;
@@ -21,9 +19,9 @@ public class PedidoDTO {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id", nullable = false, unique = true)
     private long id;
-
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
     private LocalDate cadastrado;
-
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
     private LocalDate finalizado;
 
     private Atendente atendente;
@@ -31,6 +29,7 @@ public class PedidoDTO {
     private Cliente cliente;
 
     private List<Pizza> pizzas;
+    private List<Produto> produtos;
 
     private boolean entrega;
 
@@ -42,11 +41,12 @@ public class PedidoDTO {
 
     private Status status;
 
-    public PedidoDTO(long id,Atendente atendente, Cliente cliente, List<Pizza> pizzas, boolean entrega, String detalhes, BigDecimal valorTotal, boolean dinheiro) {
+    public PedidoDTO(long id,Atendente atendente, Cliente cliente, List<Pizza> pizzas, List<Produto> produtos, boolean entrega, String detalhes, BigDecimal valorTotal, boolean dinheiro) {
         this.id = id;
         this.atendente = atendente;
         this.cliente = cliente;
         this.pizzas = pizzas;
+        this.produtos = produtos;
         this.entrega = entrega;
         this.detalhes = detalhes;
         this.valorTotal = valorTotal;

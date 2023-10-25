@@ -1,6 +1,7 @@
 package com.uniamerica.pizzaria.controller;
 
 import com.uniamerica.pizzaria.dto.ClienteDTO;
+import com.uniamerica.pizzaria.entity.Atendente;
 import com.uniamerica.pizzaria.entity.Cliente;
 import com.uniamerica.pizzaria.repository.ClienteRep;
 import org.modelmapper.ModelMapper;
@@ -14,6 +15,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping(value = "/pizzaria/cliente")
@@ -32,6 +34,15 @@ public class ClienteController {
             return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
         }
     }
+  @GetMapping("/{nome}")
+  public ResponseEntity<List<Cliente>> findByNome(@PathVariable("nome") String nome) {
+    List<Cliente> clientes = clienteRep.findAll()
+      .stream()
+      .filter(a -> a.getNome() != null && a.getNome().equalsIgnoreCase(nome))
+      .collect(Collectors.toList());
+
+    return ResponseEntity.ok(clientes);
+  }
     @PostMapping
     public ResponseEntity<Object> inserir(@RequestBody final ClienteDTO cliente){
         try {
@@ -54,7 +65,7 @@ public class ClienteController {
 
         BeanUtils.copyProperties(cliente, clienteNovo, "id");
         clienteRep.save(clienteNovo);
-        return ResponseEntity.ok("Cliente atualizado com sucesso!");
+        return new ResponseEntity<>(HttpStatus.OK);
 
     }
     @DeleteMapping("/{id}")
@@ -64,7 +75,7 @@ public class ClienteController {
 
 
         clienteRep.delete(cliente);
-        return ResponseEntity.ok("Cliente deletado com sucesso!");
+        return new ResponseEntity<>(HttpStatus.OK);
         }catch (Exception e){
             return ResponseEntity.internalServerError().body(ERRO+ e.getMessage());
         }

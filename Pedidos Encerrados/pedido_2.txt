@@ -1,11 +1,3 @@
-Cliente: Sche
-Telefone: 45-98034-3600
+Cliente: Scheligan Gabriele Monzon
+Telefone: 75-78947-8575
 Entrega 
-Endereço: Avenida tancredo neves N°:1234
-Complemento: casa 123
-Itens do pedido:
-- pizza n°: 1 Tamanho:P
-Sabor(es):
--Calabresa
- Valor unitário: R$25
-Pagamento no CartãoTotal: R$ 25

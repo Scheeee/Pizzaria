@@ -6,6 +6,7 @@ import com.uniamerica.pizzaria.service.SaborService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -34,11 +35,11 @@ public class SaborController {
 
             BeanUtils.copyProperties(sabor,sabor1);
             saborService.saveSabor(sabor1);
-            return ResponseEntity.ok("Sabor cadastrado com sucesso!");
+          return new ResponseEntity<>(HttpStatus.OK);
 
         }
         catch (Exception e){
-            return ResponseEntity.internalServerError().body(ERRO+ e.getMessage());
+          return ResponseEntity.internalServerError().body(ERRO+e.getMessage());
         }
     }
 
@@ -61,7 +62,7 @@ public class SaborController {
            saborRep.delete(sabor);
             return ResponseEntity.ok("Sabor deletado com sucesso!");
         }catch (Exception e){
-            return ResponseEntity.internalServerError().body(ERRO+ e.getMessage());
+          return ResponseEntity.internalServerError().body(ERRO+e.getMessage());
         }
     }
 }

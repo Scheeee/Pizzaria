@@ -11,6 +11,7 @@ import org.modelmapper.internal.util.Assert;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -38,7 +39,7 @@ public class PizzaController {
             ModelMapper modelMapper = new ModelMapper();
             Pizza pizza1 =  modelMapper.map(pizza, Pizza.class);
             BeanUtils.copyProperties(pizza,pizza1);
-            return  pizzaService.save(pizza1);
+            return new ResponseEntity<>(HttpStatus.OK);
 
         }
         catch (Exception e){
@@ -53,7 +54,7 @@ public class PizzaController {
 
         BeanUtils.copyProperties(pizza, pizzaNovo, "id");
         pizzaRep.save(pizzaNovo);
-        return ResponseEntity.ok("pizza atualizada com sucesso!");
+        return new ResponseEntity<>(HttpStatus.OK);
 
     }
     @DeleteMapping("/{id}")
@@ -63,7 +64,7 @@ public class PizzaController {
 
 
             pizzaRep.delete(pizza);
-            return ResponseEntity.ok("Pizza deletada com sucesso!");
+          return new ResponseEntity<>(HttpStatus.OK);
         }catch (Exception e){
             return ResponseEntity.internalServerError().body(ERRO+ e.getMessage());
         }

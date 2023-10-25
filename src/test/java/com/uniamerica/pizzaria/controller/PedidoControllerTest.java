@@ -62,7 +62,7 @@ class PedidoControllerTest {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
         LocalDate cadastro = LocalDate.parse(dataString, formatter);
 
-        Pedido pedido = new Pedido(1L,atendente,cliente,pizzas,true,"Retirar cebolar", valor, false, cadastro);
+        Pedido pedido = new Pedido(1L,cliente, atendente,pizzas,true,"Retirar cebolar", valor, false, cadastro);
 
 
         List<Pedido> pedidos = new ArrayList<>();
@@ -290,7 +290,8 @@ class PedidoControllerTest {
 
     @Test
     void comanda() {
-        var comanda = pedidoController.comanda(1L);
+      Atendente atendente = new Atendente(1L,"Sche");
+        var comanda = pedidoController.comanda(1L, atendente.getId());
 
         Assertions.assertNotNull(comanda);
         Assertions.assertEquals("comanda gerada com sucesso!", comanda.getBody());

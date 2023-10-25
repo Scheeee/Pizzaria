@@ -1,11 +1,12 @@
-Cliente: Sche
-Telefone: 45-98034-3600
+Cliente: teste sem end
+Telefone: 75-78947-8578
 Entrega 
-Endereço: Avenida tancredo neves N°:1234
-Complemento: casa 123
+Endereço: rua 2 N°:5057
+Complemento: 648
 Itens do pedido:
-- pizza n°: 1 Tamanho:P
+- pizza n°: 1 Tamanho:G
 Sabor(es):
--Calabresa
- Valor unitário: R$25
-Pagamento no CartãoTotal: R$ 25
+-Calabresa com alho
+ Valor unitário: R$35.00
+Pagamento no Dinheiro
+Total: R$ 35.00

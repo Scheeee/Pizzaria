@@ -28,13 +28,13 @@ public class Pedido {
     @Column( name = "finalizado")
     private LocalDate finalizado;
     @Getter @Setter @ManyToOne
-    @JsonBackReference // Indica que esta é a parte "de trás" da referência
-    @JoinColumn(name = "atendente_id")
-    private Atendente atendente;
-    @Getter @Setter @ManyToOne
     @JoinColumn(name = "cliente_id")
    // @JsonBackReference // Indica que esta é a parte "de trás" da referência
     private Cliente cliente;
+  @Getter @Setter @ManyToOne
+  @JoinColumn(name = "atendente_id")
+  // @JsonBackReference // Indica que esta é a parte "de trás" da referência
+  private Atendente atendente;
     @Getter
     @Setter
     @ManyToMany
@@ -44,6 +44,16 @@ public class Pedido {
             inverseJoinColumns = @JoinColumn(name = "pizza_id")
     )
     private List<Pizza> pizzas;
+
+  @Getter
+  @Setter
+  @ManyToMany
+  @JoinTable(
+    name = "pedido_produto",
+    joinColumns = @JoinColumn(name = "pedido_id"),
+    inverseJoinColumns = @JoinColumn(name = "produto_id")
+  )
+  private List<Produto> produtos;
     @Getter @Setter
     @JoinColumn(name = "entrega", nullable = false)
     private boolean entrega;
@@ -74,19 +84,20 @@ public class Pedido {
         this.finalizado = LocalDate.now();
     }
 
-    public Pedido(long id, Atendente atendente, Cliente cliente, boolean entrega, String detalhes, BigDecimal valorTotal, boolean dinheiro) {
+    public Pedido(long id, Cliente cliente,Atendente atendente, boolean entrega, String detalhes, BigDecimal valorTotal, boolean dinheiro) {
         this.id = id;
-        this.atendente = atendente;
         this.cliente = cliente;
+        this.atendente = atendente;
         this.entrega = entrega;
         this.detalhes = detalhes;
         this.valorTotal = valorTotal;
         this.dinheiro = dinheiro;
     }
-    public Pedido(long id, Atendente atendente, Cliente cliente, List<Pizza> pizzas, boolean entrega, String detalhes, BigDecimal valorTotal, boolean dinheiro) {
+    public Pedido(long id, Cliente cliente, Atendente atendente,List<Produto> produtos, List<Pizza> pizzas, boolean entrega, String detalhes, BigDecimal valorTotal, boolean dinheiro) {
         this.id = id;
-        this.atendente = atendente;
         this.cliente = cliente;
+        this.atendente = atendente;
+        this.produtos = produtos;
         this.pizzas = pizzas;
         this.entrega = entrega;
         this.detalhes = detalhes;
@@ -94,10 +105,11 @@ public class Pedido {
         this.dinheiro = dinheiro;
 
     }
-    public Pedido(long id, Atendente atendente, Cliente cliente, List<Pizza> pizzas, boolean entrega, String detalhes, BigDecimal valorTotal, boolean dinheiro, LocalDate cadastrado) {
+    public Pedido(long id, Cliente cliente,Atendente atendente, List<Produto> produtos,List<Pizza> pizzas, boolean entrega, String detalhes, BigDecimal valorTotal, boolean dinheiro, LocalDate cadastrado) {
         this.id = id;
-        this.atendente = atendente;
         this.cliente = cliente;
+        this.atendente = atendente;
+        this.produtos = produtos;
         this.pizzas = pizzas;
         this.entrega = entrega;
         this.detalhes = detalhes;

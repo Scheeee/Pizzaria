@@ -1,9 +1,7 @@
 package com.uniamerica.pizzaria.controller;
 
 import com.uniamerica.pizzaria.dto.PedidoDTO;
-import com.uniamerica.pizzaria.entity.Atendente;
-import com.uniamerica.pizzaria.entity.Pedido;
-import com.uniamerica.pizzaria.entity.Status;
+import com.uniamerica.pizzaria.entity.*;
 import com.uniamerica.pizzaria.repository.AtendenteRep;
 import com.uniamerica.pizzaria.repository.ClienteRep;
 import com.uniamerica.pizzaria.repository.PedidoRep;
@@ -36,13 +34,8 @@ public class PedidoController {
     private static final String ERRO = "Error:  ";
 
     @GetMapping("/data/{data}")
-    public ResponseEntity<String> findByData(@PathVariable("data") String dataString){
-        try {
+    public ResponseEntity<Total> findByData(@PathVariable("data") String dataString){
             return ResponseEntity.ok(pedidoService.totais(dataString));
-
-        } catch (Exception e) {
-            return new ResponseEntity<>("Formato de data inválido.", HttpStatus.BAD_REQUEST);
-        }
     }
     @GetMapping("/atendente/{id}")
     public ResponseEntity<Optional<List<Pedido>>> getatendente(@PathVariable("id") Long id){
@@ -51,11 +44,17 @@ public class PedidoController {
         Optional<List<Pedido>> pedidos = this.pedidoRep.findByAtendente(atendenteRep.getReferenceById(id));
         return ResponseEntity.ok(pedidos);
     }
-    @GetMapping("/cliente/{id}")
-    public ResponseEntity<Optional<List<Pedido>>> getCliente(@PathVariable("id") Long id){
+    @GetMapping("/pedido/cliente/{id}")
+    public ResponseEntity<Optional<List<Pedido>>> getClientePedido(@PathVariable("id") Long id){
         Optional<List<Pedido>> pedidos = this.pedidoRep.findByCliente(clienteRep.getReferenceById(id));
         return ResponseEntity.ok(pedidos);
     }
+    @GetMapping("/cliente/{id}")
+    public ResponseEntity<Optional<Cliente>> getCliente(@PathVariable("id") Long id){
+      Optional<Cliente> cliente = Optional.of(this.clienteRep.getReferenceById(id));
+      return ResponseEntity.ok(cliente);
+    }
+
     @GetMapping("/{id}")
     public ResponseEntity<Optional<Pedido>> findById(@PathVariable("id") Long id) {
         Optional<Pedido> pessoa = this.pedidoRep.findById(id);
@@ -70,7 +69,7 @@ public class PedidoController {
             Assert.isTrue(pedido.getPizzas().size() >= 1 , "o pedido solicitado não possui pizzas");
 
             pedidoService.gerarComanda(pedido,atendente);
-            return ResponseEntity.ok("comanda gerada com sucesso!");
+            return new ResponseEntity<>(HttpStatus.OK);
 
         } catch (Exception e) {
             return ResponseEntity.internalServerError().body(ERRO);
@@ -80,6 +79,14 @@ public class PedidoController {
     @GetMapping("/ativos")
     public ResponseEntity<List<Pedido>> getativos(){
         return ResponseEntity.ok(pedidoRep.findByStatus(Status.ATIVO));
+    }
+    @GetMapping("/finalizados")
+    public ResponseEntity<List<Pedido>> getfinalizados(){
+      return ResponseEntity.ok(pedidoRep.findByStatus(Status.ENCERRADO));
+    }
+    @GetMapping("/cancelados")
+    public ResponseEntity<List<Pedido>> getcancelados(){
+      return ResponseEntity.ok(pedidoRep.findByStatus(Status.CANCELADO));
     }
 
     @GetMapping("/lista")
@@ -94,7 +101,7 @@ public class PedidoController {
             Pedido pedido1 =  modelMapper.map(pedido, Pedido.class);
             BeanUtils.copyProperties(pedido,pedido1);
            pedidoRep.save(pedido1);
-            return ResponseEntity.ok("pedido cadastrado com sucesso!");
+          return new ResponseEntity<>(HttpStatus.OK);
 
         }
         catch (Exception e){
@@ -104,12 +111,17 @@ public class PedidoController {
 
     @PutMapping("/{id}")
     public ResponseEntity<Object> updatePedido(@PathVariable(value = "id")Long id,@RequestBody PedidoDTO pedido){
-
+      try {
         Pedido pedidoNovo = pedidoRep.getReferenceById(id);
 
         BeanUtils.copyProperties(pedido, pedidoNovo, "id");
         pedidoRep.save(pedidoNovo);
-        return ResponseEntity.ok("pedido atualizado com sucesso!");
+        return new ResponseEntity<>(HttpStatus.OK);
+
+      }
+      catch (Exception e ){
+        return ResponseEntity.internalServerError().body(ERRO);
+      }
 
     }
 
@@ -121,7 +133,7 @@ public class PedidoController {
         pedidoAtual.setStatus(Status.CANCELADO);
 
         pedidoRep.save(pedidoAtual);
-        return ResponseEntity.ok("pedido cancelado com sucesso!");
+        return new ResponseEntity<>(HttpStatus.OK);
 
 
     }
@@ -129,7 +141,7 @@ public class PedidoController {
     public ResponseEntity<Object> encerrarPedido(@PathVariable(value = "id") Long id){
         try {
              pedidoService.encerrar(id);
-            return ResponseEntity.ok("pedido encerrado com sucesso!");
+          return new ResponseEntity<>(HttpStatus.OK);
 
         }
         catch (Exception e ){
@@ -145,7 +157,7 @@ public class PedidoController {
 
 
             pedidoRep.delete(pedido);
-            return ResponseEntity.ok("Pedido deletado com sucesso!");
+          return new ResponseEntity<>(HttpStatus.OK);
         }catch (Exception e){
             return ResponseEntity.internalServerError().body(ERRO+ e.getMessage());
         }

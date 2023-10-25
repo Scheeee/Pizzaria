@@ -1,11 +1,13 @@
 package com.uniamerica.pizzaria.controller;
 import com.uniamerica.pizzaria.dto.EnderecoDTO;
 import com.uniamerica.pizzaria.entity.Endereco;
+import com.uniamerica.pizzaria.entity.Pedido;
 import com.uniamerica.pizzaria.repository.EnderecoRep;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.internal.util.Assert;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -30,7 +32,7 @@ public class EnderecoController {
             Assert.notNull(endereco1);
 
             enderecoRep.save(endereco1);
-            return ResponseEntity.ok("Endereço cadastrado com sucesso!");
+            return new ResponseEntity<>(HttpStatus.OK);
 
         }
         catch (Exception e){
@@ -41,11 +43,17 @@ public class EnderecoController {
     @PutMapping("/{id}")
     public ResponseEntity<Object> updateEndereco(@PathVariable(value = "id")Long id,@RequestBody EnderecoDTO endereco){
 
+      try {
         Endereco enderecoNovo = enderecoRep.getReferenceById(id);
 
         BeanUtils.copyProperties(endereco, enderecoNovo, "id");
         enderecoRep.save(enderecoNovo);
-        return ResponseEntity.ok("endereço atualizado com sucesso!");
+        return new ResponseEntity<>(HttpStatus.OK);
+
+      }
+      catch (Exception e ){
+        return ResponseEntity.internalServerError().body(ERRO);
+      }
 
     }
 

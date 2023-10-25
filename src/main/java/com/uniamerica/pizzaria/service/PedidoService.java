@@ -29,36 +29,34 @@ public class PedidoService {
 
     String mensagem = "Arquivo gerado com sucesso: ";
     @Transactional(rollbackOn = Exception.class)
-    public String totais(String data) {
+    public Total totais(String data) {
+
 
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
         LocalDate date = LocalDate.parse(data, formatter);
 
-        List<Pedido> hoje = pedidoRep.findByCadastrado(date);
-        int pedidosDoDia = hoje.size();
-        List<Pedido> encerrado = pedidoRep.findByStatusAndCadastrado(Status.ENCERRADO, date);
-        int pedidosEncerrados = encerrado.size();
-        List<Pedido> cancelado = pedidoRep.findByStatusAndCadastrado(Status.CANCELADO, date);
-        int pedidosCancelados = cancelado.size();
-        List<Pedido> entregue = pedidoRep.findByEntregaAndStatusAndCadastrado(true,Status.ENCERRADO, date);
-        int pedidosEntregues = entregue.size();
-        List<Pedido> retirado = pedidoRep.findByEntregaAndStatusAndCadastrado(false,Status.ENCERRADO, date);
-        int pedidosRetirados = retirado.size();
-        List<Pedido> dinheiro = pedidoRep.findByStatusAndCadastradoAndDinheiro(Status.ENCERRADO, date, true);
-        int pedidosDinheiro = dinheiro.size();
-        List<Pedido> cartao = pedidoRep.findByStatusAndCadastradoAndDinheiro(Status.ENCERRADO, date, false);
-        int pedidosCartao = cartao.size();
+      List<Pedido> hoje = pedidoRep.findByCadastrado(date);
+      int pedidosDoDia = hoje.size();
+      List<Pedido> encerrado = pedidoRep.findByStatusAndCadastrado(Status.ENCERRADO, date);
+      int pedidosEncerrados = encerrado.size();
+      List<Pedido> cancelado = pedidoRep.findByStatusAndCadastrado(Status.CANCELADO, date);
+      int pedidosCancelados = cancelado.size();
+      List<Pedido> entregue = pedidoRep.findByEntregaAndStatusAndCadastrado(true,Status.ENCERRADO, date);
+      int pedidosEntregues = entregue.size();
+      List<Pedido> retirado = pedidoRep.findByEntregaAndStatusAndCadastrado(false,Status.ENCERRADO, date);
+      int pedidosRetirados = retirado.size();
+      List<Pedido> dinheiro = pedidoRep.findByStatusAndCadastradoAndDinheiro(Status.ENCERRADO, date, true);
+      int pedidosDinheiro = dinheiro.size();
+      List<Pedido> cartao = pedidoRep.findByStatusAndCadastradoAndDinheiro(Status.ENCERRADO, date, false);
+      int pedidosCartao = cartao.size();
 
-        BigDecimal totalValorPedidos = encerrado.stream().map(Pedido::getValorTotal).reduce(BigDecimal.ZERO, BigDecimal::add);
+      BigDecimal totalValorPedidos = encerrado.stream().map(Pedido::getValorTotal).reduce(BigDecimal.ZERO, BigDecimal::add);
 
-        return "Total de pedidos: " + pedidosDoDia +
-        "\nTotal de pedidos encerrados: " + pedidosEncerrados +
-                "\nTotal de pedidos cancelados: " + pedidosCancelados +
-                "\nPedidos entregues: " + pedidosEntregues +
-                "\nPedidos retirados: " + pedidosRetirados +
-                "\nFaturamento total: " + totalValorPedidos +
-                "\nPedidos pagos em dinheiro: " + pedidosDinheiro +
-                "\nPedidos pagos no cartão: " + pedidosCartao;
+
+      Total total = new Total(pedidosDoDia, pedidosEncerrados, pedidosCancelados, pedidosEntregues, pedidosRetirados,totalValorPedidos,  pedidosDinheiro, pedidosCartao);
+
+      return total;
+
 
 
     }
@@ -70,8 +68,10 @@ public class PedidoService {
         pedidoAtual.setStatus(Status.ENCERRADO);
 
         BigDecimal valorPizzas = pedidoAtual.getPizzas().stream().map(Pizza::getValorUnit).reduce(BigDecimal.ZERO, BigDecimal::add);
+        BigDecimal valorProdutos = pedidoAtual.getProdutos().stream().map(Produto::getValorUnit).reduce(BigDecimal.ZERO,BigDecimal::add );
 
-        pedidoAtual.setValorTotal(valorPizzas);
+
+        pedidoAtual.setValorTotal(valorPizzas.add(valorProdutos));
 
         pedidoRep.save(pedidoAtual);
 
@@ -118,6 +118,14 @@ public class PedidoService {
                 writer.write(" Valor unitário: R$" + pizza.getValorUnit());
                 writer.newLine();
                 nPizza++;
+            }
+            for (Produto produto : pedido.getProdutos()) {
+              writer.write("- pizza n°: "+ nPizza +" Detalhes:"+ produto.getDetalhes() );
+              writer.newLine();
+
+              writer.write(" Valor unitário: R$" + produto.getValorUnit());
+              writer.newLine();
+              nPizza++;
             }
 
             if(pedido.isDinheiro()){
@@ -170,9 +178,14 @@ public class PedidoService {
 
                 nPizza++;
             }
+            for (Produto produto : pedido.getProdutos()) {
+              writer.write("- produto n°: "+ nPizza +" Detalhes:"+ produto.getDetalhes() );
+              writer.newLine();
+              nPizza++;
+            }
 
 
-
+            pedido.setAtendente(atendente);
 
             return ResponseEntity.status(HttpStatus.OK).body(mensagem + arquivo);
         } catch (IOException e) {
