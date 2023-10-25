@@ -6,4 +6,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface SaborRep extends JpaRepository<Sabor,Long> {
+
+  Sabor findByNome(String nome);
 }

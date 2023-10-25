@@ -1,5 +1,6 @@
 package com.uniamerica.pizzaria.controller;
 import com.uniamerica.pizzaria.dto.SaborDTO;
+import com.uniamerica.pizzaria.entity.Cliente;
 import com.uniamerica.pizzaria.entity.Sabor;
 import com.uniamerica.pizzaria.repository.SaborRep;
 import com.uniamerica.pizzaria.service.SaborService;
@@ -11,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping(value = "/pizzaria/sabor")
@@ -24,13 +26,15 @@ public class SaborController {
     public ResponseEntity<List<Sabor>> getAll(){
         return ResponseEntity.ok(saborRep.findAll());
     }
+
     private static final String ERRO = "Error:  + e.getMessage()";
     @PostMapping
     public ResponseEntity<Object> inserir(@RequestBody final SaborDTO sabor){
         try {
-
-
-            ModelMapper modelMapper = new ModelMapper();
+          if (saborRep.findByNome(sabor.getNome()) != null){
+            return ResponseEntity.badRequest().body("nome já existente");
+          }
+           ModelMapper modelMapper = new ModelMapper();
             Sabor sabor1 =  modelMapper.map(sabor, Sabor.class);
 
             BeanUtils.copyProperties(sabor,sabor1);

@@ -1,0 +1,7 @@
+Atendente: Scheligan Gabriele Monzon
+Preparar pedido para entrega
+Itens do pedido:
+- pizza n°: 1 Tamanho:P
+Sabor(es):
+-Calabresa com alho
+- produto n°: 2 Detalhes:2L

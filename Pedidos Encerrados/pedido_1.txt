@@ -1,12 +1,13 @@
-Cliente: teste sem end
+Cliente: Sche
 Telefone: 75-78947-8578
 Entrega 
-Endereço: rua 2 N°:5057
+Endereço: Rua dois N°:5057
 Complemento: 648
 Itens do pedido:
-- pizza n°: 1 Tamanho:G
+- pizza n°: 1 Tamanho:P
 Sabor(es):
 -Calabresa com alho
- Valor unitário: R$35.00
-Pagamento no Dinheiro
-Total: R$ 35.00
+ Valor unitário: R$25.00
+- pizza n°: 2 Detalhes:2L
+ Valor unitário: R$12.00
+Pagamento no CartãoTotal: R$ 37.00
