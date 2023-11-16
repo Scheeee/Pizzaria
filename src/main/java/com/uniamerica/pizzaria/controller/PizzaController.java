@@ -39,6 +39,7 @@ public class PizzaController {
             ModelMapper modelMapper = new ModelMapper();
             Pizza pizza1 =  modelMapper.map(pizza, Pizza.class);
             BeanUtils.copyProperties(pizza,pizza1);
+            pizzaService.save(pizza1);
             return new ResponseEntity<>(HttpStatus.OK);
 
         }

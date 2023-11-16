@@ -35,13 +35,13 @@ public class Pedido {
   @JoinColumn(name = "atendente_id")
   // @JsonBackReference // Indica que esta é a parte "de trás" da referência
   private Atendente atendente;
-    @Getter
-    @Setter
-    @ManyToMany
-    @JoinTable(
-            name = "pedido_pizza",
-            joinColumns = @JoinColumn(name = "pedido_id"),
-            inverseJoinColumns = @JoinColumn(name = "pizza_id")
+  @Getter
+  @Setter
+  @ManyToMany
+  @JoinTable(
+      name = "pedido_pizza",
+      joinColumns = @JoinColumn(name = "pedido_id"),
+      inverseJoinColumns = @JoinColumn(name = "pizza_id")
     )
     private List<Pizza> pizzas;
 

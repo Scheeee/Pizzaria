@@ -1,7 +1,6 @@
 package com.uniamerica.pizzaria.controller;
 import com.uniamerica.pizzaria.dto.AtendenteDTO;
 import com.uniamerica.pizzaria.entity.Atendente;
-import com.uniamerica.pizzaria.entity.Pedido;
 import com.uniamerica.pizzaria.repository.AtendenteRep;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.internal.util.Assert;

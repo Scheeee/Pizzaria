@@ -27,7 +27,7 @@ public class SaborService {
   public ResponseEntity<String> saveSabor(Sabor sabor) {
     saborRep.save(sabor);
 
-    Pizza pizza1 = new Pizza();
+    /*Pizza pizza1 = new Pizza();
     List<Sabor> saborList1 = new ArrayList<>();
     saborList1.add(sabor);
     pizza1.setSabores(saborList1);
@@ -115,7 +115,7 @@ public class SaborService {
         }
         pizzaRep.save(pizza6);
       }
-    }
+    }*/
 
 
     return ResponseEntity.status(HttpStatus.CREATED).body("Pizza cadastrada com sucesso");

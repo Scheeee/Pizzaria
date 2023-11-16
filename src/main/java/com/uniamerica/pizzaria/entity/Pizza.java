@@ -44,7 +44,6 @@ public class Pizza {
 
     @Getter
     @Setter
-    @NotNull(message = "Campo não informado")
     @JoinColumn(name = "valorUnidade")
     private BigDecimal valorUnit;
 

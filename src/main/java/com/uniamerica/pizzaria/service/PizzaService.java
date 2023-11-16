@@ -10,6 +10,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
+import java.math.BigDecimal;
+
 @Service
 public class PizzaService {
     @Autowired
@@ -21,13 +23,19 @@ public class PizzaService {
         Assert.isTrue(pizza.getSabores().size() >= 1,"insira um sabor");
         if( pizza.getTamanho() == Tamanho.P){
             Assert.isTrue(pizza.getSabores().size() == 1,"A pizza P possui apenas um sabor");
+            pizza.setValorUnit(BigDecimal.valueOf(20.00));
         } else if (pizza.getTamanho() == Tamanho.M) {
             Assert.isTrue(pizza.getSabores().size() <= 2  ,"A pizza M possui apenas dois sabores");
+          pizza.setValorUnit(BigDecimal.valueOf(25.00));
         } else if (pizza.getTamanho() == Tamanho.G) {
             Assert.isTrue(pizza.getSabores().size() <= 3,"A pizza G possui apenas três sabores");
+          pizza.setValorUnit(BigDecimal.valueOf(30.00));
         } else if (pizza.getTamanho() == Tamanho.GG) {
             Assert.isTrue(pizza.getSabores().size() <= 4,"A pizza GG possui apenas quatro sabores");
+          pizza.setValorUnit(BigDecimal.valueOf(40.00));
         }
+
+
         pizzaRep.save(pizza);
 
 

@@ -1,7 +1,7 @@
-Cliente: Sche
-Telefone: 75-78947-8578
+Cliente: Scheligan Gabriele Monzon
+Telefone: 45-99802-3600
 Entrega 
-Endereço: Rua dois N°:5057
+Endereço: Avenida Tancredo Neves Jardim Itaipu N°:5057
 Complemento: 648
 Itens do pedido:
 - pizza n°: 1 Tamanho:P

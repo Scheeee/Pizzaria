@@ -6,6 +6,7 @@ import com.uniamerica.pizzaria.repository.AtendenteRep;
 import com.uniamerica.pizzaria.repository.ClienteRep;
 import com.uniamerica.pizzaria.repository.PedidoRep;
 import com.uniamerica.pizzaria.service.PedidoService;
+import com.uniamerica.pizzaria.service.PizzaService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +28,9 @@ public class PedidoController {
     PedidoRep pedidoRep;
     @Autowired
     PedidoService pedidoService;
+
+    @Autowired
+    PizzaService pizzaService;
     @Autowired
     private ClienteRep clienteRep;
     @Autowired
@@ -98,11 +102,14 @@ public class PedidoController {
         try {
 
             ModelMapper modelMapper = new ModelMapper();
+           for(int i = 0; i < pedido.getPizzas().size(); i++){
+
+              pizzaService.save( pedido.getPizzas().get(i));
+            }
             Pedido pedido1 =  modelMapper.map(pedido, Pedido.class);
             BeanUtils.copyProperties(pedido,pedido1);
-           pedidoRep.save(pedido1);
+            pedidoRep.save(pedido1);
           return new ResponseEntity<>(HttpStatus.OK);
-
         }
         catch (Exception e){
             return ResponseEntity.internalServerError().body(ERRO+ e.getMessage());
