@@ -11,5 +11,7 @@ import java.util.Optional;
 @Repository
 public interface AtendenteRep extends JpaRepository<Atendente,Long> {
 
-      Optional<List<Atendente>> findByNomeIgnoreCase(String nome);
+  Optional<List<Atendente>> findByUsernameIgnoreCase(String username);
+
+  Atendente findByUsername(String username);
 }

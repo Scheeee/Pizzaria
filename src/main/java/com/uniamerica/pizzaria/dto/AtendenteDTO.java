@@ -4,26 +4,27 @@ import jakarta.persistence.Column;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 import lombok.Data;
 import lombok.Getter;
 
 
 @Data
 public class AtendenteDTO {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Getter
-    @Column(name = "id", nullable = false, unique = true)
-    private long id;
+  @Id
+  @GeneratedValue(strategy = GenerationType.AUTO)
+  private long id;
 
-    private String nome;
 
-    public AtendenteDTO(long id, String nome) {
-        this.id = id;
-        this.nome = nome;
-    }
+  @NotBlank(message = "Campo não informado")
+  @Size(max = 50, message = "A quantidade de caracteres é inválida")
+  private String username;
 
-    public AtendenteDTO() {
 
-    }
+  @NotBlank(message = "Campo não informado")
+  private String password;
+
+  @Size(max = 15, message = "A quantidade de caracteres é inválida")
+  private String role;
 }

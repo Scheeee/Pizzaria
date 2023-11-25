@@ -24,6 +24,7 @@ public class AtendenteController {
     @Autowired
     AtendenteRep atendenteRep;
 
+
     private static final String ERRO = "Error: ";
     @GetMapping("/lista")
     public ResponseEntity<List<Atendente>> findAll(){
@@ -33,7 +34,7 @@ public class AtendenteController {
   public ResponseEntity<List<Atendente>> findByNome(@PathVariable("nome") String nome) {
     List<Atendente> atendentes = atendenteRep.findAll()
       .stream()
-      .filter(a -> a.getNome() != null && a.getNome().equalsIgnoreCase(nome))
+      .filter(a -> a.getUsername() != null && a.getUsername().equalsIgnoreCase(nome))
       .collect(Collectors.toList());
 
     return ResponseEntity.ok(atendentes);
@@ -42,9 +43,17 @@ public class AtendenteController {
   @PostMapping
     public ResponseEntity<Object> inserir(@RequestBody final AtendenteDTO atendente){
         try {
-            Assert.notNull(atendente.getNome());
+            Assert.notNull(atendente.getUsername());
             ModelMapper modelMapper = new ModelMapper();
             Atendente atendente1 = modelMapper.map(atendente, Atendente.class);
+
+           /* String encodedPassword = passwordEncoder.encode(atendente1.getPassword());
+            atendente1.setPassword(encodedPassword);*/
+
+
+
+
+
 
             atendenteRep.save(atendente1);
           return new ResponseEntity<>(HttpStatus.OK);

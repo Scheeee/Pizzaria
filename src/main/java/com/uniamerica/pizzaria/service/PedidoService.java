@@ -151,7 +151,7 @@ public class PedidoService {
         String pasta = "C:\\Users\\Lenovo\\Documents\\desenvolvimentoFront\\Pizzaria\\pizzaria\\backend\\Comanda\\";
         String arquivo = pasta + "pedido_" + pedido.getId() + ".txt";
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(arquivo))) {
-            writer.write("Atendente: " + atendente.getNome());
+            writer.write("Atendente: " + atendente.getUsername());
             writer.newLine();
             if(pedido.isEntrega()){
                 writer.write("Preparar pedido para entrega");

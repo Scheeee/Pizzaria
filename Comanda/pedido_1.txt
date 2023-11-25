@@ -1,9 +1,7 @@
-Atendente: atendente  2
+Atendente: atendente 2
 Preparar pedido para entrega
 Itens do pedido:
 - pizza n°: 1 Tamanho:P
 Sabor(es):
--Calabresa
+-Calabresa com alho
 - produto n°: 2 Detalhes:2L
-- produto n°: 3 Detalhes:2L
-- produto n°: 4 Detalhes:500g
