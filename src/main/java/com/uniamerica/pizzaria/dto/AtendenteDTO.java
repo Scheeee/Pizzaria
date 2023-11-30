@@ -27,4 +27,7 @@ public class AtendenteDTO {
 
   @Size(max = 15, message = "A quantidade de caracteres é inválida")
   private String role;
+
+
+  private String token;
 }
