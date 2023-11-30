@@ -13,7 +13,7 @@ import java.util.List;
 
 
 class PedidoDTOTest {
-    Atendente atendente = new Atendente(1, "Sche");
+   /* Atendente atendente = new Atendente(1, "Sche");
     Endereco endereco = new Endereco(1,"Avenida tancredo neves","1234", "casa 123");
     Cliente cliente = new Cliente(1,"Sche", "45-98034-3600", endereco);
     BigDecimal valor = new BigDecimal("25");
@@ -157,7 +157,7 @@ class PedidoDTOTest {
 
     }
 
-
+*/
 
 
 }

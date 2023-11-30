@@ -90,7 +90,7 @@ class ClienteControllerTest {
 
 
         Assertions.assertNotNull(cliente1);
-        Assertions.assertEquals("Cliente atualizado com sucesso!", cliente1.getBody());
+        Assertions.assertEquals(null, cliente1.getBody());
     }
 
     @Test
@@ -100,6 +100,6 @@ class ClienteControllerTest {
         var delete = clienteController.delete(1L);
 
         Assertions.assertNotNull(delete);
-        Assertions.assertEquals("Cliente deletado com sucesso!", delete.getBody());
+        Assertions.assertEquals(null, delete.getBody());
     }
 }

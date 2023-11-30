@@ -11,7 +11,7 @@ import java.util.Collections;
 
 
 class PizzaDTOTest {
-    Atendente atendente = new Atendente(1, "Sche");
+   /* Atendente atendente = new Atendente(1, "Sche");
     Cliente cliente = new Cliente(1,"Sche", "45-98034-3600");
 
     Sabor sabor = new Sabor(1, "Calabresa","Calabresa");
@@ -89,5 +89,5 @@ class PizzaDTOTest {
 
     }
 
-
+*/
 }

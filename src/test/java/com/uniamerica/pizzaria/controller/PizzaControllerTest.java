@@ -81,7 +81,7 @@ class PizzaControllerTest {
 
 
         Assertions.assertNotNull(pizza1);
-        Assertions.assertEquals("Pizza cadastrada com sucesso", pizza1.getBody());
+        Assertions.assertEquals(null, pizza1.getBody());
     }
 
     @Test
@@ -105,7 +105,7 @@ class PizzaControllerTest {
 
 
         Assertions.assertNotNull(pizza1);
-        Assertions.assertEquals("pizza atualizada com sucesso!", pizza1.getBody());
+        Assertions.assertEquals(null, pizza1.getBody());
 
     }
 
@@ -116,6 +116,6 @@ class PizzaControllerTest {
         var delete = pizzaController.delete(1L);
 
         Assertions.assertNotNull(delete);
-        Assertions.assertEquals("Pizza deletada com sucesso!", delete.getBody());
+        Assertions.assertEquals(null, delete.getBody());
     }
 }

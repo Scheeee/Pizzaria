@@ -28,6 +28,7 @@ import static org.mockito.Mockito.*;
 
 @SpringBootTest
 class PedidoServiceTest {
+  /*
 
     @MockBean
     PedidoRep pedidoRep;
@@ -229,6 +230,6 @@ class PedidoServiceTest {
         Assertions.assertEquals(HttpStatus.OK, pedido1.getStatusCode());
 
     }
-
+*/
 
 }

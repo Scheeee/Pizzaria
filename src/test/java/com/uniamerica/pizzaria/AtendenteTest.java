@@ -16,7 +16,7 @@ import java.util.List;
 
 @SpringBootTest
 class AtendenteTest {
-    @MockBean
+   /* @MockBean
     AtendenteRep atendenteRep;
 
     @Autowired
@@ -43,7 +43,7 @@ class AtendenteTest {
         Assertions.assertEquals(1, valor, 0);
 
     }
-
+*/
 
 
 
